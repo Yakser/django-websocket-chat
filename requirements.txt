@@ -1,6 +1,7 @@
 asgiref==3.5.0
 autopep8==1.6.0
 Django==3.2.12
+django-debug-toolbar==3.2.4
 pycodestyle==2.8.0
 python-decouple==3.6
 pytz==2022.1

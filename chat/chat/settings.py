@@ -1,3 +1,5 @@
+import mimetypes
+import os
 from pathlib import Path
 
 from decouple import config
@@ -23,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -33,6 +36,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'chat.urls'
@@ -40,7 +44,7 @@ ROOT_URLCONF = 'chat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,11 +89,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -101,11 +109,28 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+STATIC_URL = '/static_dev/'
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev',
+]
+
+# STATICFILES_FINDERS = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'sass_processor.finders.CssFinder',
+# ]
+
+SASS_PROCESSOR_ROOT = BASE_DIR / 'static_dev'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Set up debug-toolbar
+SHOW_TOOLBAR_CALLBACK = True
+mimetypes.add_type("application/javascript", ".js", True)
