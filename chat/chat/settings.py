@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "debug_toolbar",
+    'debug_toolbar',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -119,11 +120,11 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev',
 ]
 
-# STATICFILES_FINDERS = [
-#     'django.contrib.staticfiles.finders.FileSystemFinder',
-#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#     'sass_processor.finders.CssFinder',
-# ]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
 
 SASS_PROCESSOR_ROOT = BASE_DIR / 'static_dev'
 

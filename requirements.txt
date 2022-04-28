@@ -1,9 +1,17 @@
 asgiref==3.5.0
 autopep8==1.6.0
 Django==3.2.12
+django-appconf==1.0.5
+django-compressor==4.0
 django-debug-toolbar==3.2.4
+django-libsass==0.9
+django-sass-processor==1.1
+libsass==0.21.0
 pycodestyle==2.8.0
 python-decouple==3.6
 pytz==2022.1
+rcssmin==1.1.0
+rjsmin==1.2.0
+six==1.16.0
 sqlparse==0.4.2
 toml==0.10.2
