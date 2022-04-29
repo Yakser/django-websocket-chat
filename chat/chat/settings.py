@@ -13,7 +13,10 @@ SECRET_KEY = config('SECRET_KEY',
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # '192.168.43.21',
+    # '192.168.43.108',
+]
 
 
 # Application definition
@@ -27,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'sass_processor',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +63,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat.wsgi.application'
+
+ASGI_APPLICATION = "chat.asgi.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
