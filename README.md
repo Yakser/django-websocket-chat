@@ -2,7 +2,7 @@
 # Запуск
 ### Перед установкой зависимостей
 - [C++ Build Tools](https://stackoverflow.com/questions/40504552/how-to-install-visual-c-build-tools) (весом 6Гб)
-- Python версии 3.8
+- Python версии <= 3.9
 
 # Установка зависимостей
 ```
