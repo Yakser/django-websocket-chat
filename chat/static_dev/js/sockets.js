@@ -1,12 +1,9 @@
 const roomName = JSON.parse(document.getElementById('room-name').textContent);
-const chatSocket = new WebSocket(
-    `ws://${window.location.host}/ws/chat/${roomName}/`
-);
+const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${roomName}/`);
 
 
 chatSocket.onmessage = function (e) {
     moment.locale('ru')
-
     const data = JSON.parse(e.data);
     if (data.message.trim().length > 0) {
         const chatLog = document.querySelector('#chat-log');
@@ -16,7 +13,7 @@ chatSocket.onmessage = function (e) {
 };
 
 chatSocket.onclose = function (e) {
-    console.error('Chat socket closed unexpectedly');
+    console.error('Chat socket closed unexpectedly', e);
 };
 
 document.querySelector('#chat-message-input').focus();

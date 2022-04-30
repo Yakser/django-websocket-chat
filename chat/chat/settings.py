@@ -1,7 +1,7 @@
 import mimetypes
 import os
 from pathlib import Path
-
+import channels_redis.core
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -67,8 +67,11 @@ WSGI_APPLICATION = 'chat.wsgi.application'
 ASGI_APPLICATION = "chat.asgi.application"
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
     },
 }
 
