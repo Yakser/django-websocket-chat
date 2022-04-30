@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sass_processor',
     'channels',
+    'groups.apps.GroupsConfig',
+    'homepage.apps.HomepageConfig',
 ]
 
 MIDDLEWARE = [

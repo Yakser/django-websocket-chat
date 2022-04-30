@@ -1,4 +1,4 @@
-const roomName = JSON.parse(document.getElementById('room-name').textContent);
+const roomName = JSON.parse(document.getElementById('group-name').textContent);
 const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${roomName}/`);
 
 

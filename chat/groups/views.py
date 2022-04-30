@@ -1,8 +1,8 @@
 from django.views.generic.base import TemplateView
 
 
-class HomeView(TemplateView):
-    template_name = 'homepage/home.html'
+class GroupsView(TemplateView):
+    template_name = 'groups/group.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
