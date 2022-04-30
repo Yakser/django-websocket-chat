@@ -12,4 +12,4 @@ pip install -r requirements.txt
 
 Заставляем ```RedisChannelLayer``` работать
 - [Установить WSL2](https://docs.microsoft.com/ru-ru/windows/wsl/install)
-- В подсистеме Linux [установить Redis](https://redis.io/docs/getting-started/installation/install-redis-on-windows/)
+- В подсистеме Linux [установить и запустить Redis](https://redis.io/docs/getting-started/installation/install-redis-on-windows/)
