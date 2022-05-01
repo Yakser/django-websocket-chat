@@ -84,6 +84,12 @@ button[type="submit"] {
 .message__text {
     overflow-wrap: break-word;
 }
+.message__author {
+    color: $blue;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-block-end: 10px;
+}
 
 .base-form {
     display: flex;
@@ -210,14 +216,20 @@ button[type="submit"] {
         outline: 1px solid $blue;
     }
 }
-.login-btn-container {
+.btns-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 .login-btn {
     font-size: 1.5rem;
     font-weight: 600;
-    
+}
+.signup-btn {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 .forgot-password-link {
     margin-block-start: 5px;
@@ -246,8 +258,8 @@ nav {
     &:not(:last-child) {
         margin-bottom: 20px;
     }
-    .nav-block__title_admin a{
-        color: rgba($blue, .5);
+    .nav-block__title_admin a {
+        color: rgba($blue, 0.5);
     }
 }
 
@@ -259,17 +271,16 @@ nav {
 .content {
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     padding-top: 20px;
 }
-
 
 @media screen and (max-width: 1200px) {
     .sidebar {
         margin-block-end: 20px;
         height: 100%;
-        width: 100%;;
+        width: 100%;
     }
     main {
         display: flex;

@@ -15,6 +15,7 @@
           <input id="chat-message-submit" type="button" value="Send">
       </div>
       {{ group_name|json_script:"group-name" }}
+      {{ request.user.username|json_script:"username" }}
       <script src="{% static 'js/sockets.js' %}">
       </script>
     </div>

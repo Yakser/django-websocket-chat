@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %} Главная {% endblock %}
 {% block content %}
-  <h1 class='title'>Главная страница</h1>
+    {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+        <h1 class='title'>Добро пожаловать</h1>
+    </div>
 {% endblock %}

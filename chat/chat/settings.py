@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'sorl.thumbnail',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
