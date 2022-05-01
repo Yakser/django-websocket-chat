@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Информация о пользователе
+{% endblock %}
+
+{% block content %}
+    <h1 class='title'>Информация о пользователе</h1>
+    <div>
+        <div class='user-info'>
+            <span>Имя: {{user.username}}</span>
+            <span>Почта: {{user.email}}</span>
+            <span>О себе: {{user.profile.biography}}</span>
+        </div>
+    </div>
+{% endblock %}

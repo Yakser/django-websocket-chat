@@ -1,0 +1,40 @@
+<div class='base-form col-12 col-sm-9 col-md-7 col-lg-6 col-xl-5'>
+    <div class='base-form__errors'>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <span>{{ error|escape }}</span>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <span>{{ error|escape }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <form method='POST' class='base-form__form'>
+    {% csrf_token %}
+
+        {% for field in form %}
+            <div class='base-form__form-row'>
+                <label for='{{ field.id_for_label }}'>
+                    {{ field.label }}
+                    {% if field.field.required %}
+                        <span class='base-form__star'>*</span>
+                    {% endif %}
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small id='{{ field.id_for_label}}-help'>
+                        {{ field.help_text|safe}}
+                    </small>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type='submit'>{{ submit_text }}</button>
+        {% if show_forgot_password %}
+            <a href='{% url "users:password_reset" %}' class='forgot-password-link'>Забыли пароль?</a>
+        {% endif %}
+    </form>
+</div>
