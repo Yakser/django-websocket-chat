@@ -212,6 +212,10 @@ button[type="submit"] {
   .submit-btn:focus, .submit-btn:focus-visible {
     outline: 1px solid #0eaef6; }
 
+.login-btn-container {
+  display: flex;
+  justify-content: center; }
+
 .login-btn {
   font-size: 1.5rem;
   font-weight: 600; }
@@ -255,6 +259,11 @@ nav {
 @media screen and (max-width: 1200px) {
   .sidebar {
     margin-block-end: 20px;
-    height: 100%; } }
+    height: 100%;
+    width: 100%; }
+  main {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px; } }
 
 /*# sourceMappingURL=style.css.map */

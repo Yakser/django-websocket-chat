@@ -46,7 +46,9 @@
 
     </nav>
     {% else %}
-        <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
+        <div class="login-btn-container">
+            <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
+        </div>
     {% endif %}
 
     

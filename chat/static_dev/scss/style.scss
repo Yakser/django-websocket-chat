@@ -210,10 +210,14 @@ button[type="submit"] {
         outline: 1px solid $blue;
     }
 }
-
+.login-btn-container {
+    display: flex;
+    justify-content: center;
+}
 .login-btn {
     font-size: 1.5rem;
     font-weight: 600;
+    
 }
 .forgot-password-link {
     margin-block-start: 5px;
@@ -265,5 +269,11 @@ nav {
     .sidebar {
         margin-block-end: 20px;
         height: 100%;
+        width: 100%;;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
     }
 }
