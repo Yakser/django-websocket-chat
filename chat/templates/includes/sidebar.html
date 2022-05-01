@@ -34,6 +34,11 @@
         {% if request.user.is_staff %}
             <div class="nav-block">
                 <span class="nav-block__title nav-block__title_admin">
+                    <a href="{% url 'groups:group' 'test_group' %}">Войти в тестовую группу</a>
+                </span>
+            </div>
+            <div class="nav-block">
+                <span class="nav-block__title nav-block__title_admin">
                     <a href="{% url 'admin:index' %}">Админка</a>
                 </span>
             </div>
@@ -41,9 +46,7 @@
 
     </nav>
     {% else %}
-        
         <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
-        
     {% endif %}
 
     

@@ -5,22 +5,17 @@
 {% block title %} Главная {% endblock %}
 
 {% block content %}
-  <h1 class='title'>Чат: {{ group_name|safe }}</h1>
-    <h3>Сообщения</h3>
-
-    <div class="chat col-12">
-
-        <div id="chat-log">
-    
-        </div>
-    
-        <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
-        
-        <input id="chat-message-submit" type="button" value="Send">
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      <h1 class='title'>Чат: {{ group_name|safe }}</h1>
+      <div class="chat col-12">
+          <div id="chat-log">
+          </div>
+          <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
+          <input id="chat-message-submit" type="button" value="Send">
+      </div>
+      {{ group_name|json_script:"group-name" }}
+      <script src="{% static 'js/sockets.js' %}">
+      </script>
     </div>
-
-    {{ group_name|json_script:"group-name" }}
-
-    <script src="{% static 'js/sockets.js' %}">
-    </script>
 {% endblock %}
