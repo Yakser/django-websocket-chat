@@ -14,7 +14,7 @@ html,
 }
 
 a,
-a:visited {
+a:visited, a:hover {
     color: $white;
     text-decoration: none;
 }
