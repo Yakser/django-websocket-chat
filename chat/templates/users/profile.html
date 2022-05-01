@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Мой профиль
+{% endblock %}
+
+{% block content %}
+    <h1 class='title'>Мой профиль</h1>
+    <div>
+        <div class='user-info'>
+            <span>Имя: {{user.username}}</span>
+            <span>Почта: {{user.email}}</span>
+        </div>
+    </div>
+    <div>
+        {% include 'includes/form.html' with form=form submit_text="Изменить" %}
+    </div>
+{% endblock %}
+
+
+

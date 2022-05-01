@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+<h1 class='title'>Вход</h1>
+{% include 'includes/form.html' with form=form submit_text="Войти" show_forgot_password=True %}
+{% endblock %}

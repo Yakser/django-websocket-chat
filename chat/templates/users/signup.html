@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block content %}
+    <h1 class='title'>Регистрация</h1>
+    {% include 'includes/form.html' with form=form submit_text="Зарегистрироваться" %}
+{% endblock %}

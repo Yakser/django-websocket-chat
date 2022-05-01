@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'channels',
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
