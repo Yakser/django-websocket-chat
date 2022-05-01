@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+  <h1 class='title'>Чат: {{ channel_name|safe }}</h1>
+    <h3>Сообщения</h3>
+
+    <div class="chat col-12">
+
+        <div id="chat-log">
+    
+        </div>
+    
+        <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
+        
+        <input id="chat-message-submit" type="button" value="Send">
+    </div>
+
+    {{ group_name|json_script:"group-name" }}
+
+    <script src="{% static 'js/sockets.js' %}">
+    </script>
+{% endblock %}
