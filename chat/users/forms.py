@@ -1,30 +1,18 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm
 
 from users.validators import validate_login, validate_email
 
 User = get_user_model()
 
 
-class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-
-    email = forms.EmailField(widget=forms.EmailInput(
-        attrs={'autofocus': True}), label='Почта')
-    username = forms.CharField(
-        widget=forms.HiddenInput(), required=False, label='')
-    field_order = ['email', 'password']
-
-
 class EditProfileForm(forms.Form):
     login = forms.CharField(max_length=150, label='Имя пользователя',
                             help_text='Максимум 150 символов',
                             required=True)
-    
+
     email = forms.EmailField(label='Почта', required=False)
-    
+
     biography = forms.CharField(label='Расскажите немного о себе',
                                 widget=forms.Textarea(),
                                 max_length=500,
