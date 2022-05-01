@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.forms import AuthenticationForm
 
 from users.validators import validate_login, validate_email
 
@@ -20,9 +20,16 @@ class UserLoginForm(AuthenticationForm):
 
 class EditProfileForm(forms.Form):
     login = forms.CharField(max_length=150, label='Имя пользователя',
-                            help_text='Максимум 150 символов', required=True)
+                            help_text='Максимум 150 символов',
+                            required=True)
+    
     email = forms.EmailField(label='Почта', required=False)
-  
+    
+    biography = forms.CharField(label='Расскажите немного о себе',
+                                widget=forms.Textarea(),
+                                max_length=500,
+                                required=False)
+
     def validate_edit_login_and_email(self, current_user):
         login = self.cleaned_data['login']
         email = self.cleaned_data['email']
