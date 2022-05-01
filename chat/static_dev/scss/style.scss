@@ -67,8 +67,11 @@ input[type="submit"] {
     flex-direction: column;
 }
 .message__time {
-    font-size: .8rem;
+    font-size: 0.8rem;
     opacity: 0.7;
     font-weight: 300;
     align-self: flex-end;
+}
+.message__text {
+    overflow-wrap: break-word;
 }
