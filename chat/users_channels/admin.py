@@ -1,5 +1,8 @@
 from django.contrib import admin
 
+from users_channels.models import UsersChannel
 
-class ItemAdmin(admin.ModelAdmin):
+
+@admin.register(UsersChannel)
+class UsersChannelAdmin(admin.ModelAdmin):
     list_display = ('name', 'image_tmb')

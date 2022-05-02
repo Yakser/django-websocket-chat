@@ -10,7 +10,7 @@ class BaseWebsocketGroup(models.Model):
                             help_text='Введите название, длина до 150 символов',
                             default='Default group name')
 
-    image = models.ImageField(verbose_name='Изображение группы',
+    image = models.ImageField(verbose_name = 'Изображение группы',
                               upload_to='uploads/',
                               null=True,
                               help_text='Выберите изображение группы')
