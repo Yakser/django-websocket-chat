@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sass_processor',
     'channels',
+    'core.apps.CoreConfig',
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
