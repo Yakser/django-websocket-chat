@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'sorl.thumbnail',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Set up debug-toolbar
 SHOW_TOOLBAR_CALLBACK = True
 mimetypes.add_type("application/javascript", ".js", True)
+
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/auth/profile/'
+LOGOUT_REDIRECT_URL = '/auth/login/'

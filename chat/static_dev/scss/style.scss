@@ -4,8 +4,13 @@ body {
     background-color: $bg;
     color: $white;
 }
+.wrapper {
+    min-height: 100vh;
+}
 
-input, button, textarea {
+input,
+button,
+textarea {
     background-color: $gray;
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     color: $white;
@@ -79,6 +84,12 @@ button[type="submit"] {
 .message__text {
     overflow-wrap: break-word;
 }
+.message__author {
+    color: $blue;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-block-end: 10px;
+}
 
 .base-form {
     display: flex;
@@ -98,6 +109,7 @@ button[type="submit"] {
     .base-form__form {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
     .base-form__form-row {
         display: flex;
@@ -111,7 +123,7 @@ button[type="submit"] {
         small {
             width: 100%;
             margin-block-start: 5px;
-            opacity: .5;
+            opacity: 0.5;
         }
         input {
             width: 100%;
@@ -119,5 +131,160 @@ button[type="submit"] {
     }
     button {
         width: max-content;
+    }
+}
+
+.sidebar {
+    background-color: lighten($bg, 2%);
+    padding: 20px;
+    height: 100vh;
+}
+
+.user-block {
+    background-color: $light-gray;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    color: $white;
+    border-radius: 15px;
+    padding: 15px;
+    transition: $transition;
+    display: flex;
+    align-items: center;
+}
+
+.user-img {
+    flex-shrink: 0;
+    border-radius: 15px;
+    width: 70px;
+    height: 70px;
+    background-color: rgba($white, 0.2);
+    margin-inline-end: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    span {
+        font-weight: 600;
+        font-size: 2rem;
+        user-select: none;
+    }
+}
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    .user__username {
+        font-weight: 500;
+        font-size: 1.5rem;
+        user-select: none;
+    }
+}
+
+.logout-btn {
+    font-weight: 300;
+    font-size: 0.9rem;
+    // text-decoration: underline;
+    color: rgba($white, 0.5);
+    transition: $transition;
+    &:hover {
+        text-decoration: underline;
+        color: rgba($white, 0.8);
+    }
+}
+.submit-btn {
+    background-color: $blue;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    color: $white;
+    border-radius: 15px;
+    padding: 5px 15px;
+    outline: 1px solid transparent;
+    transition: $transition;
+    font-weight: 500;
+    &:hover {
+        background-color: lighten($blue, 10%);
+    }
+    &:focus,
+    &:focus-visible {
+        outline: 1px solid $blue;
+    }
+}
+.btns-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.login-btn {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.signup-btn {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.forgot-password-link {
+    margin-block-start: 5px;
+}
+
+main {
+    display: flex;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 50px;
+}
+
+.nav-block {
+    display: flex;
+    flex-direction: column;
+
+    .nav-block__title {
+        font-weight: 500;
+        font-size: 1.2rem;
+        user-select: none;
+        cursor: pointer;
+    }
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+    .nav-block__title_admin a {
+        color: rgba($blue, 0.5);
+    }
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        margin-block-end: 20px;
+        height: 100%;
+        width: 100%;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
     }
 }

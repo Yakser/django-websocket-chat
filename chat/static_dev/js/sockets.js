@@ -4,15 +4,21 @@ const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${roomNam
 
 chatSocket.onmessage = function (e) {
     moment.locale('ru')
-    const data = JSON.parse(e.data);
-    if (data.message.trim().length > 0) {
+    const {username, message} = JSON.parse(e.data);
+    if (message.trim().length > 0) {
         const chatLog = document.querySelector('#chat-log');
-        chatLog.insertAdjacentHTML('beforeend', `<div class='message'><span class='message__text'>${data.message}</span>  <span class='message__time'>${moment().fromNow()}</span></div>`);
+        const messageMarkup = `<div class='message'>
+            <span class='message__author'>${username ? username : 'Анонимный пользователь'}</span>
+            <p class='message__text'>${message}</p>
+            <span class='message__time'>${moment().fromNow()}</span>
+        </div>`
+        chatLog.insertAdjacentHTML('beforeend', messageMarkup);
         chatLog.scrollTop = chatLog.scrollHeight;
     }
 };
 
 chatSocket.onclose = function (e) {
+    alert('Произошла ошибка! Сервер недоступен.')
     console.error('Chat socket closed unexpectedly', e);
 };
 
@@ -26,8 +32,15 @@ document.querySelector('#chat-message-input').onkeyup = function (e) {
 document.querySelector('#chat-message-submit').onclick = function (e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
-    chatSocket.send(JSON.stringify({
-        'message': message
-    }));
-    messageInputDom.value = '';
+    const username = JSON.parse(document.getElementById('username').textContent);
+    try {
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': username
+        }));
+        messageInputDom.value = '';
+    } catch (e) {
+        consol.error(e);
+    }
+    
 };

@@ -1,3 +1,7 @@
 from django.contrib import admin
+from groups.models import Group
 
-# Register your models here.
+
+@admin.register(Group)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'image_tmb')
