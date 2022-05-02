@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'channels',
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
+    'info.apps.InfoConfig',
     'users.apps.UsersConfig',
     'users_channels.apps.UsersChannelsConfig',
     'sorl.thumbnail',
