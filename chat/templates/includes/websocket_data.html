@@ -1,0 +1,8 @@
+{% load static %}
+
+{{ connection_name|json_script:"connection_name" }}
+{{ connection_type|json_script:"connection_type" }}
+{{ username|json_script:"username" }}
+
+<script src="{% static 'js/sockets.js' %}">
+</script>

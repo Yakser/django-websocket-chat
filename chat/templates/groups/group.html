@@ -14,9 +14,6 @@
           <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
           <input id="chat-message-submit" type="button" value="Отправить">
       </div>
-      {{ group_name|json_script:"group-name" }}
-      {{ request.user.username|json_script:"username" }}
-      <script src="{% static 'js/sockets.js' %}">
-      </script>
+      {% include '../includes/websocket_data.html' with connection_type="groups" connection_name=channel_name username=request.user.username %}
     </div>
 {% endblock %}

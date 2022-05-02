@@ -1,9 +1,10 @@
 import json
+
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
 
-class ChatConsumer(WebsocketConsumer):
+class BaseConsumer(WebsocketConsumer):
     def connect(self):
         self.group_name = self.scope['url_route']['kwargs']['group_name']
         self.group_group_name = 'chat_%s' % self.group_name
@@ -38,7 +39,7 @@ class ChatConsumer(WebsocketConsumer):
                 'username': username
             }
         )
-        
+
     # Receive message from group
     def chat_message(self, event):
         message = event['message']
@@ -49,3 +50,10 @@ class ChatConsumer(WebsocketConsumer):
             'username': username
         }))
 
+
+class GroupsConsumer(BaseConsumer):
+    pass
+
+
+class UsersChannelsConsumer(BaseConsumer):
+    pass
