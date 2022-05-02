@@ -3,13 +3,14 @@ const connectionName = JSON.parse(document.getElementById('connection_name').tex
 
 const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${connectionType}_${connectionName}/`);
 
+moment.locale('ru');
 
 chatSocket.onmessage = function (e) {
-    moment.locale('ru')
-    const {username, message} = JSON.parse(e.data);
+    const { username, message } = JSON.parse(e.data);
+    
     if (message.trim().length > 0) {
         const chatLog = document.querySelector('#chat-log');
-        
+
         const messageMarkup = `
         <div class='message'>
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
