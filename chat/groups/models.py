@@ -16,12 +16,12 @@ class Group(models.Model):
                               help_text='Выберите изображение группы')
 
     def get_image_x1280(self):
-        return get_thumbnail(self.preview,
+        return get_thumbnail(self.image,
                              '1280',
                              quality=51)
 
     def image_tmb(self):
-        if self.preview:
+        if self.image:
             return mark_safe(f'<img src="{self.preview.url}" width="50"')
         return 'Нет изображения'
 
