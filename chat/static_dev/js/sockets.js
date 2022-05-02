@@ -18,6 +18,7 @@ chatSocket.onmessage = function (e) {
 };
 
 chatSocket.onclose = function (e) {
+    alert('Произошла ошибка! Сервер недоступен.')
     console.error('Chat socket closed unexpectedly', e);
 };
 
@@ -32,9 +33,14 @@ document.querySelector('#chat-message-submit').onclick = function (e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
     const username = JSON.parse(document.getElementById('username').textContent);
-    chatSocket.send(JSON.stringify({
-        'message': message,
-        'username': username
-    }));
-    messageInputDom.value = '';
+    try {
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': username
+        }));
+        messageInputDom.value = '';
+    } catch (e) {
+        consol.error(e);
+    }
+    
 };
