@@ -18,6 +18,11 @@ class Profile(models.Model):
         null=True,
         help_text='Немного расскажите о себе'
     )
+    
+    image = models.ImageField(verbose_name='Изображение пользователя',
+                              upload_to='uploads/users_images',
+                              null=True,
+                              help_text='Выберите изображение')
 
     # TODO additional fields : chats, groups, public_channels, private_channels, . . .
 
