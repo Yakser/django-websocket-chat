@@ -13,12 +13,6 @@ SECRET_KEY = config('SECRET_KEY',
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    # '192.168.43.21',
-    # '192.168.43.108',
-]
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -34,6 +28,7 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'users_channels.apps.UsersChannelsConfig',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
 ]
