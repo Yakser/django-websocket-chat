@@ -37,26 +37,41 @@ class ProfileView(TemplateView):
     form_class = EditProfileForm
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.get_context_data(request.user.id))
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(request.user.id))
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(User.objects.only('email', 'username'),
                                  pk=request.user.id)
 
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
 
-        if form.is_valid() and form.validate_edit_login_and_email(request.user):
+        if form.is_valid() and form.validate_all(request.user):
             user.email = form.cleaned_data['email']
             user.username = form.cleaned_data['login']
+            user.profile.biography = form.cleaned_data['biography'] or user.profile.biography
+
+            # if clear image checkbox is checked
+            if form.cleaned_data['image'] is False:
+                user.profile.image = None
+            else:
+                user.profile.image = form.cleaned_data['image'] or user.profile.image
+
             user.save()
 
         return redirect('users:profile')
 
     def get_context_data(self, id, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = get_object_or_404(User.objects.only('email', 'username'), pk=id)
+
+        user = get_object_or_404(User.objects.only('email', 'username'),
+                                 pk=id)
+
         form = self.form_class(initial={'email': user.email,
-                                        'login': user.username
+                                        'login': user.username,
+                                        'biography': user.profile.biography,
+                                        'image': user.profile.image
                                         })
 
         context['user'] = user
@@ -70,7 +85,9 @@ class SignupView(TemplateView):
     form_class = SignupForm
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.get_context_data(request))
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(request))
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(request)
@@ -81,13 +98,16 @@ class SignupView(TemplateView):
             user = User.objects.create_user(
                 username=form.cleaned_data['login'],
                 password=form.cleaned_data['password'],
-                email=form.cleaned_data['email'])
+                email=form.cleaned_data['email']
+            )
 
             login(request, user)
 
             return redirect('homepage:home')
 
-        return render(request, self.template_name, self.get_context_data(request))
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(request))
 
     def get_context_data(self, request, **kwargs):
         context = super().get_context_data(**kwargs)

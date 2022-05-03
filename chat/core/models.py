@@ -10,14 +10,14 @@ class BaseWebsocketGroup(models.Model):
                             help_text='Введите название, длина до 150 символов',
                             default='Default group name')
 
-    image = models.ImageField(verbose_name = 'Изображение группы',
-                              upload_to='uploads/',
+    image = models.ImageField(verbose_name='Изображение группы',
+                              upload_to='uploads/groups_images',
                               null=True,
                               help_text='Выберите изображение группы')
 
-    def get_image_x1280(self):
-        return get_thumbnail(self.preview,
-                             '1280',
+    def get_image_x256(self):
+        return get_thumbnail(self.image,
+                             '256',
                              quality=51)
 
     def image_tmb(self):

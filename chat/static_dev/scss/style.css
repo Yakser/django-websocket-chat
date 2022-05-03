@@ -35,7 +35,7 @@ body {
 .wrapper {
   min-height: 100vh; }
 
-input,
+input:not([type="checkbox"]):not([type="radio"]),
 button,
 textarea {
   background-color: #1e293b;
@@ -45,11 +45,11 @@ textarea {
   padding: 5px 15px;
   outline: 1px solid transparent;
   transition: 0.15s ease-in; }
-  input:hover,
+  input:not([type="checkbox"]):not([type="radio"]):hover,
   button:hover,
   textarea:hover {
     background-color: #27354c; }
-  input:focus, input:focus-visible,
+  input:not([type="checkbox"]):not([type="radio"]):focus, input:not([type="checkbox"]):not([type="radio"]):focus-visible,
   button:focus,
   button:focus-visible,
   textarea:focus,
@@ -144,6 +144,16 @@ button[type="submit"] {
       opacity: 0.5; }
     .base-form .base-form__form-row input {
       width: 100%; }
+    .base-form .base-form__form-row input[type="checkbox"] {
+      display: inline-block;
+      width: max-content;
+      margin-inline-end: 5px; }
+    .base-form .base-form__form-row label[for="id_image"] + a {
+      display: block;
+      width: 100%;
+      text-decoration: underline;
+      color: #0eaef6;
+      margin-block-end: 5px; }
   .base-form button {
     width: max-content; }
 
