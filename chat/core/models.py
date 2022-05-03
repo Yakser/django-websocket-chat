@@ -1,7 +1,32 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
 from sorl.thumbnail import get_thumbnail
 
 from django.utils.html import mark_safe
+
+
+User = get_user_model()
+
+
+class BaseUserMessage(models.Model):
+    text = models.TextField(max_length=1024,
+                            verbose_name='Текст')
+    datetime = models.DateTimeField()
+    user = models.ForeignKey(User,
+                                on_delete=models.SET_NULL,
+                                verbose_name='Отправитель',
+                                related_name='messages',
+                                null=True
+                                )
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
+        abstract = True
+
+    def __str__(self):
+        return f"{self.user_id} {self.datetime}"
 
 
 class BaseWebsocketGroup(models.Model):
@@ -41,3 +66,15 @@ class BaseWebsocketGroup(models.Model):
 
     def __str__(self):
         return self.name[:15]
+
+
+class BaseDailyMessagesContainer(models.Model):
+    date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Контейнер сообщений'
+        verbose_name_plural = 'Контейнеры сообщений'
+        abstract = True
+
+    def __str__(self):
+        return self.date
