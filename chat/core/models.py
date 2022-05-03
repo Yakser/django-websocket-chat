@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -12,17 +13,9 @@ User = get_user_model()
 class BaseUserMessage(models.Model):
     text = models.TextField(max_length=1024,
                             verbose_name='Текст')
-    datetime = models.DateTimeField()
-    user = models.ForeignKey(User,
-                                on_delete=models.SET_NULL,
-                                verbose_name='Отправитель',
-                                related_name='messages',
-                                null=True
-                                )
+    time = models.TimeField(verbose_name='Время отправки', null=True, default=datetime.datetime.now())
 
     class Meta:
-        verbose_name = 'Сообщение'
-        verbose_name_plural = 'Сообщения'
         abstract = True
 
     def __str__(self):
@@ -34,7 +27,8 @@ class BaseWebsocketGroup(models.Model):
                             help_text='Используйте буквы, цифры или @/./+/-/_ ',
                             max_length=100,
                             unique=True,
-                            primary_key=True)
+                            primary_key=True, 
+                            default='None')
 
     # TODO messages, owner_id, members
 
@@ -68,12 +62,11 @@ class BaseWebsocketGroup(models.Model):
         return self.name[:15]
 
 
-class BaseDailyMessagesContainer(models.Model):
-    date = models.DateField(auto_now_add=True)
+class BaseDailyMessages(models.Model):
+    date = models.DateField(verbose_name='Дата создания', 
+                            null=True)
 
     class Meta:
-        verbose_name = 'Контейнер сообщений'
-        verbose_name_plural = 'Контейнеры сообщений'
         abstract = True
 
     def __str__(self):
