@@ -9,11 +9,11 @@ class UserMessage(models.Model):
                             verbose_name='Текст')
     datetime = models.DateTimeField()
     user = models.ForeignKey(User,
-                                on_delete=models.SET_NULL,
-                                verbose_name='Отправитель',
-                                related_name='messages',
-                                null=True
-                                )
+                             on_delete=models.SET_NULL,
+                             verbose_name='Отправитель',
+                             related_name='messages',
+                             null=True
+                             )
 
     class Meta:
         verbose_name = 'Сообщение'
