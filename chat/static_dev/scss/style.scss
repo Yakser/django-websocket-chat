@@ -8,7 +8,7 @@ body {
     min-height: 100vh;
 }
 
-input,
+input:not([type="checkbox"]):not([type="radio"]),
 button,
 textarea {
     background-color: $gray;
@@ -127,6 +127,18 @@ button[type="submit"] {
         }
         input {
             width: 100%;
+        }
+        input[type="checkbox"] {
+            display: inline-block;
+            width: max-content;
+            margin-inline-end: 5px;
+        }
+        label[for="id_image"] + a {
+            display: block;
+            width: 100%;
+            text-decoration: underline;
+            color: $blue;
+            margin-block-end: 5px;
         }
     }
     button {

@@ -1,7 +1,6 @@
 import mimetypes
-import os
 from pathlib import Path
-import channels_redis.core
+
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -156,3 +155,6 @@ mimetypes.add_type("application/javascript", ".js", True)
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/auth/profile/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
