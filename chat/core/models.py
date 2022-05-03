@@ -5,6 +5,14 @@ from django.utils.html import mark_safe
 
 
 class BaseWebsocketGroup(models.Model):
+    slug = models.SlugField(verbose_name='Идентификатор',
+                            help_text='Используйте буквы, цифры или @/./+/-/_ ',
+                            max_length=100,
+                            unique=True,
+                            primary_key=True)
+
+    # TODO messages, owner_id, members
+
     name = models.CharField(verbose_name='Название',
                             max_length=150,
                             help_text='Введите название, длина до 150 символов',

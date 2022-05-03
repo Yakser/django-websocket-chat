@@ -3,5 +3,5 @@ from groups.models import Group
 
 
 @admin.register(Group)
-class ItemAdmin(admin.ModelAdmin):
+class GroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'image_tmb')
