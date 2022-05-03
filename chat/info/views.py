@@ -9,7 +9,7 @@ class AboutView(TemplateView):
         return context
 
 
-class InstroctionView(TemplateView):
+class InstructionView(TemplateView):
     template_name = 'info/instruction.html'
 
     def get_context_data(self, **kwargs):
