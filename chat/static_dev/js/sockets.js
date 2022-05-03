@@ -5,9 +5,8 @@ const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${connect
 
 moment.locale('ru');
 
-chatSocket.onmessage = function (e) {
-    const { username, message } = JSON.parse(e.data);
-    
+chatSocket.onmessage = function (event) {
+    const { username, message } = JSON.parse(event.data);
     if (message.trim().length > 0) {
         const chatLog = document.querySelector('#chat-log');
 
@@ -24,7 +23,7 @@ chatSocket.onmessage = function (e) {
 };
 
 chatSocket.onclose = function (e) {
-    console.error('Chat socket closed unexpectedly', e);
+    console.error('Chat socket closed unexpectedly');
     alert('Произошла ошибка! Сервер недоступен.')
 };
 
@@ -38,11 +37,9 @@ document.querySelector('#chat-message-input').onkeyup = function (e) {
 document.querySelector('#chat-message-submit').onclick = function (e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
-    const username = JSON.parse(document.getElementById('username').textContent);
     try {
         chatSocket.send(JSON.stringify({
             'message': message,
-            'username': username
         }));
         messageInputDom.value = '';
     } catch (e) {
