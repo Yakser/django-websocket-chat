@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.utils.html import mark_safe
 
 from users.models import Profile
 
@@ -14,7 +15,7 @@ class ProfileInlined(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (ProfileInlined, )
-    list_display = ('email', 'username', 'is_staff')
+    list_display = ('email', 'username', 'is_staff',)
 
 
 admin.site.unregister(User)

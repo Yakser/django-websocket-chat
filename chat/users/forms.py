@@ -7,7 +7,6 @@ User = get_user_model()
 
 
 class EditProfileForm(forms.Form):
-
     login = forms.CharField(max_length=150,
                             label='Имя пользователя',
                             help_text='Максимум 150 символов',
