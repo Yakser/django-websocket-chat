@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Создание группы {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+        <h1 class='title'>Создание группы</h1>
+        {% include 'includes/form.html' with form=form submit_text="Создать группу" %}
+    </div>
+{% endblock %}

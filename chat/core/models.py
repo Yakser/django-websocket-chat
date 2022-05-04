@@ -14,7 +14,9 @@ User = get_user_model()
 class BaseUserMessage(models.Model):
     text = models.TextField(max_length=1024,
                             verbose_name='Текст')
-    time = models.TimeField(verbose_name='Время отправки', null=True, default=datetime.datetime.now())
+    time = models.TimeField(verbose_name='Время отправки',
+                            null=True,
+                            default=datetime.datetime.now())
 
     class Meta:
         abstract = True
@@ -31,19 +33,16 @@ class BaseWebsocketGroup(models.Model):
                             primary_key=True)
 
     name = models.CharField(verbose_name='Название',
-                            max_length=150,
-                            help_text='Введите название, длина до 150 символов',
+                            max_length=100,
+                            help_text='Введите название, длина до 100 символов',
                             default='Default group name')
 
     image = models.ImageField(verbose_name='Изображение группы',
                               upload_to='uploads/groups_images',
                               null=True,
-                              help_text='Выберите изображение группы')
-
-    name = models.CharField(verbose_name='Название',
-                            max_length=100,
-                            help_text='Введите название, длина до 100 символов',
-                            default='Default group name')
+                              blank=True,
+                              help_text='Выберите изображение группы'
+                              )
 
     owner = models.ForeignKey(User,
                               verbose_name='Владелец',
@@ -77,7 +76,7 @@ class BaseWebsocketGroup(models.Model):
 
 
 class BaseDailyMessages(models.Model):
-    date = models.DateField(verbose_name='Дата создания', 
+    date = models.DateField(verbose_name='Дата создания',
                             null=True)
 
     class Meta:

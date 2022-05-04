@@ -2,18 +2,18 @@
 
 {% load static %}
 
-{% block title %} Главная {% endblock %}
+{% block title %} Группа {{ group.name|safe }} {% endblock %}
 
 {% block content %}
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
-      <h1 class='title'>Чат: {{ group_name|safe }}</h1>
+      <h1 class='title'>Чат: {{ group.name|safe }}</h1>
       <div class="chat col-12">
           <div id="chat-log">
           </div>
           <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
           <input id="chat-message-submit" type="button" value="Отправить">
       </div>
-      {% include '../includes/websocket_data.html' with connection_type="groups" connection_name=group_name %}
+      {% include '../includes/websocket_data.html' with connection_type="groups" connection_name=group.slug %}
     </div>
 {% endblock %}

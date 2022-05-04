@@ -35,7 +35,10 @@
 
         <button type='submit' class='submit-btn'>{{ submit_text }}</button>
         {% if show_forgot_password %}
-            <a href='{% url "users:password_reset" %}' class='forgot-password-link'>Забыли пароль?</a>
+            <a href='{% url "users:password_reset" %}' class='base-form__link'>Забыли пароль?</a>
+        {% endif %}
+        {% if show_register_link %}
+            <a href='{% url "users:signup" %}' class='base-form__link'>Зарегистрироваться</a>
         {% endif %}
     </form>
 </div>
