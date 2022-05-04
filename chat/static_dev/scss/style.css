@@ -157,6 +157,9 @@ button[type="submit"] {
   .base-form button {
     width: max-content; }
 
+.base-form__link {
+  margin-block-start: 5px; }
+
 .sidebar {
   background-color: #0e1528;
   padding: 20px;
@@ -242,9 +245,6 @@ button[type="submit"] {
 .signup-btn {
   font-size: 1.5rem;
   font-weight: 600; }
-
-.forgot-password-link {
-  margin-block-start: 5px; }
 
 main {
   display: flex; }

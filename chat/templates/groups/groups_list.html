@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Группы {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      <h1 class='title'>Все группы</h1>
+      
+      {% for group in groups %}
+         <div>
+            <a href="{% url 'groups:group' group.slug %}">{{ group.name }} - {{ group.slug }}</a>
+         </div>
+      {% endfor %}
+      
+    </div>
+{% endblock %}

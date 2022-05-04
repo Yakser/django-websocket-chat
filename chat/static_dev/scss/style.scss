@@ -146,6 +146,10 @@ button[type="submit"] {
     }
 }
 
+.base-form__link {
+    margin-block-start: 5px;
+}
+
 .sidebar {
     background-color: lighten($bg, 2%);
     padding: 20px;
@@ -243,9 +247,7 @@ button[type="submit"] {
     font-size: 1.5rem;
     font-weight: 600;
 }
-.forgot-password-link {
-    margin-block-start: 5px;
-}
+
 
 main {
     display: flex;
