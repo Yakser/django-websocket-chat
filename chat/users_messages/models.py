@@ -1,16 +1,13 @@
+from core.models import BaseDailyMessages, BaseUserMessage
 from django.contrib.auth import get_user_model
 from django.db import models
-
-from core.models import BaseUserMessage, BaseDailyMessages
-
 from groups.models import Group
-
 from users_channels.models import UsersChannel
 
 User = get_user_model()
 
 
-class DailyMessagesGroup(BaseDailyMessages):
+class DailyGroupMessages(BaseDailyMessages):
     group = models.ForeignKey(Group,
                               on_delete=models.SET_NULL,
                               verbose_name='Группа',
@@ -23,7 +20,7 @@ class DailyMessagesGroup(BaseDailyMessages):
         verbose_name_plural = 'Контейнеры сообщений группы'
 
 
-class DailyMessagesChannel(BaseDailyMessages):
+class DailyChannelMessages(BaseDailyMessages):
     channel = models.ForeignKey(UsersChannel,
                                 on_delete=models.SET_NULL,
                                 verbose_name='Канал',
@@ -43,7 +40,7 @@ class UserGroupMessage(BaseUserMessage):
                              related_name='group_messages',
                              null=True
                              )
-    container = models.ForeignKey(DailyMessagesGroup,
+    container = models.ForeignKey(DailyGroupMessages,
                                   on_delete=models.SET_NULL,
                                   verbose_name='Контейнер',
                                   related_name='group_messages',
@@ -62,7 +59,7 @@ class UserChannelMessage(BaseUserMessage):
                              related_name='channel_messages',
                              null=True
                              )
-    container = models.ForeignKey(DailyMessagesChannel,
+    container = models.ForeignKey(DailyChannelMessages,
                                   on_delete=models.SET_NULL,
                                   verbose_name='Контейнер',
                                   related_name='channel_messages',
