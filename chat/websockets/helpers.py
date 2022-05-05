@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404
-from websockets.connection_types import GROUPS_CONNECTION
 from groups.models import Group
 from users_messages.models import DailyGroupMessages
+
+from websockets.connection_types import GROUPS_CONNECTION
 
 
 def get_group_slug(connection_name: str) -> str:
