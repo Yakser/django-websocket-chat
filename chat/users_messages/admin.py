@@ -5,12 +5,12 @@ from .models import (DailyChannelMessages, DailyGroupMessages,
 
 
 @admin.register(DailyGroupMessages)
-class DailyMessagesGroupAdmin(admin.ModelAdmin):
+class DailyGroupMessagesAdmin(admin.ModelAdmin):
     list_display = ('date',)
 
 
 @admin.register(DailyChannelMessages)
-class DailyMessagesChannelAdmin(admin.ModelAdmin):
+class DailyChannelMessagesAdmin(admin.ModelAdmin):
     list_display = ('date',)
 
 
