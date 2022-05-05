@@ -153,12 +153,7 @@ button[type="submit"] {
       width: 100%;
       text-decoration: underline;
       color: #0eaef6;
-      margin-block-end: 5px;
-      display: none; }
-    .base-form .base-form__form-row label[for="id_image"] + a + span {
-      display: none; }
-    .base-form .base-form__form-row label[for="id_image"] + a:after {
-      content: "HOHO"; }
+      margin-block-end: 5px; }
   .base-form button {
     width: max-content; }
 
