@@ -1,5 +1,5 @@
 <div class='base-form col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4'>
-
+    {% load static %}
     <div class='base-form__errors'>
         {% if form.errors %}
             {% for field in form %}
@@ -41,24 +41,7 @@
             <a href='{% url "users:signup" %}' class='base-form__link'>Зарегистрироваться</a>
         {% endif %}
     </form>
-    <script type='text/javascript'>
-        const image = document.querySelector('label[for="id_image"] + a');
-        if (image) {
-            image.innerHTML = "Посмотреть изображение";
-        };
-    </script>
-    <script type='text/javascript'>
-        const imageLabel = document.getElementById('id_image');
-        if (imageLabel.parentElement) {
-            const imageLabelParent = imageLabel.parentElement;
-            let child = imageLabelParent.firstChild, nextChild;
-            while (child) {
-                nextChild = child.nextSibling;
-                if (child.nodeType == 3) {
-                    imageLabelParent.removeChild(child);
-                }
-                child = nextChild;
-            }
-        }
-    </script>
+    <script src="{% static 'js/change_image_text.js' %}"></script>
+    <script src="{% static 'js/delete_text.js' %}"></script>
+    <script src="{% static 'js/wrappering_image_label.js' %}"></script>
 </div>
