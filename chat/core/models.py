@@ -20,6 +20,10 @@ class BaseUserMessage(models.Model):
 
 
 class BaseWebsocketGroup(models.Model):
+    """
+    Абстрактная модель контейнера сообщений
+    # TODO сделать task с созданием нового контейнера раз в сутки
+    """
     slug = models.SlugField(verbose_name='Идентификатор',
                             help_text='Используйте буквы, цифры или @/./+/-/_ ',
                             max_length=100,
@@ -79,4 +83,3 @@ class BaseDailyMessages(models.Model):
 
     def __str__(self):
         return f"Daily Messages - {self.date.strftime('%Y-%m-%d %H:%M')}"
-    
