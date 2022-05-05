@@ -68,8 +68,8 @@ class CreateGroupView(TemplateView):
                           owner=user)
 
             group.save()
-            group.group_members.add(user)
             group.group_members.set(members)
+            group.group_members.add(user)
             group.save()
 
             return redirect('groups:group', form.cleaned_data['slug'])
