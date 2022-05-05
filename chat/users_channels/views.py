@@ -1,4 +1,5 @@
 from django.views.generic.base import TemplateView
+from websockets.connection_types import USERS_CHANNELS_CONNECTION
 
 
 class UsersChannelsView(TemplateView):
@@ -6,4 +7,5 @@ class UsersChannelsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['connection_type'] = USERS_CHANNELS_CONNECTION
         return context

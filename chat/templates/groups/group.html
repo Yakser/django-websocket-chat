@@ -7,13 +7,30 @@
 {% block content %}
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
-      <h1 class='title'>Чат: {{ group.name|safe }}</h1>
-      <div class="chat col-12">
-          <div id="chat-log">
-          </div>
-          <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
-          <input id="chat-message-submit" type="button" value="Отправить">
-      </div>
-      {% include '../includes/websocket_data.html' with connection_type="groups" connection_name=group.slug %}
+      {% if is_member %}
+        <h1 class='title'>Чат: {{ group.name|safe }}</h1>
+        <div class="chat col-12">
+            <div id="chat-log">
+              {% for message in messages.all %}
+                <div class='message'>
+                    <span class='message__author'>
+                      {% if message.user.username %}
+                        {{ message.user.username }} 
+                      {% else %}
+                        Анонимный пользователь
+                      {% endif %}
+                    </span>
+                    <p class='message__text'>{{message.text|safe}}</p>
+                    <span class='message__time'>{{ message.time }} </span>
+                </div>
+              {% endfor %}
+            </div>
+            <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
+            <input id="chat-message-submit" type="button" value="Отправить">
+        </div>
+        {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
+      {% else %}
+        <h1 class='title'>Вы не состоите в этой группе!</h1>
+      {% endif %}
     </div>
 {% endblock %}

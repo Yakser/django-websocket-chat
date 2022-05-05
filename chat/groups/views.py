@@ -1,31 +1,46 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
-from groups.models import Group
-from django.contrib.admin.views.decorators import staff_member_required
-from django.db.models.query import QuerySet
+from websockets.connection_types import GROUPS_CONNECTION
+from users_messages.models import DailyGroupMessages
+
 from groups.forms import CreateGroupForm
+from groups.models import Group
 
 User = get_user_model()
 
 
+@method_decorator(login_required, name='dispatch')
 class GroupsView(TemplateView):
     template_name = 'groups/group.html'
 
     def get(self, request, group_slug: str, *args, **kwargs):
-
-        group: Group = get_object_or_404(Group, slug=group_slug)
-
         return render(request,
                       self.template_name,
-                      self.get_context_data(group))
+                      self.get_context_data(request.user, group_slug))
 
-    def get_context_data(self, group: Group, **kwargs):
+    def get_context_data(self, user: User, group_slug: str, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['group'] = group
+        group: Group = get_object_or_404(Group, slug=group_slug)
+        
+        if group.group_members.filter(id=user.id):
+            container, created = DailyGroupMessages.objects.get_or_create(group=group)
+
+            messages = container.group_messages
+
+            context['is_member'] = True
+            context['group'] = group
+            context['messages'] = messages
+        else:
+            context['is_member'] = False
+            
+        context['connection_type'] = GROUPS_CONNECTION
+
         return context
 
 
@@ -53,11 +68,10 @@ class CreateGroupView(TemplateView):
                           owner=user)
 
             group.save()
-
             group.group_members.add(user)
             group.group_members.set(members)
-            # need to save 2 times else FOREIGN KEY CONSTRAINT ERROR
             group.save()
+
             return redirect('groups:group', form.cleaned_data['slug'])
 
         return self.get(request)

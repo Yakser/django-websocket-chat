@@ -3,20 +3,22 @@ const connectionName = JSON.parse(document.getElementById('connection_name').tex
 
 const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${connectionType}_${connectionName}/`);
 
+const chatLog = document.querySelector('#chat-log');
+chatLog.scrollTop = chatLog.scrollHeight;
+
+
 moment.locale('ru');
 
 chatSocket.onmessage = function (event) {
     const { username, message } = JSON.parse(event.data);
     if (message.trim().length > 0) {
-        const chatLog = document.querySelector('#chat-log');
-
         const messageMarkup = `
         <div class='message'>
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
             <p class='message__text'>${message}</p>
-            <span class='message__time'>${moment().fromNow()}</span>
+            <span class='message__time'>${moment().format('h:mm:ss, MMMM Do')}</span>
         </div>`
-
+        
         chatLog.insertAdjacentHTML('beforeend', messageMarkup);
         chatLog.scrollTop = chatLog.scrollHeight;
     }
