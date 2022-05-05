@@ -10,7 +10,7 @@ User = get_user_model()
 @database_sync_to_async
 def add_message_to_group(user: User, message_text: str, connection_name: str) -> None:
     """
-    Добавляет сообщение в контейнер группы
+    Добавляет сообщение в контейнер группы DailyGroupMessages
 
     Args:
         user (User): отправитель

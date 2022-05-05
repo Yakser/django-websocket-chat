@@ -16,7 +16,7 @@ def get_group_slug(connection_name: str) -> str:
         None: если имя подключение не соответствует группе
     """
     if connection_name.startswith(GROUPS_CONNECTION):
-        return connection_name[len(GROUPS_CONNECTION):]
+        return connection_name[len(GROUPS_CONNECTION) + 1:]
 
 
 def get_group_daily_messages(group_slug: str) -> DailyGroupMessages:
