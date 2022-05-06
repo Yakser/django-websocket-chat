@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.html import mark_safe
-
 from sorl.thumbnail import get_thumbnail
 
 User = get_user_model()
