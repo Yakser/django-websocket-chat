@@ -1,4 +1,3 @@
-
 const groupClearCheckboxWithLabel = () => {
     const imageInput = document.getElementById('id_image');
 
@@ -15,7 +14,11 @@ const groupClearCheckboxWithLabel = () => {
     imageInput.insertAdjacentElement('beforebegin', block);
 
     // удаляет <br>, сгенерированный Django
-    imageInput.parentElement.children[3].remove();
+    for (let child of imageInput.parentElement.children) {
+        if (child.tagName == 'BR') {
+            child.remove();
+        }
+    }
 }
 
 groupClearCheckboxWithLabel();
