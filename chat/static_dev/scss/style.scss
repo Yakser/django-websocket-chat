@@ -111,14 +111,19 @@ button[type="submit"] {
         flex-direction: column;
         width: 100%;
     }
-    .base-form__form-row {
+    button {
+        width: max-content;
+    }
+}
+
+.base-form__form-row {
         display: flex;
-        align-items: baseline;
-        justify-content: flex-start;
+        flex-direction: column;
         margin-block-end: 20px;
-        flex-wrap: wrap;
         label {
             margin-inline-end: 5px;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
         small {
             width: 100%;
@@ -133,7 +138,7 @@ button[type="submit"] {
             width: max-content;
             margin-inline-end: 5px;
         }
-        label[for="id_image"] + a {
+        .base-form__image-link {
             display: block;
             width: 100%;
             text-decoration: underline;
@@ -141,13 +146,23 @@ button[type="submit"] {
             margin-block-end: 5px;
         }
     }
-    button {
-        width: max-content;
-    }
-}
 
 .base-form__link {
     margin-block-start: 5px;
+}
+.base-form__star {
+    color: rgba($blue, .5);
+    font-size: 1rem;
+}
+
+.base-form__field-errors, .base-form__errors {
+    display: flex;
+    flex-direction: column;
+    span {
+        color: $red;
+        font-size: 1rem;
+        font-weight: 300;
+    }
 }
 
 .sidebar {
@@ -288,6 +303,13 @@ nav {
     justify-content: center;
     align-items: center;
     padding-top: 20px;
+}
+
+.clear-image-block {
+    label {
+        font-size: 1rem;
+        font-weight: 400;
+    }
 }
 
 @media screen and (max-width: 1200px) {
