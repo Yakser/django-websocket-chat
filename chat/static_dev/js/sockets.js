@@ -11,11 +11,13 @@ moment.locale('ru');
 
 chatSocket.onmessage = function (event) {
     const { username, message } = JSON.parse(event.data);
-    if (message.trim().length > 0) {
+    const cleanedMessage = cleanMessage(message);
+
+    if (validateMessage(message)) {
         const messageMarkup = `
         <div class='message'>
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
-            <p class='message__text'>${message}</p>
+            <p class='message__text'>${cleanedMessage}</p>
             <span class='message__time'>${moment().format('h:mm:ss, MMMM Do')}</span>
         </div>`
         
@@ -38,14 +40,24 @@ document.querySelector('#chat-message-input').onkeyup = function (e) {
 
 document.querySelector('#chat-message-submit').onclick = function (e) {
     const messageInputDom = document.querySelector('#chat-message-input');
-    const message = messageInputDom.value;
-    try {
-        chatSocket.send(JSON.stringify({
-            'message': message,
-        }));
-        messageInputDom.value = '';
-    } catch (e) {
-        consol.error(e);
+    const message = cleanMessage(messageInputDom.value);
+    if (validateMessage(message)) {
+        try {
+            chatSocket.send(JSON.stringify({
+                'message': message,
+            }));
+            messageInputDom.value = '';
+        } catch (e) {
+            consol.error(e);
+        }
     }
-    
 };
+
+
+const cleanMessage = (message) => {
+    return message.trim();
+}
+
+const validateMessage = (message) => {
+    return message.length > 0;
+}
