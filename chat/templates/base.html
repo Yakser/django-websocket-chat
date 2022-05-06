@@ -23,6 +23,17 @@
     {% comment %} Connect SCSS styles {% endcomment %}
     <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
 
+    {% comment %} Connect favicons and manifest {% endcomment %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static './fav/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static './fav/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static './fav/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static './fav/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static './fav/safari-pinned-tab.svg' %}" color="#0b1120">
+    <link rel="shortcut icon" href="{% static './fav/favicon.ico' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="{% static './fav/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+
     {% comment %} Connect MomentJS {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
