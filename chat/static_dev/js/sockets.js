@@ -13,9 +13,17 @@ chatSocket.onmessage = function (event) {
     const { username, message } = JSON.parse(event.data);
     const cleanedMessage = cleanMessage(message);
 
+    const currentUsername = document.querySelector('.user__username').textContent.trim();
+
     if (validateMessage(message)) {
+        let messageClassRow = `<div class='message'>`
+
+        if (currentUsername === username) {
+            messageClassRow = `<div class='message current-user-message'>`
+        }
+        
         const messageMarkup = `
-        <div class='message'>
+        ${messageClassRow}
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
             <p class='message__text'>${cleanedMessage}</p>
             <span class='message__time'>${moment().format('h:mm:ss, MMMM Do')}</span>
