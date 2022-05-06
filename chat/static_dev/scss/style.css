@@ -130,35 +130,48 @@ button[type="submit"] {
     display: flex;
     flex-direction: column;
     width: 100%; }
-  .base-form .base-form__form-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    margin-block-end: 20px;
-    flex-wrap: wrap; }
-    .base-form .base-form__form-row label {
-      margin-inline-end: 5px; }
-    .base-form .base-form__form-row small {
-      width: 100%;
-      margin-block-start: 5px;
-      opacity: 0.5; }
-    .base-form .base-form__form-row input {
-      width: 100%; }
-    .base-form .base-form__form-row input[type="checkbox"] {
-      display: inline-block;
-      width: max-content;
-      margin-inline-end: 5px; }
-    .base-form .base-form__form-row label[for="id_image"] + a {
-      display: block;
-      width: 100%;
-      text-decoration: underline;
-      color: #0eaef6;
-      margin-block-end: 5px; }
   .base-form button {
     width: max-content; }
 
+.base-form__form-row {
+  display: flex;
+  flex-direction: column;
+  margin-block-end: 20px; }
+  .base-form__form-row label {
+    margin-inline-end: 5px;
+    font-size: 1.1rem;
+    font-weight: 500; }
+  .base-form__form-row small {
+    width: 100%;
+    margin-block-start: 5px;
+    opacity: 0.5; }
+  .base-form__form-row input {
+    width: 100%; }
+  .base-form__form-row input[type="checkbox"] {
+    display: inline-block;
+    width: max-content;
+    margin-inline-end: 5px; }
+  .base-form__form-row .base-form__image-link {
+    display: block;
+    width: 100%;
+    text-decoration: underline;
+    color: #0eaef6;
+    margin-block-end: 5px; }
+
 .base-form__link {
   margin-block-start: 5px; }
+
+.base-form__star {
+  color: rgba(14, 174, 246, 0.5);
+  font-size: 1rem; }
+
+.base-form__field-errors, .base-form__errors {
+  display: flex;
+  flex-direction: column; }
+  .base-form__field-errors span, .base-form__errors span {
+    color: #BE185D;
+    font-size: 1rem;
+    font-weight: 300; }
 
 .sidebar {
   background-color: #0e1528;
@@ -278,6 +291,10 @@ nav {
   justify-content: center;
   align-items: center;
   padding-top: 20px; }
+
+.clear-image-block label {
+  font-size: 1rem;
+  font-weight: 400; }
 
 @media screen and (max-width: 1200px) {
   .sidebar {
