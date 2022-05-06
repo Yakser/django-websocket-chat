@@ -5,8 +5,8 @@ from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
-from websockets.connection_types import GROUPS_CONNECTION
 from users_messages.models import DailyGroupMessages
+from websockets.connection_types import GROUPS_CONNECTION
 
 from groups.forms import CreateGroupForm
 from groups.models import Group
@@ -27,7 +27,7 @@ class GroupsView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         group: Group = get_object_or_404(Group, slug=group_slug)
-        
+
         if group.group_members.filter(id=user.id):
             container, created = DailyGroupMessages.objects.get_or_create(group=group)
 

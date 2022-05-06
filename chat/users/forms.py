@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from users.validators import validate_login, validate_email
+from users.validators import validate_email, validate_login
 
 User = get_user_model()
 
@@ -30,7 +30,7 @@ class EditProfileForm(forms.Form):
 
     def validate_edit_login(self, current_user):
         login = self.cleaned_data['login']
-        
+
         if not current_user.is_staff:
             if len(login.strip()) < 8:
                 self.add_error('login', 'Длина имени не менее 8 символов!')
