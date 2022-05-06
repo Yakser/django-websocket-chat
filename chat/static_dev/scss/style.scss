@@ -158,6 +158,7 @@ button[type="submit"] {
 .base-form__field-errors, .base-form__errors {
     display: flex;
     flex-direction: column;
+    margin-block-end: 5px;
     span {
         color: $red;
         font-size: 1rem;

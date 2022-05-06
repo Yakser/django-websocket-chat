@@ -10,23 +10,20 @@ class CreateGroupForm(forms.Form):
         self.user = kwargs.pop('user')
         super(CreateGroupForm, self).__init__(*args, **kwargs)
 
-        self.fields['group_members'].queryset = User.objects.filter(
-            ~Q(id=self.user.id)).only('id', 'username')
+        self.fields['group_members'].queryset = \
+            User.objects.filter(~Q(id=self.user.id)).only('id', 'username')
 
     slug = forms.SlugField(label='Идентификатор',
                            help_text='Используйте буквы, цифры или @/./+/-/_ ',
-                           max_length=100,
-                           )
+                           max_length=100)
 
     name = forms.CharField(max_length=100,
                            label='Имя группы',
                            help_text='Максимум 100 символов',
-                           required=True
-                           )
-    
+                           required=True)
+
     group_members = forms.ModelMultipleChoiceField(
         label='Участники',
         queryset=User.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
-    )
+        required=False)

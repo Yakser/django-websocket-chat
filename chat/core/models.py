@@ -24,6 +24,7 @@ class BaseWebsocketGroup(models.Model):
     Абстрактная модель контейнера сообщений
     # TODO сделать task с созданием нового контейнера раз в сутки
     """
+    
     slug = models.SlugField(verbose_name='Идентификатор',
                             help_text='Используйте буквы, цифры или @/./+/-/_ ',
                             max_length=100,

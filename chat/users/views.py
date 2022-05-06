@@ -79,6 +79,9 @@ class ProfileView(TemplateView):
                                         'biography': user.profile.biography,
                                         'image': user.profile.image
                                         })
+        # небоходимо, чтобы показать ошибки
+        if form.is_valid():
+            form.validate_all(user)
 
         context['user'] = user
         context['form'] = form
