@@ -31,10 +31,10 @@ class EditProfileForm(forms.Form):
     def validate_edit_login(self, current_user):
         login = self.cleaned_data['login']
         
-        # if current_user.is_staff:
-        if len(login.strip()) < 8:
-            self.add_error('login', 'Длина имени не менее 8 символов!')
-            return
+        if not current_user.is_staff:
+            if len(login.strip()) < 8:
+                self.add_error('login', 'Длина имени не менее 8 символов!')
+                return
 
         if login != current_user.username and User.objects.filter(username=login):
             self.add_error('login',
