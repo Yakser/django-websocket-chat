@@ -68,18 +68,19 @@ button[type="submit"] {
 .chat {
   display: flex;
   flex-direction: column;
-  gap: 20px; }
+  gap: 20px;
+  max-height: 90vh; }
 
 #chat-log {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 300px;
   overflow-y: scroll;
   padding: 15px;
   top: 0;
   border: 1px solid #1e293b;
-  border-radius: 15px; }
+  border-radius: 15px;
+  margin-top: 10px; }
   #chat-log::-webkit-scrollbar {
     width: 0px; }
   #chat-log::-webkit-scrollbar-track {
@@ -91,27 +92,33 @@ button[type="submit"] {
 
 .message {
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-  padding: 10px;
-  background-color: #353f4f;
+  padding: 7px 15px;
+  background-color: rgba(53, 63, 79, 0.5);
   border-radius: 15px;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  width: fit-content;
+  min-width: 125px;
+  max-width: 75%; }
+  .message.current-user-message {
+    background-color: #353f4f; }
 
 .message__time {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   opacity: 0.7;
   font-weight: 300;
-  align-self: flex-end; }
+  align-self: flex-end;
+  margin-left: 50px; }
 
 .message__text {
-  overflow-wrap: break-word; }
+  overflow-wrap: break-word;
+  margin: 0; }
 
 .message__author {
   color: #0eaef6;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  margin-block-end: 10px; }
-
+  margin-block-end: 2px; }
 .base-form {
   display: flex;
   flex-direction: column;
@@ -165,19 +172,25 @@ button[type="submit"] {
   color: rgba(14, 174, 246, 0.5);
   font-size: 1rem; }
 
-.base-form__field-errors, .base-form__errors {
+.base-form__field-errors,
+.base-form__errors {
   display: flex;
   flex-direction: column;
   margin-block-end: 5px; }
-  .base-form__field-errors span, .base-form__errors span {
+  .base-form__field-errors span,
+  .base-form__errors span {
     color: #BE185D;
     font-size: 1rem;
     font-weight: 300; }
 
 .sidebar {
-  background-color: #0e1528;
+  background-color: #0F172A;
   padding: 20px;
   height: 100vh; }
+
+.sidebar__logo {
+  width: 100%;
+  margin-block-end: 20px; }
 
 .user-block {
   background-color: #353f4f;
@@ -305,6 +318,9 @@ nav {
   main {
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px; } }
+    padding-bottom: 20px; }
+  .current-user-message {
+    margin-left: auto;
+    margin-right: 0; } }
 
 /*# sourceMappingURL=style.css.map */
