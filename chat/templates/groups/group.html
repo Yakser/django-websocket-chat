@@ -12,13 +12,27 @@
         <div class="chat col-12">
             <div id="chat-log">
               {% for message in messages.all %}
-                <div class='message'>
+                {% if message.user == user %}
+                  <div class='message current-user-message'>
+                      <span class='message__author'>
+                        {% if message.user.username %}
+                          {{ message.user.username }} 
+                        {% else %}
+                          Анонимный пользователь
+                        {% endif %}
+                      </span>
+                      <p class='message__text'>{{message.text|safe}}</p>
+                      <span class='message__time'>{{ message.time }} </span>
+                  </div>
+                {% else %}
+                  <div class='message'>
                     <span class='message__author'>
                       {{ message.user.username }} 
                     </span>
                     <p class='message__text'>{{message.text|safe}}</p>
                     <span class='message__time'>{{ message.time }} </span>
-                </div>
+                  </div>
+                {% endif %}
               {% endfor %}
             </div>
             <input id="chat-message-input" type="text" maxlength="1024" autofocus placeholder="Введите сообщение...">
