@@ -42,10 +42,10 @@ button[type="submit"] {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 90vh;
 }
 
 #chat-log {
-    margin-top: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -54,6 +54,7 @@ button[type="submit"] {
     top: 0;
     border: 1px solid $gray;
     border-radius: 15px;
+    margin-top: 10px;
     &::-webkit-scrollbar {
         width: 0px;
     }
@@ -65,7 +66,6 @@ button[type="submit"] {
         background-color: $light-gray;
         border-radius: 10000px;
     }
-    font-size: 0.85rem;
 }
 
 .message {
@@ -78,10 +78,11 @@ button[type="submit"] {
     width: fit-content;
     min-width: 125px;
     max-width: 75%;
+    &.current-user-message {
+        background-color: $light-gray;
+    }
 }
-.current-user-message {
-    background-color: $light-gray;
-}
+
 .message__time {
     font-size: 0.6rem;
     opacity: 0.7;
@@ -125,45 +126,46 @@ button[type="submit"] {
     }
 }
 .base-form__form-row {
-        display: flex;
-        flex-direction: column;
-        margin-block-end: 20px;
-        label {
-            margin-inline-end: 5px;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        small {
-            width: 100%;
-            margin-block-start: 5px;
-            opacity: 0.5;
-        }
-        input {
-            width: 100%;
-        }
-        input[type="checkbox"] {
-            display: inline-block;
-            width: max-content;
-            margin-inline-end: 5px;
-        }
-        .base-form__image-link {
-            display: block;
-            width: 100%;
-            text-decoration: underline;
-            color: $blue;
-            margin-block-end: 5px;
-        }
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 20px;
+    label {
+        margin-inline-end: 5px;
+        font-size: 1.1rem;
+        font-weight: 500;
     }
+    small {
+        width: 100%;
+        margin-block-start: 5px;
+        opacity: 0.5;
+    }
+    input {
+        width: 100%;
+    }
+    input[type="checkbox"] {
+        display: inline-block;
+        width: max-content;
+        margin-inline-end: 5px;
+    }
+    .base-form__image-link {
+        display: block;
+        width: 100%;
+        text-decoration: underline;
+        color: $blue;
+        margin-block-end: 5px;
+    }
+}
 
 .base-form__link {
     margin-block-start: 5px;
 }
 .base-form__star {
-    color: rgba($blue, .5);
+    color: rgba($blue, 0.5);
     font-size: 1rem;
 }
 
-.base-form__field-errors, .base-form__errors {
+.base-form__field-errors,
+.base-form__errors {
     display: flex;
     flex-direction: column;
     margin-block-end: 5px;
@@ -175,9 +177,13 @@ button[type="submit"] {
 }
 
 .sidebar {
-    background-color: lighten($bg, 2%);
+    background-color: $sidebar;
     padding: 20px;
     height: 100vh;
+}
+.sidebar__logo {
+    width: 100%;
+    margin-block-end: 20px;
 }
 
 .user-block {
@@ -272,7 +278,6 @@ button[type="submit"] {
     font-weight: 600;
 }
 
-
 main {
     display: flex;
 }
@@ -307,7 +312,6 @@ nav {
     margin: 20px 0;
 }
 .content {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
