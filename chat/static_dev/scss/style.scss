@@ -167,9 +167,13 @@ button[type="submit"] {
 }
 
 .sidebar {
-    background-color: lighten($bg, 2%);
+    background-color: $sidebar;
     padding: 20px;
     height: 100vh;
+}
+.sidebar__logo {
+    width: 100%;
+    margin-block-end: 20px;
 }
 
 .user-block {

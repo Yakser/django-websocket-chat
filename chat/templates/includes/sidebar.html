@@ -2,6 +2,7 @@
 
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
+        <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
         <div class="user-block">
             <div class="user-img">
                 {% if request.user.profile.image %}

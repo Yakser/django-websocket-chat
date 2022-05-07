@@ -175,9 +175,13 @@ button[type="submit"] {
     font-weight: 300; }
 
 .sidebar {
-  background-color: #0e1528;
+  background-color: #0F172A;
   padding: 20px;
   height: 100vh; }
+
+.sidebar__logo {
+  width: 100%;
+  margin-block-end: 20px; }
 
 .user-block {
   background-color: #353f4f;

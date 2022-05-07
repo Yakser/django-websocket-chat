@@ -1,3 +1,5 @@
+moment.locale('ru');
+
 const connectionType= JSON.parse(document.getElementById('connection_type').textContent);
 const connectionName = JSON.parse(document.getElementById('connection_name').textContent);
 
@@ -6,8 +8,9 @@ const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${connect
 const chatLog = document.querySelector('#chat-log');
 chatLog.scrollTop = chatLog.scrollHeight;
 
+const chatInput = document.querySelector('#chat-message-input');
+const chatSubmit = document.querySelector('#chat-message-submit');
 
-moment.locale('ru');
 
 chatSocket.onmessage = function (event) {
     const { username, message } = JSON.parse(event.data);
@@ -18,7 +21,7 @@ chatSocket.onmessage = function (event) {
         <div class='message'>
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
             <p class='message__text'>${cleanedMessage}</p>
-            <span class='message__time'>${moment().format('h:mm:ss, MMMM Do')}</span>
+            <span class='message__time'>${moment().format('LT')}</span>
         </div>`
         
         chatLog.insertAdjacentHTML('beforeend', messageMarkup);
@@ -31,22 +34,23 @@ chatSocket.onclose = function (e) {
     alert('Произошла ошибка! Сервер недоступен.')
 };
 
-document.querySelector('#chat-message-input').focus();
-document.querySelector('#chat-message-input').onkeyup = function (e) {
+chatInput.focus();
+
+chatInput.onkeyup = function (e) {
     if (e.keyCode === 13) { // enter, return
-        document.querySelector('#chat-message-submit').click();
+        chatSubmit.click();
     }
 };
 
-document.querySelector('#chat-message-submit').onclick = function (e) {
-    const messageInputDom = document.querySelector('#chat-message-input');
-    const message = cleanMessage(messageInputDom.value);
+chatSubmit.onclick = function (e) {
+    const message = cleanMessage(chatInput.value);
+
     if (validateMessage(message)) {
         try {
             chatSocket.send(JSON.stringify({
                 'message': message,
             }));
-            messageInputDom.value = '';
+            chatInput.value = '';
         } catch (e) {
             consol.error(e);
         }
