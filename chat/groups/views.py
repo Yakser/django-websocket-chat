@@ -1,6 +1,7 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
@@ -31,15 +32,17 @@ class GroupsView(TemplateView):
         if group.group_members.filter(id=user.id):
             container, created = DailyGroupMessages.objects.get_or_create(group=group)
 
-            messages = container.group_messages
+            prefetch_users = Prefetch('user', queryset=User.objects.only('username'))
+            messages = container.group_messages.prefetch_related(prefetch_users)
 
             context['is_member'] = True
             context['group'] = group
             context['messages'] = messages
         else:
             context['is_member'] = False
-            
+
         context['connection_type'] = GROUPS_CONNECTION
+        context['user'] = user
 
         return context
 
@@ -105,5 +108,48 @@ class GroupsListView(TemplateView):
         groups = Group.objects.only('slug', 'name')
 
         context['groups'] = groups
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ClearGroupMessagesConfirmView(TemplateView):
+    template_name = 'groups/clear_group_messages_confirm.html'
+
+    def get(self, request, group_slug: str, *args, **kwargs):
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(group_slug))
+
+    def get_context_data(self, group_slug: str, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        group = get_object_or_404(Group, pk=group_slug)
+
+        context['group'] = group
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ClearGroupMessagesView(TemplateView):
+    template_name = 'groups/clear_group_messages.html'
+
+    def get(self, request, group_slug: str, *args, **kwargs):
+        group = get_object_or_404(Group, pk=group_slug)
+
+        group_container = DailyGroupMessages.objects.get(group=group)
+        group_container.group_messages.all().delete()
+
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(group_slug))
+
+    def get_context_data(self, group_slug: str, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        group = get_object_or_404(Group, pk=group_slug)
+
+        context['group'] = group
 
         return context

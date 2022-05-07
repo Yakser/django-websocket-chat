@@ -35,6 +35,9 @@ body {
 .wrapper {
   min-height: 100vh; }
 
+.title {
+  margin-block-end: 20px; }
+
 input:not([type="checkbox"]):not([type="radio"]),
 button,
 textarea {
@@ -57,12 +60,13 @@ textarea {
     outline: 1px solid #0eaef6; }
 
 textarea {
-  resize: vertical;
-  width: 100%; }
+  resize: none;
+  width: 100%;
+  padding: 15px; }
 
 input[type="button"],
 input[type="submit"],
-button[type="submit"] {
+button {
   cursor: pointer; }
 
 .chat {
@@ -89,6 +93,23 @@ button[type="submit"] {
   #chat-log::-webkit-scrollbar-thumb {
     background-color: #353f4f;
     border-radius: 10000px; }
+
+.chat-log__title-message-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; }
+  .chat-log__title-message-container span {
+    font-weight: 500;
+    font-size: 1.2rem;
+    user-select: none;
+    background-color: #0b1120;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    color: #f5f5f5;
+    border-radius: 100000px;
+    padding: 5px 15px;
+    border: 1px solid #BE185D; }
+  .chat-log__title-message-container a {
+    font-weight: 600; }
 
 .message {
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
@@ -119,6 +140,7 @@ button[type="submit"] {
   font-size: 1.1rem;
   font-weight: 500;
   margin-block-end: 2px; }
+
 .base-form {
   display: flex;
   flex-direction: column;
@@ -294,11 +316,6 @@ nav {
   .nav-block .nav-block__title_admin a {
     color: rgba(14, 174, 246, 0.5); }
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0; }
-
 .content {
   display: flex;
   flex-direction: column;
@@ -309,6 +326,18 @@ nav {
 .clear-image-block label {
   font-size: 1rem;
   font-weight: 400; }
+
+.clear_messages_confirm {
+  display: flex;
+  align-items: center;
+  margin-block-start: 20px; }
+  .clear_messages_confirm a {
+    font-size: 1.2rem; }
+    .clear_messages_confirm a:first-child {
+      margin-inline-end: 10px; }
+
+.go-back-btn {
+  font-size: 1.2rem; }
 
 @media screen and (max-width: 1200px) {
   .sidebar {

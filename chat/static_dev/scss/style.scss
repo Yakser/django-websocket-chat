@@ -7,6 +7,9 @@ body {
 .wrapper {
     min-height: 100vh;
 }
+.title {
+    margin-block-end: 20px;
+}
 
 input:not([type="checkbox"]):not([type="radio"]),
 button,
@@ -28,13 +31,14 @@ textarea {
 }
 
 textarea {
-    resize: vertical;
+    resize: none;
     width: 100%;
+    padding: 15px;
 }
 
 input[type="button"],
 input[type="submit"],
-button[type="submit"] {
+button {
     cursor: pointer;
 }
 
@@ -65,6 +69,25 @@ button[type="submit"] {
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
+    }
+}
+.chat-log__title-message-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    span {
+        font-weight: 500;
+        font-size: 1.2rem;
+        user-select: none;
+        background-color: $bg;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        color: $white;
+        border-radius: 100000px;
+        padding: 5px 15px;
+        border: 1px solid $red;
+    }
+    a {
+        font-weight: 600;
     }
 }
 
@@ -306,11 +329,6 @@ nav {
     }
 }
 
-.user-info {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-}
 .content {
     display: flex;
     flex-direction: column;
@@ -325,6 +343,22 @@ nav {
         font-weight: 400;
     }
 }
+
+.clear_messages_confirm {
+    display: flex;
+    align-items: center;
+    margin-block-start: 20px;
+    a {
+        font-size: 1.2rem;
+        &:first-child {
+        margin-inline-end: 10px;
+    }
+    }
+}
+.go-back-btn {
+    font-size: 1.2rem;
+}
+
 
 @media screen and (max-width: 1200px) {
     .sidebar {

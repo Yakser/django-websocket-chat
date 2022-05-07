@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Группы {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      <h3 class='title'>Удалить историю сообщений группы {{ group.name }}?</h3>
+      <div class="clear_messages_confirm">
+          <a href="{% url 'groups:clear_messages' group.slug %}">
+            <button>Да</button>
+          </a>
+          <a href="{% url 'groups:group' group.slug %}">
+            <button>Нет</button>
+          </a>
+      </div>
+    </div>
+{% endblock %}
