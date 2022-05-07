@@ -3,37 +3,49 @@
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
         <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
-        <div class="user-block">
-            <div class="user-img">
-                {% if request.user.profile.image %}
-                    <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
-                {% else %}
-                    <span>{{ request.user.username|make_list|first|capfirst  }}</span>
-                {% endif %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <div class="burger-container">
+            <div class="">
+                <span class="material-icons burger-icon" onclick="myFunction()">
+                    format_list_bulleted
+                </span>
             </div>
-            <div class="user ">
-                <a class="user__username" href="{% url 'users:profile' %}">
-                    {{ request.user.username|safe }}
-                </a>
-                <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
+            <div class="hamburger-menu">
+                <div id="myLinks">
+                    <div class="user-block">
+                        <div class="user-img">
+                            {% if request.user.profile.image %}
+                                <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
+                            {% else %}
+                                <span>{{ request.user.username|make_list|first|capfirst  }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="user ">
+                            <a class="user__username" href="{% url 'users:profile' %}">
+                                {{ request.user.username|safe }}
+                            </a>
+                            <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
+                        </div>
+                    </div>
+                    <div class="nav-block">
+                        <span class="nav-block__title">
+                            Чаты
+                        </span>
+                    </div>
+                    <div class="nav-block">
+                        <span class="nav-block__title">
+                            Группы
+                        </span>
+                    </div>
+                    <div class="nav-block">
+                        <span class="nav-block__title">
+                            Каналы
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
-        <nav>
-        <div class="nav-block">
-            <span class="nav-block__title">
-                Чаты
-            </span>
-        </div>
-         <div class="nav-block">
-            <span class="nav-block__title">
-                Группы
-            </span>
-        </div>
-        <div class="nav-block">
-            <span class="nav-block__title">
-                Каналы
-            </span>
-        </div>
+        <script type="text/javascript" src="{% static 'js/hamburger_menu.js' %}"></script>
 
         {% if request.user.is_staff %}
             <div class="nav-block">
