@@ -68,20 +68,20 @@ button[type="submit"] {
 .chat {
   display: flex;
   flex-direction: column;
-  gap: 20px; }
+  gap: 20px;
+  max-height: 90vh; }
 
 #chat-log {
-  margin-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 80vh;
+  height: 100%;
   overflow-y: scroll;
   padding: 15px;
   top: 0;
   border: 1px solid #1e293b;
   border-radius: 15px;
-  font-size: 0.85rem; }
+  margin-top: 10px; }
   #chat-log::-webkit-scrollbar {
     width: 0px; }
   #chat-log::-webkit-scrollbar-track {
@@ -101,9 +101,8 @@ button[type="submit"] {
   width: fit-content;
   min-width: 125px;
   max-width: 75%; }
-
-.current-user-message {
-  background-color: #353f4f; }
+  .message.current-user-message {
+    background-color: #353f4f; }
 
 .message__time {
   font-size: 0.7rem;
@@ -174,11 +173,13 @@ button[type="submit"] {
   color: rgba(14, 174, 246, 0.5);
   font-size: 1rem; }
 
-.base-form__field-errors, .base-form__errors {
+.base-form__field-errors,
+.base-form__errors {
   display: flex;
   flex-direction: column;
   margin-block-end: 5px; }
-  .base-form__field-errors span, .base-form__errors span {
+  .base-form__field-errors span,
+  .base-form__errors span {
     color: #BE185D;
     font-size: 1rem;
     font-weight: 300; }
@@ -300,7 +301,6 @@ nav {
   margin: 20px 0; }
 
 .content {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
