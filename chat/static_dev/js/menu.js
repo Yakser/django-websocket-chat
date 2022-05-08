@@ -11,8 +11,10 @@ const Menu = () => {
     }
   });
 
-  document.getElementById('js-menu-btn').addEventListener('click', () => {
+  const menuBtn = document.getElementById('js-menu-btn')
+  menuBtn.addEventListener('click', () => {
     nav.classList.toggle('active');
+    menuBtn.classList.toggle('active');
     if (nav.classList.contains('active')) {
       nav.style.height = `${ nav.scrollHeight }px`
       nav.style.marginBlockStart = '20px';

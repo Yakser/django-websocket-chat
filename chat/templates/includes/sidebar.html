@@ -2,61 +2,67 @@
 
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
-        <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
-        <div class="user-block">
-            <div class="user-img">
-                {% if request.user.profile.image %}
-                    <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
-                {% else %}
-                    <span>{{ request.user.username|make_list|first|capfirst  }}</span>
-                {% endif %}
-            </div>
-            <div class="user ">
-                <a class="user__username" href="{% url 'users:profile' %}">
-                    {{ request.user.username|safe }}
-                </a>
-                <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
-            </div>
-        </div>
-        <div class="menu-container">
-            <div id='js-menu-btn'>
-                <div class='menu-ico'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect y="14" width="128" height="20" rx="10"/><rect y="94" width="128" height="20" rx="10"/><rect y="54" width="128" height="20" rx="10"/></svg>
+        <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-5 col-sm-3 col-md-3 col-lg-4 col-xl-6">
+        
+        <div class="sidebar__container">
+            <div class="user-block">
+                <div class="user-img">
+                    {% if request.user.profile.image %}
+                        <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
+                    {% else %}
+                        <span>{{ request.user.username|make_list|first|capfirst  }}</span>
+                    {% endif %}
+                </div>
+                <div class="user ">
+                    <a class="user__username" href="{% url 'users:profile' %}">
+                        {{ request.user.username|safe }}
+                    </a>
+                    <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
                 </div>
             </div>
-            <div class="menu">
-                <nav id="js-menu-nav">
-                    <div class="nav-block">
-                        <span class="nav-block__title">
-                            Чаты
-                        </span>
+            <div class="hr"></div>
+            <div class="menu-container">
+                <div id='js-menu-btn' class='menu-btn'>
+                    <div class='menu-ico menu-ico_arrow'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="cls-1" d="M23.89,14.75l0,0a1.33,1.33,0,0,0-.3-.23l-13-13a1.7,1.7,0,0,0-2.43,0l0,0A1.73,1.73,0,0,0,8.11,4l12,12-12,12a1.73,1.73,0,0,0,0,2.44l0,0a1.7,1.7,0,0,0,2.43,0l13-13a1.33,1.33,0,0,0,.3-.23l0,0a1.81,1.81,0,0,0,0-2.5Z"/></svg>
                     </div>
-                    <div class="nav-block">
-                        <span class="nav-block__title">
-                            Группы - <a href="{% url 'groups:create' %}">создать</a>
-                        </span>
-                    </div>
-                    <div class="nav-block">
-                        <span class="nav-block__title">
-                            Каналы
-                        </span>
-                    </div>
+                </div>
+                <div class="menu">
+                    <nav id="js-menu-nav">
+                        <div class="nav-block">
+                            <span class="nav-block__title">
+                                Чаты
+                            </span>
+                        </div>
+                        <div class="nav-block">
+                            <span class="nav-block__title">
+                                Группы - <a href="{% url 'groups:create' %}">создать</a>
+                            </span>
+                        </div>
+                        <div class="nav-block">
+                            <span class="nav-block__title">
+                                Каналы
+                            </span>
+                        </div>
 
-                    {% if request.user.is_staff %}
-                        <div class="nav-block">
-                            <span class="nav-block__title nav-block__title_admin">
-                                <a href="{% url 'groups:group' 'test_group' %}">Войти в тестовую группу</a>
-                            </span>
-                        </div>
-                        <div class="nav-block">
-                            <span class="nav-block__title nav-block__title_admin">
-                                <a href="{% url 'admin:index' %}">Админка</a>
-                            </span>
-                        </div>
-                    {% endif %}
-                </nav>
+                        {% if request.user.is_staff %}
+                            <div class="nav-block">
+                                <span class="nav-block__title nav-block__title_admin">
+                                    <a href="{% url 'groups:group' 'test_group' %}">Войти в тестовую группу</a>
+                                </span>
+                            </div>
+                            <div class="nav-block">
+                                <span class="nav-block__title nav-block__title_admin">
+                                    <a href="{% url 'admin:index' %}">Админка</a>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </nav>
+                </div>
             </div>
         </div>
+
+    
     {% else %}
         <div class="btns-container">
             <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>
