@@ -39,7 +39,7 @@ class ProfileView(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request,
                       self.template_name,
-                      self.get_context_data(request.user.id))
+                      self.get_context_data(request))
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(User.objects.only('email', 'username'),
@@ -60,19 +60,28 @@ class ProfileView(TemplateView):
 
             user.save()
 
-        return redirect('users:profile')
+            return redirect('users:profile')
 
-    def get_context_data(self, id, **kwargs):
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(request))
+
+    def get_context_data(self, request, **kwargs):
         context = super().get_context_data(**kwargs)
 
         user = get_object_or_404(User.objects.only('email', 'username'),
-                                 pk=id)
+                                 pk=request.user.id)
 
-        form = self.form_class(initial={'email': user.email,
+        form = self.form_class(request.POST or None,
+                               request.FILES or None,
+                               initial={'email': user.email,
                                         'login': user.username,
                                         'biography': user.profile.biography,
                                         'image': user.profile.image
                                         })
+        # небоходимо, чтобы показать ошибки
+        if form.is_valid():
+            form.validate_all(user)
 
         context['user'] = user
         context['form'] = form

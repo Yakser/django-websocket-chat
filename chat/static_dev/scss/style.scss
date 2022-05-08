@@ -2,10 +2,37 @@
 @import "variables";
 body {
     background-color: $bg;
+ 
+    .bg {
+        mask-image: linear-gradient(to bottom, transparent, black);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+        width: 100vw;
+        height: 100vh;
+        background: url("../img/bg.png");
+        background-repeat: none;
+        background-position: center;
+        background-size: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .bg-grid {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url('../img/grid.svg');
+        mask-image: linear-gradient(to bottom, transparent, black);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    }
     color: $white;
 }
 .wrapper {
     min-height: 100vh;
+}
+.title {
+    margin-block-end: 20px;
 }
 
 input:not([type="checkbox"]):not([type="radio"]),
@@ -28,13 +55,14 @@ textarea {
 }
 
 textarea {
-    resize: vertical;
+    resize: none;
     width: 100%;
+    padding: 15px;
 }
 
 input[type="button"],
 input[type="submit"],
-button[type="submit"] {
+button {
     cursor: pointer;
 }
 
@@ -42,53 +70,83 @@ button[type="submit"] {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 85vh;
 }
 
 #chat-log {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 300px;
     overflow-y: scroll;
     padding: 15px;
     top: 0;
     border: 1px solid $gray;
     border-radius: 15px;
+    margin-top: 10px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(15, 23, 42, .7);
     &::-webkit-scrollbar {
-        width: 0px;
+        width: 14px;
     }
-    &::-webkit-scrollbar-track {
-        background-color: $gray;
-        border-radius: 10000px;
-    }
+
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
+        border: 4px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+    }
+}
+.chat-log__title-message-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    span {
+        font-weight: 500;
+        font-size: 1.2rem;
+        user-select: none;
+        background-color: $bg;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        color: $white;
+        border-radius: 100000px;
+        padding: 5px 15px;
+        border: 1px solid $red;
+    }
+    a {
+        font-weight: 600;
     }
 }
 
 .message {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    background-color: $light-gray;
+    padding: 7px 15px;
+    background-color: $transparented-light-gray;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    min-width: 125px;
+    max-width: 75%;
+    &.current-user-message {
+        background-color: $light-gray;
+    }
 }
+
 .message__time {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     opacity: 0.7;
     font-weight: 300;
     align-self: flex-end;
+    margin-left: 50px;
 }
 .message__text {
     overflow-wrap: break-word;
+    margin: 0;
 }
 .message__author {
     color: $blue;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
-    margin-block-end: 10px;
+    margin-block-end: 2px;
 }
 
 .base-form {
@@ -111,49 +169,69 @@ button[type="submit"] {
         flex-direction: column;
         width: 100%;
     }
-    .base-form__form-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: flex-start;
-        margin-block-end: 20px;
-        flex-wrap: wrap;
-        label {
-            margin-inline-end: 5px;
-        }
-        small {
-            width: 100%;
-            margin-block-start: 5px;
-            opacity: 0.5;
-        }
-        input {
-            width: 100%;
-        }
-        input[type="checkbox"] {
-            display: inline-block;
-            width: max-content;
-            margin-inline-end: 5px;
-        }
-        label[for="id_image"] + a {
-            display: block;
-            width: 100%;
-            text-decoration: underline;
-            color: $blue;
-            margin-block-end: 5px;
-        }
-    }
     button {
         width: max-content;
+    }
+}
+.base-form__form-row {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 20px;
+    label {
+        margin-inline-end: 5px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    small {
+        width: 100%;
+        margin-block-start: 5px;
+        opacity: 0.5;
+    }
+    input {
+        width: 100%;
+    }
+    input[type="checkbox"] {
+        display: inline-block;
+        width: max-content;
+        margin-inline-end: 5px;
+    }
+    .base-form__image-link {
+        display: block;
+        width: 100%;
+        text-decoration: underline;
+        color: $blue;
+        margin-block-end: 5px;
     }
 }
 
 .base-form__link {
     margin-block-start: 5px;
 }
+.base-form__star {
+    color: rgba($blue, 0.5);
+    font-size: 1rem;
+}
+
+.base-form__field-errors,
+.base-form__errors {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 5px;
+    span {
+        color: $red;
+        font-size: 1rem;
+        font-weight: 300;
+    }
+}
 
 .sidebar {
-    background-color: lighten($bg, 2%);
+    // background-color: $sidebar;
     padding: 20px;
     height: 100vh;
+}
+.sidebar__logo {
+    width: 100%;
+    margin-block-end: 20px;
 }
 
 .user-block {
@@ -248,7 +326,6 @@ button[type="submit"] {
     font-weight: 600;
 }
 
-
 main {
     display: flex;
 }
@@ -277,17 +354,34 @@ nav {
     }
 }
 
-.user-info {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-}
 .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 20px;
+}
+
+.clear-image-block {
+    label {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+
+.clear_messages_confirm {
+    display: flex;
+    align-items: center;
+    margin-block-start: 20px;
+    a {
+        font-size: 1.2rem;
+        &:first-child {
+            margin-inline-end: 10px;
+        }
+    }
+}
+.go-back-btn {
+    font-size: 1.2rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -300,5 +394,9 @@ nav {
         display: flex;
         flex-direction: column;
         padding-bottom: 20px;
+    }
+    .current-user-message {
+        margin-left: auto;
+        margin-right: 0;
     }
 }
