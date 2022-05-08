@@ -118,6 +118,7 @@ button {
     padding: 15px;
     top: 0;
     border: 1px solid $gray;
+    border-bottom-width: 0;
     border-radius: 15px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -202,7 +203,6 @@ textarea#chat-message-input {
     border-top-left-radius: 0;
     border-bottom-right-radius: 0;
     max-height: 25vh;
-    height: calc(1rem + 20px);
     resize: none;
     width: 100%;
     &::-webkit-scrollbar {
@@ -216,6 +216,8 @@ textarea#chat-message-input {
     justify-content: center;
     align-items: center;
     border: 1px solid $gray;
+    backdrop-filter: blur(8px);
+    background-color: rgba(15, 23, 42, 0.7);
     border-radius: 15px;
     padding: 10px;
     margin: 0 auto;
