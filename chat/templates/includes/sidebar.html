@@ -3,29 +3,29 @@
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
         <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
-        <div class="burger-container">
-            <div class="">
-                <span class="material-icons burger-icon" id='js-menu'>
-                    format_list_bulleted
-                </span>
+        <div class="user-block">
+            <div class="user-img">
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
+                {% else %}
+                    <span>{{ request.user.username|make_list|first|capfirst  }}</span>
+                {% endif %}
             </div>
-            <div class="hamburger-menu">
-                <div id="myLinks">
-                    <div class="user-block">
-                        <div class="user-img">
-                            {% if request.user.profile.image %}
-                                <img src="{{ request.user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
-                            {% else %}
-                                <span>{{ request.user.username|make_list|first|capfirst  }}</span>
-                            {% endif %}
-                        </div>
-                        <div class="user ">
-                            <a class="user__username" href="{% url 'users:profile' %}">
-                                {{ request.user.username|safe }}
-                            </a>
-                            <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
-                        </div>
-                    </div>
+            <div class="user ">
+                <a class="user__username" href="{% url 'users:profile' %}">
+                    {{ request.user.username|safe }}
+                </a>
+                <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div id='js-menu-btn'>
+                <div class='menu-ico'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect y="14" width="128" height="20" rx="10"/><rect y="94" width="128" height="20" rx="10"/><rect y="54" width="128" height="20" rx="10"/></svg>
+                </div>
+            </div>
+            <div class="menu">
+                <nav id="js-menu-nav">
                     <div class="nav-block">
                         <span class="nav-block__title">
                             Чаты
@@ -33,7 +33,7 @@
                     </div>
                     <div class="nav-block">
                         <span class="nav-block__title">
-                            Группы
+                            Группы - <a href="{% url 'groups:create' %}">создать</a>
                         </span>
                     </div>
                     <div class="nav-block">
@@ -41,45 +41,27 @@
                             Каналы
                         </span>
                     </div>
-                </div>
-            </div>
-        </div>
-        <nav>
-        <div class="nav-block">
-            <span class="nav-block__title">
-                Чаты
-            </span>
-        </div>
-         <div class="nav-block">
-            <span class="nav-block__title">
-                Группы - <a href="{% url 'groups:create' %}">создать</a>
-            </span>
-        </div>
-        <div class="nav-block">
-            <span class="nav-block__title">
-                Каналы
-            </span>
-        </div>
 
-        {% if request.user.is_staff %}
-            <div class="nav-block">
-                <span class="nav-block__title nav-block__title_admin">
-                    <a href="{% url 'groups:group' 'test_group' %}">Войти в тестовую группу</a>
-                </span>
+                    {% if request.user.is_staff %}
+                        <div class="nav-block">
+                            <span class="nav-block__title nav-block__title_admin">
+                                <a href="{% url 'groups:group' 'test_group' %}">Войти в тестовую группу</a>
+                            </span>
+                        </div>
+                        <div class="nav-block">
+                            <span class="nav-block__title nav-block__title_admin">
+                                <a href="{% url 'admin:index' %}">Админка</a>
+                            </span>
+                        </div>
+                    {% endif %}
+                </nav>
             </div>
-            <div class="nav-block">
-                <span class="nav-block__title nav-block__title_admin">
-                    <a href="{% url 'admin:index' %}">Админка</a>
-                </span>
-            </div>
-        {% endif %}
-
-    </nav>
+        </div>
     {% else %}
         <div class="btns-container">
             <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>
             <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
         </div>
     {% endif %}
-    <script src="{% static 'js/hamburger_menu.js' %}"></script>
+    <script src="{% static 'js/menu.js' %}"></script>
 </div>
