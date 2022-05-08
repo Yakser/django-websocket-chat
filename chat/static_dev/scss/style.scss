@@ -2,7 +2,7 @@
 @import "variables";
 body {
     background-color: $bg;
- 
+
     .bg {
         mask-image: linear-gradient(to bottom, transparent, black);
         -webkit-mask-image: linear-gradient(to bottom, transparent, black);
@@ -22,7 +22,7 @@ body {
         position: absolute;
         top: 0;
         left: 0;
-        background-image: url('../img/grid.svg');
+        background-image: url("../img/grid.svg");
         mask-image: linear-gradient(to bottom, transparent, black);
         -webkit-mask-image: linear-gradient(to bottom, transparent, black);
     }
@@ -54,10 +54,48 @@ textarea {
     }
 }
 
-textarea {
-    resize: none;
-    width: 100%;
-    padding: 15px;
+.burger-container {
+    border-radius: 5px;
+    margin-bottom: 0.75rem;
+    background-color: $light-gray;
+}
+
+.hamburger-menu {
+    overflow: hidden;
+    position: relative;
+}
+
+.hamburger-menu #myLinks {
+    overflow: hidden;
+    transition: height 500ms ease;
+    display: none;
+}
+
+.hamburger-menu span {
+    color: white;
+    padding: 14px 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #ddd;
+        color: black;
+    }
+}
+
+.burger-icon {
+    margin-left: 5px;
+    margin-top: 5px;
+    position: relative;
+    user-select: none;
+    &:hover {
+        color: $gray;
+        transition: all 0.25s;
+    }
 }
 
 input[type="button"],
@@ -69,7 +107,6 @@ button {
 .chat {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     max-height: 85vh;
 }
 
@@ -81,14 +118,16 @@ button {
     padding: 15px;
     top: 0;
     border: 1px solid $gray;
+    border-bottom-width: 0;
     border-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     margin-top: 10px;
     backdrop-filter: blur(8px);
-    background-color: rgba(15, 23, 42, .7);
+    background-color: rgba(15, 23, 42, 0.7);
     &::-webkit-scrollbar {
         width: 14px;
     }
-
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
@@ -148,6 +187,28 @@ button {
     font-weight: 500;
     margin-block-end: 2px;
 }
+.chat__sendings {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+#chat-message-submit {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+textarea#chat-message-input {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    max-height: 25vh;
+    resize: none;
+    width: 100%;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
 
 .base-form {
     display: flex;
@@ -155,6 +216,8 @@ button {
     justify-content: center;
     align-items: center;
     border: 1px solid $gray;
+    backdrop-filter: blur(8px);
+    background-color: rgba(15, 23, 42, 0.7);
     border-radius: 15px;
     padding: 10px;
     margin: 0 auto;
@@ -238,11 +301,11 @@ button {
     background-color: $light-gray;
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     color: $white;
-    border-radius: 15px;
     padding: 15px;
     transition: $transition;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid $gray;
 }
 
 .user-img {
@@ -339,6 +402,7 @@ nav {
 .nav-block {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0;
 
     .nav-block__title {
         font-weight: 500;
@@ -346,9 +410,7 @@ nav {
         user-select: none;
         cursor: pointer;
     }
-    &:not(:last-child) {
-        margin-bottom: 20px;
-    }
+
     .nav-block__title_admin a {
         color: rgba($blue, 0.5);
     }

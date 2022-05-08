@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% load static %}
 
@@ -6,21 +6,20 @@
 
 {% block content %}
   {% include '../includes/sidebar.html' %}
-    <script type="text/javascript" src="{% static 'js/auto_textarea_resizing.js' %}"></script>
     <div class='content col-xl-9 h-100'>
       {% if is_member %}
         <h1 class='title' title='{{ group.slug }}'>Чат: {{ group.name|safe }}</h1>
-        <div class="chat col-12">
+        <div class='chat col-12'>
           {% if user.id == group.owner.id %}
-            <a href="{% url 'groups:clear_messages_confirm' group.slug %}">
+            <a href='{% url 'groups:clear_messages_confirm' group.slug %}'>
                 <button>Очистить</button>
             </a>
           {% endif %}
             
-            <div id="chat-log">
+            <div id='chat-log'>
               <span class='chat-log__title-message-container'>
                 <span>
-                ✨ <a href="{% url 'users:user_detail' group.owner.id %}">{{ group.owner.username|capfirst }}</a> создал группу {{ group.name }}! ✨
+                ✨ <a href='{% url 'users:user_detail' group.owner.id %}'>{{ group.owner.username|capfirst }}</a> создал группу {{ group.name }}! ✨
                 </span>
               </span>
               {% for message in messages.all %}
@@ -30,7 +29,11 @@
                       {{ message.user.username }} 
                     </span>
                     <p class='message__text'>{{message.text|safe}}</p>
-                    <span class='message__time'>{{ message.time }} </span>
+                    {% if message.text|length > 7 %}
+                      <span class='message__time' style='{margin-top: 0}'>{{ message.time }} </span>
+                    {% else %}
+                      <span class='message__time'>{{ message.time }} </span>
+                    {% endif %}
                   </div>
                 {% else %}
                   <div class='message'>
@@ -43,14 +46,17 @@
                 {% endif %}
               {% endfor %}
             </div>
-            <textarea class='auto-height' 
+            <div class='chat__sendings'>
+              <textarea 
                       id='chat-message-input'
                       maxlength='1024'
-                      rows='2'
-                      placeholder="Введите сообщение..."
+                      placeholder='Введите сообщение...'
+                      rows='1'
                       ></textarea>
-            <input id="chat-message-submit" type="button" value="Отправить">
+              <input id='chat-message-submit' type='button' value='Отправить'>
+            </div>
         </div>
+        <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}
         <h1 class='title'>Вы не состоите в этой группе 😔</h1>
