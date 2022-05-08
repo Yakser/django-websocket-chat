@@ -2,6 +2,30 @@
 @import "variables";
 body {
     background-color: $bg;
+ 
+    .bg {
+        mask-image: linear-gradient(to bottom, transparent, black);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+        width: 100vw;
+        height: 100vh;
+        background: url("../img/bg.png");
+        background-repeat: none;
+        background-position: center;
+        background-size: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .bg-grid {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url('../img/grid.svg');
+        mask-image: linear-gradient(to bottom, transparent, black);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    }
     color: $white;
 }
 .wrapper {
@@ -46,7 +70,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-height: 90vh;
+    max-height: 85vh;
 }
 
 #chat-log {
@@ -59,16 +83,17 @@ button {
     border: 1px solid $gray;
     border-radius: 15px;
     margin-top: 10px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(15, 23, 42, .7);
     &::-webkit-scrollbar {
-        width: 0px;
+        width: 14px;
     }
-    &::-webkit-scrollbar-track {
-        background-color: $gray;
-        border-radius: 10000px;
-    }
+
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
+        border: 4px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
     }
 }
 .chat-log__title-message-container {
@@ -200,7 +225,7 @@ button {
 }
 
 .sidebar {
-    background-color: $sidebar;
+    // background-color: $sidebar;
     padding: 20px;
     height: 100vh;
 }
@@ -351,14 +376,13 @@ nav {
     a {
         font-size: 1.2rem;
         &:first-child {
-        margin-inline-end: 10px;
-    }
+            margin-inline-end: 10px;
+        }
     }
 }
 .go-back-btn {
     font-size: 1.2rem;
 }
-
 
 @media screen and (max-width: 1200px) {
     .sidebar {
