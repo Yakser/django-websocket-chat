@@ -80,14 +80,9 @@ textarea {
   textarea:focus-visible {
     outline: 1px solid #0eaef6; }
 
-textarea {
-  resize: none;
-  width: 100%;
-  padding: 15px; }
-
 .burger-container {
   border-radius: 5px;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
   background-color: #353f4f; }
 
 .hamburger-menu {
@@ -119,7 +114,7 @@ textarea {
   user-select: none; }
   .burger-icon:hover {
     color: #1e293b;
-    transition: all .25s; }
+    transition: all 0.25s; }
 
 input[type="button"],
 input[type="submit"],
@@ -129,7 +124,6 @@ button {
 .chat {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   max-height: 85vh; }
 
 #chat-log {
@@ -141,6 +135,8 @@ button {
   top: 0;
   border: 1px solid #1e293b;
   border-radius: 15px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   margin-top: 10px;
   backdrop-filter: blur(8px);
   background-color: rgba(15, 23, 42, 0.7); }
@@ -187,8 +183,7 @@ button {
   opacity: 0.7;
   font-weight: 300;
   align-self: flex-end;
-  margin-left: 50px;
-  margin-top: -12px; }
+  margin-left: 50px; }
 
 .message__text {
   overflow-wrap: break-word;
@@ -199,6 +194,27 @@ button {
   font-size: 1.1rem;
   font-weight: 500;
   margin-block-end: 2px; }
+
+.chat__sendings {
+  display: flex;
+  flex-direction: row;
+  margin: 0; }
+
+#chat-message-submit {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
+
+textarea#chat-message-input {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  max-height: 25vh;
+  height: calc(1rem + 20px);
+  resize: none;
+  width: 100%; }
+  textarea#chat-message-input::-webkit-scrollbar {
+    width: 0; }
 
 .base-form {
   display: flex;

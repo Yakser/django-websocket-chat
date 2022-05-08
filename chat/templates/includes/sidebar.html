@@ -3,10 +3,9 @@
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
         <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="burger-container">
             <div class="">
-                <span class="material-icons burger-icon" onclick="myFunction()">
+                <span class="material-icons burger-icon" id='js-menu'>
                     format_list_bulleted
                 </span>
             </div>
@@ -82,7 +81,5 @@
             <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
         </div>
     {% endif %}
-
-    
-                
+    <script src="{% static 'js/hamburger_menu.js' %}"></script>
 </div>
