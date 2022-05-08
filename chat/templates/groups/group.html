@@ -7,20 +7,27 @@
 {% block content %}
   {% include '../includes/sidebar.html' %}
     <script type="text/javascript" src="{% static 'js/auto_textarea_resizing.js' %}"></script>
-    <div class='content col-xl-9 h-100' onload="autoheight('chat-message-input')">
+    <div class='content col-xl-9 h-100'>
       {% if is_member %}
-        <h1 class='title'>Чат: {{ group.name|safe }}</h1>
+        <h1 class='title' title='{{ group.slug }}'>Чат: {{ group.name|safe }}</h1>
         <div class="chat col-12">
+          {% if user.id == group.owner.id %}
+            <a href="{% url 'groups:clear_messages_confirm' group.slug %}">
+                <button>Очистить</button>
+            </a>
+          {% endif %}
+            
             <div id="chat-log">
+              <span class='chat-log__title-message-container'>
+                <span>
+                ✨ <a href="{% url 'users:user_detail' group.owner.id %}">{{ group.owner.username|capfirst }}</a> создал группу {{ group.name }}! ✨
+                </span>
+              </span>
               {% for message in messages.all %}
                 {% if message.user == user %}
                   <div class='message current-user-message'>
                     <span class='message__author'>
-                      {% if message.user.username %}
-                        {{ message.user.username }} 
-                      {% else %}
-                        Анонимный пользователь
-                      {% endif %}
+                      {{ message.user.username }} 
                     </span>
                     <p class='message__text'>{{message.text|safe}}</p>
                     {% if message.text|length > 7 %}
@@ -40,13 +47,13 @@
                 {% endif %}
               {% endfor %}
             </div>
-            <div class="message__sendings-container">
-              <textarea class='message__input auto-height' 
-                        id="chat-message-input"
-                        autofocus placeholder="Введите сообщение..."
-                        oninput="autoheight('chat-message-input')"></textarea>
-              <input id="chat-message-submit" type="button" value="Отправить">
-            </div>
+            <textarea class='auto-height' 
+                      id='chat-message-input'
+                      maxlength='1024'
+                      rows='2'
+                      placeholder="Введите сообщение..."
+                      ></textarea>
+            <input id="chat-message-submit" type="button" value="Отправить">
         </div>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}

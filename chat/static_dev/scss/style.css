@@ -31,9 +31,33 @@ p {
 body {
   background-color: #0b1120;
   color: #f5f5f5; }
+  body .bg {
+    mask-image: linear-gradient(to bottom, transparent, black);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    width: 100vw;
+    height: 100vh;
+    background: url("../img/bg.png");
+    background-repeat: none;
+    background-position: center;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  body .bg-grid {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../img/grid.svg");
+    mask-image: linear-gradient(to bottom, transparent, black);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black); }
 
 .wrapper {
   min-height: 100vh; }
+
+.title {
+  margin-block-end: 20px; }
 
 input:not([type="checkbox"]):not([type="radio"]),
 button,
@@ -57,8 +81,9 @@ textarea {
     outline: 1px solid #0eaef6; }
 
 textarea {
-  resize: vertical;
-  width: 100%; }
+  resize: none;
+  width: 100%;
+  padding: 15px; }
 
 .burger-container {
   border-radius: 5px;
@@ -98,13 +123,14 @@ textarea {
 
 input[type="button"],
 input[type="submit"],
-button[type="submit"] {
+button {
   cursor: pointer; }
 
 .chat {
   display: flex;
   flex-direction: column;
-  max-height: 90vh; }
+  gap: 20px;
+  max-height: 85vh; }
 
 #chat-log {
   display: flex;
@@ -115,18 +141,33 @@ button[type="submit"] {
   top: 0;
   border: 1px solid #1e293b;
   border-radius: 15px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   margin-top: 10px;
-  margin-bottom: 0; }
+  backdrop-filter: blur(8px);
+  background-color: rgba(15, 23, 42, 0.7); }
   #chat-log::-webkit-scrollbar {
-    width: 0px; }
-  #chat-log::-webkit-scrollbar-track {
-    background-color: #1e293b;
-    border-radius: 10000px; }
+    width: 14px; }
   #chat-log::-webkit-scrollbar-thumb {
     background-color: #353f4f;
-    border-radius: 10000px; }
+    border-radius: 10000px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box; }
+
+.chat-log__title-message-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; }
+  .chat-log__title-message-container span {
+    font-weight: 500;
+    font-size: 1.2rem;
+    user-select: none;
+    background-color: #0b1120;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    color: #f5f5f5;
+    border-radius: 100000px;
+    padding: 5px 15px;
+    border: 1px solid #BE185D; }
+  .chat-log__title-message-container a {
+    font-weight: 600; }
 
 .message {
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
@@ -158,35 +199,6 @@ button[type="submit"] {
   font-size: 1.1rem;
   font-weight: 500;
   margin-block-end: 2px; }
-
-.message__sendings-container {
-  display: flex;
-  flex-direction: row;
-  margin: 0; }
-
-.message__input {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: 0;
-  max-height: 25vh;
-  height: calc(1rem + 20px); }
-
-#chat-message-submit {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0; }
-
-textarea#chat-message-input {
-  resize: none;
-  width: 100%; }
-  textarea#chat-message-input::-webkit-scrollbar {
-    background-color: transparent;
-    border-radius: 15px;
-    width: 10px; }
-  textarea#chat-message-input::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    border-radius: 9999px;
-    background-color: #353f4f; }
 
 .base-form {
   display: flex;
@@ -253,7 +265,6 @@ textarea#chat-message-input {
     font-weight: 300; }
 
 .sidebar {
-  background-color: #0F172A;
   padding: 20px;
   height: 100vh; }
 
@@ -362,11 +373,6 @@ nav {
   .nav-block .nav-block__title_admin a {
     color: rgba(14, 174, 246, 0.5); }
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0; }
-
 .content {
   display: flex;
   flex-direction: column;
@@ -377,6 +383,18 @@ nav {
 .clear-image-block label {
   font-size: 1rem;
   font-weight: 400; }
+
+.clear_messages_confirm {
+  display: flex;
+  align-items: center;
+  margin-block-start: 20px; }
+  .clear_messages_confirm a {
+    font-size: 1.2rem; }
+    .clear_messages_confirm a:first-child {
+      margin-inline-end: 10px; }
+
+.go-back-btn {
+  font-size: 1.2rem; }
 
 @media screen and (max-width: 1200px) {
   .sidebar {

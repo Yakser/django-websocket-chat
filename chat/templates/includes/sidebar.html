@@ -45,7 +45,22 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="{% static 'js/hamburger_menu.js' %}"></script>
+        <nav>
+        <div class="nav-block">
+            <span class="nav-block__title">
+                Чаты
+            </span>
+        </div>
+         <div class="nav-block">
+            <span class="nav-block__title">
+                Группы - <a href="{% url 'groups:create' %}">создать</a>
+            </span>
+        </div>
+        <div class="nav-block">
+            <span class="nav-block__title">
+                Каналы
+            </span>
+        </div>
 
         {% if request.user.is_staff %}
             <div class="nav-block">
