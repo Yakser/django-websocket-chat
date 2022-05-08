@@ -10,12 +10,13 @@
       {% if is_member %}
         <h1 class='title' title='{{ group.slug }}'>Чат: {{ group.name|safe }}</h1>
         <div class='chat col-12'>
-          {% if user.id == group.owner.id %}
-            <a href='{% url 'groups:clear_messages_confirm' group.slug %}'>
-                <button>Очистить</button>
-            </a>
-          {% endif %}
-            
+            <div class="chat__options">
+               {% if user.id == group.owner.id %}
+                <a href='{% url 'groups:clear_messages_confirm' group.slug %}'>
+                    Очистить
+                </a>
+              {% endif %}
+            </div>
             <div id='chat-log'>
               <span class='chat-log__title-message-container'>
                 <span>

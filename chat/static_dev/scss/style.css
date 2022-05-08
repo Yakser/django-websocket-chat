@@ -30,6 +30,8 @@ p {
 
 body {
   background-color: #0b1120;
+  overflow-x: hidden;
+  padding-bottom: 20px;
   color: #f5f5f5; }
   body .bg {
     mask-image: linear-gradient(to bottom, transparent, black);
@@ -145,6 +147,28 @@ button {
   flex-direction: column;
   max-height: 85vh; }
 
+.chat__sendings {
+  display: flex;
+  flex-direction: row;
+  margin: 0; }
+  .chat__sendings #chat-message-input {
+    box-shadow: none;
+    border: 1px solid #1e293b;
+    border-right-width: 0; }
+  .chat__sendings #chat-message-submit {
+    box-shadow: none;
+    border: 1px solid #1e293b;
+    border-left-width: 0; }
+
+.chat__options {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 1px solid #1e293b;
+  backdrop-filter: blur(8px);
+  background-color: rgba(30, 41, 59, 0.7);
+  color: #f5f5f5;
+  padding: 5px 15px; }
+
 #chat-log {
   display: flex;
   flex-direction: column;
@@ -154,10 +178,8 @@ button {
   top: 0;
   border: 1px solid #1e293b;
   border-bottom-width: 0;
-  border-radius: 15px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-top: 10px;
+  border-top-width: 0;
+  border-radius: 0;
   backdrop-filter: blur(8px);
   background-color: rgba(15, 23, 42, 0.7); }
   #chat-log::-webkit-scrollbar {
@@ -214,11 +236,6 @@ button {
   font-size: 1.1rem;
   font-weight: 500;
   margin-block-end: 2px; }
-
-.chat__sendings {
-  display: flex;
-  flex-direction: row;
-  margin: 0; }
 
 #chat-message-submit {
   border-top-right-radius: 0;
@@ -444,7 +461,7 @@ nav {
 .go-back-btn {
   font-size: 1.2rem; }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1198px) {
   .sidebar {
     margin-block-end: 20px;
     height: 100%;
