@@ -212,8 +212,7 @@ textarea#chat-message-input {
   border-bottom-right-radius: 0;
   max-height: 25vh;
   resize: none;
-  width: 100%;
-  line-height: normal; }
+  width: 100%; }
   textarea#chat-message-input::-webkit-scrollbar {
     width: 0; }
 
