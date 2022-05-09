@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('groups', '0003_alter_group_image'),
         ('users_channels', '0002_alter_userschannel_slug'),
