@@ -5,6 +5,7 @@ from django.db.models import Prefetch
 
 def get_groups():
     groups = Group.objects.all()
+    # TODO добавить список каналов и чатов с пользователями
     return groups
 
 
