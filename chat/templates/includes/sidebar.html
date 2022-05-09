@@ -63,17 +63,15 @@
         
         <div class="chats-list">
             {% for chat in chats_list %}
-                <a href="{% url 'groups:group' chat.slug %}">
-                    <div class="chats-list__item">
-                            <div class="item__img">
-                                {% if chat.image %}
-                                    <img src="{{ chat.get_image_x256.url }}">
-                                {% else %}
-                                <span>{{ chat.name|make_list|first|capfirst  }}</span>
-                                {% endif %}
-                            </div>
-                            <h7 class="item__name">{{ chat.name }}</h7>
+                <a class="chats-list-item" href="{% url 'groups:group' chat.slug %}">
+                    <div class="chats-list-item__img">
+                        {% if chat.image %}
+                            <img src="{{ chat.get_image_x256.url }}">
+                        {% else %}
+                            <span>{{ chat.name|make_list|first|capfirst  }}</span>
+                        {% endif %}
                     </div>
+                    <span class="chats-list-item__name">{{ chat.name }}</span>
                 </a>
             {% endfor %}
         </div>
