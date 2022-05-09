@@ -8,7 +8,7 @@
     <div class='users-list'>
         {% for user in users %}
         <div class='users-list__item'>
-            <a href='{% url "users:user_detail" user.id %}'>{{user.username}}</span>
+            <a href='{% url "users:user_detail" user.id %}'>{{user.username||truncatechars:10}}</span>
         </div>
         {% endfor %}
     </div>

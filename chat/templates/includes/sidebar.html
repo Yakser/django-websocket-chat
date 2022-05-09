@@ -14,7 +14,7 @@
                 </div>
                 <div class="user ">
                     <a class="user__username" href="{% url 'users:profile' %}">
-                        {{ request.user.username|safe }}
+                        {{ request.user.username|safe|truncatechars:10 }}
                     </a>
                     <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
                 </div>

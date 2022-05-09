@@ -11,7 +11,7 @@
       
       {% for group in groups %}
          <div>
-            <a href="{% url 'groups:group' group.slug %}">{{ group.name }} - {{ group.slug }}</a>
+            <a href="{% url 'groups:group' group.slug %}">{{ group.name|truncatechars:10 }} - {{ group.slug|truncatechars:20 }}</a>
          </div>
       {% endfor %}
       
