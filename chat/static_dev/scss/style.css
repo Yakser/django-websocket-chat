@@ -112,24 +112,30 @@ textarea {
 .menu {
   overflow: hidden;
   position: relative; }
-  .menu nav {
-    overflow: hidden;
-    transition: 500ms ease;
-    display: block;
-    height: 0;
-    margin-block-start: 0; }
-  .menu span {
-    color: white;
-    padding: 14px 16px;
-    margin-top: 0;
-    margin-bottom: 0;
-    text-decoration: none;
-    font-size: 17px;
-    display: block;
-    border-radius: 5px; }
-    .menu span:hover {
-      background-color: #ddd;
-      color: black; }
+
+nav {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 50px;
+  overflow: hidden;
+  transition: 500ms ease;
+  display: block;
+  height: 0;
+  margin-block-start: 0; }
+
+.nav-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0; }
+  .nav-block .nav-block__title {
+    font-weight: 500;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: pointer; }
+    .nav-block .nav-block__title:hover {
+      background-color: transparent; }
+  .nav-block .nav-block__title_admin a {
+    color: rgba(14, 174, 246, 0.5); }
 
 .burger-icon {
   margin-left: 5px;
@@ -274,7 +280,7 @@ button {
   background-color: rgba(53, 63, 79, 0.2);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05); }
   .chats-list::-webkit-scrollbar {
-    width: 14px; }
+    width: 0; }
   .chats-list::-webkit-scrollbar-thumb {
     background-color: #353f4f;
     border-radius: 10000px;
@@ -297,13 +303,15 @@ a.chats-list-item {
     padding: 5px 15px; }
   a.chats-list-item:hover {
     background-color: rgba(53, 63, 79, 0.7); }
+  a.chats-list-item.chats-list-item_active {
+    background-color: rgba(14, 174, 246, 0.2); }
 
 .chats-list-item__img {
   flex-shrink: 0;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  background-color: rgba(245, 245, 245, 0.2);
+  background-color: #475569;
   margin-inline-end: 20px;
   display: flex;
   justify-content: center;
@@ -460,7 +468,7 @@ textarea#chat-message-input {
   border-radius: 15px;
   width: 70px;
   height: 70px;
-  background-color: rgba(245, 245, 245, 0.2);
+  background-color: #475569;
   margin-inline-end: 20px;
   display: flex;
   justify-content: center;
@@ -530,23 +538,6 @@ textarea#chat-message-input {
 
 main {
   display: flex; }
-
-nav {
-  display: flex;
-  flex-direction: column;
-  margin-block-start: 50px; }
-
-.nav-block {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0; }
-  .nav-block .nav-block__title {
-    font-weight: 500;
-    font-size: 1.2rem;
-    user-select: none;
-    cursor: pointer; }
-  .nav-block .nav-block__title_admin a {
-    color: rgba(14, 174, 246, 0.5); }
 
 .content {
   display: flex;
