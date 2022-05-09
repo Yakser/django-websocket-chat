@@ -41,7 +41,7 @@ chatSocket.onmessage = function (event) {
 
 chatSocket.onclose = function (e) {
     console.error('Chat socket closed unexpectedly');
-    alert('Произошла ошибка! Сервер недоступен.')
+    // alert('Произошла ошибка! Сервер недоступен.')
 };
 
 

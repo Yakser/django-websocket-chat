@@ -28,6 +28,9 @@ button {
 p {
   margin-bottom: 0; }
 
+::selection {
+  background: #0eaef6; }
+
 body {
   background-color: #0b1120;
   overflow-x: hidden;
@@ -63,13 +66,12 @@ body {
 
 .menu-btn {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  cursor: pointer; }
   .menu-btn.active .menu-ico_arrow svg {
-    transform: rotate(-90deg);
-    fill: rgba(245, 245, 245, 0.7); }
+    transform: rotate(-90deg); }
 
 .menu-ico {
-  cursor: pointer;
   width: 25px;
   height: 25px; }
   .menu-ico svg {
@@ -158,7 +160,20 @@ button {
   .chat__sendings #chat-message-submit {
     box-shadow: none;
     border: 1px solid #1e293b;
-    border-left-width: 0; }
+    border-left-width: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .chat__sendings #chat-message-submit svg {
+      width: 20px;
+      height: 20px;
+      transition: 0.15s ease-in;
+      stroke: #0eaef6;
+      stroke-width: 2px;
+      fill: transparent; }
 
 .chat__options {
   border-top-left-radius: 15px;
@@ -167,7 +182,24 @@ button {
   backdrop-filter: blur(8px);
   background-color: rgba(30, 41, 59, 0.7);
   color: #f5f5f5;
-  padding: 5px 15px; }
+  padding: 5px 15px;
+  height: 36px;
+  display: flex;
+  align-items: center; }
+
+.chat__group-slug {
+  color: #475569; }
+
+.chat__clear-messages {
+  display: block;
+  margin-left: auto;
+  width: 20px;
+  height: 20px; }
+  .chat__clear-messages svg {
+    fill: #BE185D;
+    transition: fill 0.15s ease-in; }
+  .chat__clear-messages:hover svg {
+    fill: rgba(190, 24, 93, 0.7); }
 
 #chat-log {
   display: flex;
@@ -236,11 +268,6 @@ button {
   font-size: 1.1rem;
   font-weight: 500;
   margin-block-end: 2px; }
-
-#chat-message-submit {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0; }
 
 textarea#chat-message-input {
   border-top-right-radius: 0;
