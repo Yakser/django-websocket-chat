@@ -7,6 +7,7 @@
 {% block content %}
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
+      {% include '../includes/clear_group_messages_confirm.html' %}
       {% if is_member %}
         <h1 class='title' title='{{ group.slug }}'>Чат: {{ group.name|safe }}</h1>
         <div class='chat col-12'>
@@ -15,7 +16,8 @@
                   {{ group.slug|safe }}
                 </span>
                {% if user.id == group.owner.id %}
-                <a href='{% url "groups:clear_messages_confirm" group.slug %}' class='chat__clear-messages'>
+               {% comment %} {% url "groups:clear_messages_confirm" group.slug %} {% endcomment %}
+                <a class='chat__clear-messages'>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="cls-1" d="M17.39,16l7.32-7.32a1,1,0,1,0-1.39-1.39L16,14.61,8.68,7.29A1,1,0,1,0,7.29,8.68L14.61,16,7.29,23.32a1,1,0,1,0,1.39,1.39L16,17.39l7.32,7.32a1,1,0,0,0,1.39-1.39Z"/><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Z"/></svg>  
                 </a>
               {% endif %}
@@ -64,6 +66,7 @@
             </div>
         </div>
         <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/clear_group_messages_confirm.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}
         <h1 class='title'>Вы не состоите в этой группе 😔</h1>

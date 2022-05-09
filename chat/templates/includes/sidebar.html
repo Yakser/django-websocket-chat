@@ -3,7 +3,6 @@
 <div class="sidebar col-lg-12 col-xl-3">
     {% if request.user.is_authenticated %}
         <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-5 col-sm-3 col-md-3 col-lg-4 col-xl-6">
-        
         <div class="sidebar__container">
             <div class="user-block">
                 <div class="user-img">
@@ -61,7 +60,23 @@
                 </div>
             </div>
         </div>
-
+        
+        <div class="chats-list">
+            {% for chat in chats_list %}
+                <a href="{% url 'groups:group' chat.slug %}">
+                    <div class="chats-list__item">
+                            <div class="item__img">
+                                {% if chat.image %}
+                                    <img src="{{ chat.get_image_x256.url }}">
+                                {% else %}
+                                <span>{{ chat.name|make_list|first|capfirst  }}</span>
+                                {% endif %}
+                            </div>
+                            <h7 class="item__name">{{ chat.name }}</h7>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
     
     {% else %}
         <div class="btns-container">
