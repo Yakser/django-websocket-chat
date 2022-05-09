@@ -67,7 +67,7 @@
                         {% if kwargs.group_slug == chat.slug or kwargs.channel_slug == chat.slug or kwargs.chat_slug == chat.slug %}
                             chats-list-item_active 
                         {% endif %}"
-                    href="{% url 'groups:group' chat.slug %}">
+                        href="{% url 'groups:group' chat.slug %}">
                         <div class="chats-list-item__img">
                             {% if chat.image %}
                                 <img src="{{ chat.get_image_x256.url }}">
