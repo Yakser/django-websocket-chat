@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
+    'info.apps.InfoConfig',
     'users.apps.UsersConfig',
     'users_channels.apps.UsersChannelsConfig',
     'users_messages.apps.UsersMessagesConfig',

@@ -1,6 +1,11 @@
 {% load static %}
 
 <div class="sidebar col-lg-12 col-xl-3">
+    <div class="btns-container">
+            <a href={% url 'info:about' %} class="submit-btn">О проекте</a>
+            <a href={% url 'info:instruction' %} class="submit-btn">Инструкция</a>
+        <br>
+    </div>
     {% if request.user.is_authenticated %}
         <img src="{% static './img/text_logo.svg '%}" alt="Soft logo" class="sidebar__logo img img-responsive col-6">
         <div class="burger-container">
