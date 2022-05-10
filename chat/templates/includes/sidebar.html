@@ -62,7 +62,7 @@
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
             <div class="chats-list">
-                {% for chat in chats_list %}
+                {% for chat in user.users_groups.all %}
                     <a class="chats-list-item
                         {% if kwargs.group_slug == chat.slug or kwargs.channel_slug == chat.slug or kwargs.chat_slug == chat.slug %}
                             chats-list-item_active 
