@@ -66,6 +66,7 @@
         </div>
         <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
         <script type='text/javascript' src='{% static "js/clear_group_messages_confirm.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/restore_messages_scroll_pos.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}
         <h1 class='title'>Вы не состоите в этой группе 😔</h1>
