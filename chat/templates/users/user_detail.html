@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Информация о пользователе
+    Профиль {{ user.username|safe }}
 {% endblock %}
 
 {% block content %}
-    <h1 class='title'>Информация о пользователе</h1>
-    <div>
-        <div class='user-info'>
-            <span>Имя: {{user.username}}</span>
-            <span>Почта: {{user.email}}</span>
-            <span>{{user.profile.biography}}</span>
+    {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+        <h1 class='title'>Профиль пользователя {{ user.username|safe }}</h1>
+        <div class='user-detail-container'>
+            <div class='user-info'>
+                <div class="user-img user-info__img">
+                    {% if user.profile.image %}
+                        <img src="{{ user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
+                    {% else %}
+                        <span>{{ user.username|make_list|first|capfirst  }}</span>
+                    {% endif %}
+                </div>
+                <span class='user-info__name'>Имя: {{user.username}}</span>
+                <span class='user-info__email'>Почта: {{user.email}}</span>
+                <span class='user-info__bio'>{{user.profile.biography}}</span>
+            </div>
         </div>
+        
     </div>
 {% endblock %}

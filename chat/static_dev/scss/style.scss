@@ -156,7 +156,8 @@ button {
     width: 100%;
     height: 100%;
     padding: 15rem;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba($bg, 0.6);
+    backdrop-filter: blur(8px);
     display: none;
 
     .confirmation__text-container {
@@ -165,16 +166,16 @@ button {
         margin-left: auto;
         margin-right: auto;
         width: 65%;
-        background-color: rgba($light-gray, 0.2);
-        backdrop-filter: blur(8px);
+        background-color: rgba($light-gray, 0.7);
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
         max-height: 250px;
         border-radius: 15px;
         padding: 5px 25px;
 
-        & .title {
+        .title {
             text-align: center;
-
-            & .group-name {
+            .group-name {
+                font-weight: 600;
                 color: $red;
             }
         }
@@ -235,6 +236,7 @@ button {
     margin-left: auto;
     width: 20px;
     height: 20px;
+    cursor: pointer;
     svg {
         fill: $red;
         transition: fill $transition;
@@ -629,6 +631,20 @@ main {
 .go-back-btn {
     font-size: 1.2rem;
 }
+
+.user-detail-container {
+    backdrop-filter: blur(8px);
+    background-color: rgba($light-gray, 0.2);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px;
+   
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
 
 @media screen and (max-width: 1198px) {
     .sidebar {
