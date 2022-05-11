@@ -62,7 +62,7 @@
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
             <div class="chats-list">
-                {% for chat in chats_list %}
+                {% for chat in user.users_groups.all %}
                     <a class="chats-list-item
                         {% if kwargs.group_slug == chat.slug or kwargs.channel_slug == chat.slug or kwargs.chat_slug == chat.slug %}
                             chats-list-item_active 
@@ -89,5 +89,5 @@
         </div>
     {% endif %}
     <script src="{% static 'js/menu.js' %}"></script>
-    <script src="{% static 'js/restore_scroll_pos.js' %}"></script>
+    <script src="{% static 'js/restore_chats_scroll_pos.js' %}"></script>
 </div>
