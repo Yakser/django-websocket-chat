@@ -232,26 +232,15 @@ button {
     color: $lighter-gray;
 }
 
-.chat__options-btn {
-    width: 20px;
-    height: 20px;
-    margin-inline-start: 15px;
-    position: relative;
-    z-index: 2;
-    svg.chat__options-btn-ico {
-        cursor: pointer;
-        width: 100%;
-        height: 100%;
-        fill: $lighter-gray;
-    }
-}
+
 
 .chat__clear-messages {
     display: block;
-    margin-left: auto;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin-left: 20px;
+
     svg {
         fill: $red;
         transition: fill $transition;
@@ -264,7 +253,7 @@ button {
 }
 .chat__edit{
     display: block;
-    margin-left: 20px;
+    margin-left: auto;
     width: 20px;
     height: 20px;
     cursor: pointer;
