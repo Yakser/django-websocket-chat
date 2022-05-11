@@ -177,11 +177,11 @@ class EditGroupView(TemplateView):
             group.name = form.cleaned_data['name']
 
             members: QuerySet = form.cleaned_data['group_members']
-           
+         
             if members:
                 group.group_members.set(members)
                 group.group_members.add(user)
-                
+        
             group.save()
 
             # if clear image checkbox is checked
@@ -211,7 +211,7 @@ class EditGroupView(TemplateView):
                                user=user,
                                initial={
                                    'name': group.name,
-                                #    'group_members': group.group_members,
+                                   'group_members': group.group_members.all,
                                    'image': group.image,
                                })
 

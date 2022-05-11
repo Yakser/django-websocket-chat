@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
-from groups.models import Group
-
 User = get_user_model()
 
 
@@ -51,5 +49,5 @@ class EditGroupForm(forms.Form):
     group_members = forms.ModelMultipleChoiceField(
         label='Участники',
         queryset=User.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(),
         required=False)

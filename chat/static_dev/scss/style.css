@@ -249,6 +249,17 @@ button {
   .chat__edit:hover svg {
     fill: rgba(14, 174, 246, 0.7); }
 
+#id_group_members {
+  max-height: 350px;
+  overflow-y: scroll; }
+  #id_group_members::-webkit-scrollbar {
+    width: 14px; }
+  #id_group_members::-webkit-scrollbar-thumb {
+    background-color: #353f4f;
+    border-radius: 10000px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box; }
+
 #chat-log {
   display: flex;
   flex-direction: column;
