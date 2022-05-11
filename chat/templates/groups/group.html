@@ -17,9 +17,14 @@
                 </span>
                {% if user.id == group.owner.id %}
                 <a class='chat__clear-messages'>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="cls-1" d="M17.39,16l7.32-7.32a1,1,0,1,0-1.39-1.39L16,14.61,8.68,7.29A1,1,0,1,0,7.29,8.68L14.61,16,7.29,23.32a1,1,0,1,0,1.39,1.39L16,17.39l7.32,7.32a1,1,0,0,0,1.39-1.39Z"/><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Z"/></svg>  
+                  <svg viewBox="0 0 32 32"><path class="cls-1" d="M17.39,16l7.32-7.32a1,1,0,1,0-1.39-1.39L16,14.61,8.68,7.29A1,1,0,1,0,7.29,8.68L14.61,16,7.29,23.32a1,1,0,1,0,1.39,1.39L16,17.39l7.32,7.32a1,1,0,0,0,1.39-1.39Z"/><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Z"/></svg>  
                 </a>
               {% endif %}
+                
+              <a href="" class='chat__edit'>
+                      {% comment %} #TODO RENAME GROUP {% endcomment %}
+                      <svg viewBox="0 0 32 32"><path d="M0,31a.74.74,0,0,0,.89.88l7.26-1.76L1.66,23.63Z"/><rect x="3.26" y="12.28" width="23.3" height="9.2" transform="translate(-7.57 15.49) rotate(-44.98)"/><path d="M31.35,3.82,28.44.92a2.87,2.87,0,0,0-4.06,0L21.59,3.7l6.51,6.51L31.35,7A2.23,2.23,0,0,0,31.35,3.82Z"/></svg>
+              </a>
             </div>
             <div id='chat-log'>
               <span class='chat-log__title-message-container'>
@@ -66,6 +71,7 @@
         </div>
         <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
         <script type='text/javascript' src='{% static "js/clear_group_messages_confirm.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/chat_options.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}
         <h1 class='title'>Вы не состоите в этой группе 😔</h1>
