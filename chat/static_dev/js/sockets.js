@@ -9,6 +9,8 @@ const chatLog = document.querySelector('#chat-log');
 chatLog.scrollTop = chatLog.scrollHeight;
 
 const chatInput = document.querySelector('#chat-message-input');
+chatInput.focus();
+
 const chatSubmit = document.querySelector('#chat-message-submit');
 
 
@@ -39,20 +41,21 @@ chatSocket.onmessage = function (event) {
 
 chatSocket.onclose = function (e) {
     console.error('Chat socket closed unexpectedly');
-    alert('Произошла ошибка! Сервер недоступен.')
+    // alert('Произошла ошибка! Сервер недоступен.')
 };
 
-chatInput.focus();
 
-chatInput.onkeyup = function (e) {
+chatInput.onkeydown = function (e) {
     if (e.keyCode === 13) { // enter, return
+        e.preventDefault();
+
+        chatInput.style.height = 'auto';
         chatSubmit.click();
     }
 };
 
-chatSubmit.onclick = function (e) {
+chatSubmit.onclick = function (event) {
     const message = cleanMessage(chatInput.value);
-
     if (validateMessage(message)) {
         try {
             chatSocket.send(JSON.stringify({

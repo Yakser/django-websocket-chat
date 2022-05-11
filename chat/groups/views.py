@@ -6,6 +6,9 @@ from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
+from django.http import JsonResponse
+from django import template
+
 from users_messages.models import DailyGroupMessages
 from websockets.connection_types import GROUPS_CONNECTION
 
@@ -18,7 +21,6 @@ User = get_user_model()
 @method_decorator(login_required, name='dispatch')
 class GroupsView(TemplateView):
     template_name = 'groups/group.html'
-
     def get(self, request, group_slug: str, *args, **kwargs):
         return render(request,
                       self.template_name,
