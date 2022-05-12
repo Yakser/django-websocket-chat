@@ -1,4 +1,4 @@
-from tempfile import template
+from core.widgets import CustomClearableFileInput
 from django import forms
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -45,7 +45,8 @@ class EditGroupForm(forms.Form):
 
     image = forms.ImageField(label='Аватар группы',
                              required=False,
-                             allow_empty_file=False)
+                             allow_empty_file=False,
+                             widget=CustomClearableFileInput)
 
     group_members = forms.ModelMultipleChoiceField(
         label='Участники',

@@ -1,3 +1,4 @@
+from core.widgets import CustomClearableFileInput
 from django import forms
 from django.contrib.auth import get_user_model
 
@@ -19,7 +20,8 @@ class EditProfileForm(forms.Form):
 
     image = forms.ImageField(label='Аватар',
                              required=False,
-                             allow_empty_file=False
+                             allow_empty_file=False,
+                             widget=CustomClearableFileInput
                              )
 
     biography = forms.CharField(label='Расскажите немного о себе',
