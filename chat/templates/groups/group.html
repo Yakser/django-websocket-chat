@@ -9,11 +9,14 @@
     <div class='content col-xl-9 h-100'>
       {% if is_member %}
         {% include '../includes/clear_group_messages_confirm.html' with group=group %}
-        <h1 class='title' title='{{ group.slug }}'>Чат: {{ group.name|safe }}</h1>
+        <h1 class='title' title='{{ group.slug }}'>Группа: {{ group.name|safe }}</h1>
         <div class='chat col-12'>
             <div class="chat__options">
                 <span class="chat__group-slug">
                   {{ group.slug|safe }}
+                </span>
+                <span class="chat__members-count">
+                  Участников: {{ members_count }}
                 </span>
                {% if user.id == group.owner.id %}
                 <a href="{% url 'groups:edit' group.slug %}" class='chat__edit'>

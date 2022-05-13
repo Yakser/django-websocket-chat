@@ -43,6 +43,7 @@ class GroupView(TemplateView):
 
         context['connection_type'] = GROUPS_CONNECTION
         context['user'] = user
+        context['members_count'] = group.group_members.count()
 
         return context
 

@@ -231,6 +231,10 @@ button {
 .chat__group-slug {
     color: $lighter-gray;
 }
+.chat__members-count {
+    color: $lighter-gray;
+    margin-inline-start: 15px;
+}
 
 .chat__clear-messages {
     display: block;

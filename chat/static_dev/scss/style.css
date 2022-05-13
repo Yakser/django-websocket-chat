@@ -225,6 +225,10 @@ button {
 .chat__group-slug {
   color: #475569; }
 
+.chat__members-count {
+  color: #475569;
+  margin-inline-start: 15px; }
+
 .chat__clear-messages {
   display: block;
   width: 20px;
