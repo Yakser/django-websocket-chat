@@ -151,6 +151,9 @@ input[type="submit"],
 button {
   cursor: pointer; }
 
+.search-input {
+  margin-block-end: 15px; }
+
 .confirmation {
   z-index: 9999;
   position: fixed;
