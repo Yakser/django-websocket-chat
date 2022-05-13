@@ -1,0 +1,10 @@
+{% if widget.is_initial %}
+    <a href="{{ widget.value.url }}" class="base-form__image-link">Посмотреть изображение</a>
+    {% if not widget.required %}
+        <div class="clear-image-block">
+            <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}>
+            <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+        </div>
+    {% endif %}
+{% endif %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>

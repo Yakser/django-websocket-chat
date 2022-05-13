@@ -39,7 +39,7 @@ body {
     min-height: 100vh;
 }
 .title {
-    margin-block-end: 20px;
+    margin-block-end: 35px;
 }
 
 .menu-btn {
@@ -232,26 +232,13 @@ button {
     color: $lighter-gray;
 }
 
-.chat__options-btn {
-    width: 20px;
-    height: 20px;
-    margin-inline-start: 15px;
-    position: relative;
-    z-index: 2;
-    svg.chat__options-btn-ico {
-        cursor: pointer;
-        width: 100%;
-        height: 100%;
-        fill: $lighter-gray;
-    }
-}
-
 .chat__clear-messages {
     display: block;
-    margin-left: auto;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin-left: 20px;
+
     svg {
         fill: $red;
         transition: fill $transition;
@@ -262,9 +249,9 @@ button {
         }
     }
 }
-.chat__edit{
+.chat__edit {
     display: block;
-    margin-left: 20px;
+    margin-left: auto;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -276,6 +263,20 @@ button {
         svg {
             fill: rgba($blue, 0.7);
         }
+    }
+}
+
+#id_group_members {
+    max-height: 350px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $light-gray;
+        border-radius: 10000px;
+        border: 4px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
     }
 }
 

@@ -63,7 +63,7 @@ body {
   min-height: 100vh; }
 
 .title {
-  margin-block-end: 20px; }
+  margin-block-end: 35px; }
 
 .menu-btn {
   display: flex;
@@ -225,24 +225,12 @@ button {
 .chat__group-slug {
   color: #475569; }
 
-.chat__options-btn {
-  width: 20px;
-  height: 20px;
-  margin-inline-start: 15px;
-  position: relative;
-  z-index: 2; }
-  .chat__options-btn svg.chat__options-btn-ico {
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    fill: #475569; }
-
 .chat__clear-messages {
   display: block;
-  margin-left: auto;
   width: 20px;
   height: 20px;
-  cursor: pointer; }
+  cursor: pointer;
+  margin-left: 20px; }
   .chat__clear-messages svg {
     fill: #BE185D;
     transition: fill 0.15s ease-in; }
@@ -251,7 +239,7 @@ button {
 
 .chat__edit {
   display: block;
-  margin-left: 20px;
+  margin-left: auto;
   width: 20px;
   height: 20px;
   cursor: pointer; }
@@ -260,6 +248,17 @@ button {
     transition: fill 0.15s ease-in; }
   .chat__edit:hover svg {
     fill: rgba(14, 174, 246, 0.7); }
+
+#id_group_members {
+  max-height: 350px;
+  overflow-y: scroll; }
+  #id_group_members::-webkit-scrollbar {
+    width: 14px; }
+  #id_group_members::-webkit-scrollbar-thumb {
+    background-color: #353f4f;
+    border-radius: 10000px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box; }
 
 #chat-log {
   display: flex;

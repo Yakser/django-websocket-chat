@@ -1,3 +1,4 @@
+from core.widgets import CustomClearableFileInput
 from django import forms
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -26,4 +27,29 @@ class CreateGroupForm(forms.Form):
         label='Участники',
         queryset=User.objects.all(),
         widget=forms.CheckboxSelectMultiple,
+        required=False)
+
+
+class EditGroupForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(EditGroupForm, self).__init__(*args, **kwargs)
+
+        self.fields['group_members'].queryset = \
+            User.objects.filter(~Q(id=self.user.id)).only('id', 'username')
+
+    name = forms.CharField(max_length=100,
+                           label='Имя группы',
+                           help_text='Максимум 100 символов',
+                           required=True)
+
+    image = forms.ImageField(label='Аватар группы',
+                             required=False,
+                             allow_empty_file=False,
+                             widget=CustomClearableFileInput)
+
+    group_members = forms.ModelMultipleChoiceField(
+        label='Участники',
+        queryset=User.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
         required=False)

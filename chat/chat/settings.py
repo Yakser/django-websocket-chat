@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
     'debug_toolbar',
     'sass_processor',
     'channels',
@@ -159,3 +160,5 @@ LOGOUT_REDIRECT_URL = '/auth/login/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
