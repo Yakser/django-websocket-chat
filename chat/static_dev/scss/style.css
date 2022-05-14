@@ -151,6 +151,9 @@ input[type="submit"],
 button {
   cursor: pointer; }
 
+.search-input {
+  margin-block-end: 15px; }
+
 .confirmation {
   z-index: 9999;
   position: fixed;
@@ -221,9 +224,26 @@ button {
   height: 36px;
   display: flex;
   align-items: center; }
+  .chat__options .vl {
+    width: 1px;
+    height: 100%;
+    border-radius: 10000px;
+    background-color: #1e293b;
+    margin: 0 15px; }
 
 .chat__group-slug {
   color: #475569; }
+
+.chat__members-count {
+  display: flex;
+  align-items: center; }
+  .chat__members-count span {
+    color: #475569; }
+  .chat__members-count svg {
+    fill: #475569;
+    width: 20px;
+    height: 20px;
+    margin-inline-end: 5px; }
 
 .chat__clear-messages {
   display: block;

@@ -148,6 +148,10 @@ button {
     cursor: pointer;
 }
 
+.search-input {
+    margin-block-end: 15px;
+}
+
 .confirmation {
     z-index: 9999;
     position: fixed;
@@ -227,9 +231,30 @@ button {
     height: 36px;
     display: flex;
     align-items: center;
+    .vl {
+        width: 1px;
+        height: 100%;
+        border-radius: 10000px;
+        background-color: $gray;
+        margin: 0 15px;
+    }
 }
 .chat__group-slug {
     color: $lighter-gray;
+}
+.chat__members-count {
+    display: flex;
+    align-items: center;
+    span {
+        color: $lighter-gray;
+    }
+    svg {
+        fill: $lighter-gray;
+        width: 20px;
+        height: 20px;
+        margin-inline-end: 5px;
+
+    }
 }
 
 .chat__clear-messages {
