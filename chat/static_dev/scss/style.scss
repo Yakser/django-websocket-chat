@@ -40,6 +40,8 @@ body {
 }
 .title {
     margin-block-end: 35px;
+    margin-block-start: 35px;
+    text-align: center;
 }
 
 .menu-btn {
@@ -253,7 +255,6 @@ button {
         width: 20px;
         height: 20px;
         margin-inline-end: 5px;
-
     }
 }
 
@@ -664,7 +665,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    // padding: 20px 0;
 }
 
 .clear-image-block {
@@ -699,6 +700,34 @@ main {
 .user-info {
     display: flex;
     flex-direction: column;
+    .user-img {
+        width: 128px;
+        height: 128px;
+    }
+}
+.user-info__top {
+    display: flex;
+    align-items: center;
+    margin-block-end: 15px;
+}
+.user-info__row {
+    display: flex;
+    flex-direction: column;
+    &:not(:last-child) {
+        margin-block-end: 5px;
+    }
+    .user-info__row-title {
+        color: $light-gray;
+    }
+    .user-info__value {
+        font-weight: 500;
+        font-size: 1.2rem;
+        overflow-wrap: break-word;
+    }
+}
+.user-info__name {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 1198px) {
@@ -715,5 +744,9 @@ main {
     .current-user-message {
         margin-left: auto;
         margin-right: 0;
+    }
+    .title {
+        margin-block-end: 35px;
+        margin-block-start: 0;
     }
 }

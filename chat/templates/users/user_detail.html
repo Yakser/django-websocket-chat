@@ -6,20 +6,38 @@
 
 {% block content %}
     {% include '../includes/sidebar.html' %}
-    <div class='content col-xl-9 h-100'>
+    <div class='content col-12 col-xl-9 h-100'>
         <h1 class='title'>Профиль пользователя {{ user.username|safe }}</h1>
-        <div class='user-detail-container'>
+        <div class='user-detail-container col-12'>
             <div class='user-info'>
-                <div class="user-img user-info__img">
-                    {% if user.profile.image %}
-                        <img src="{{ user.profile.get_image_x256.url }}" alt="user image" class="img img-responsive ">
-                    {% else %}
-                        <span>{{ user.username|make_list|first|capfirst  }}</span>
-                    {% endif %}
+                <div class='user-info__top'>
+                    <div class='user-img user-info__img'>
+                        {% if user.profile.image %}
+                            <img src='{{ user.profile.get_image_x256.url }}'' alt='user image' class='img img-responsive'>
+                        {% else %}
+                            <span>{{ user.username|make_list|first|capfirst  }}</span>
+                        {% endif %}
+                    </div>
+                    <span class='user-info__name'>{{user.username}}</span>
                 </div>
-                <span class='user-info__name'>Имя: {{user.username}}</span>
-                <span class='user-info__email'>Почта: {{user.email}}</span>
-                <span class='user-info__bio'>{{user.profile.biography}}</span>
+                <div class="user-info__row">
+                    <span class='user-info__value user-info__email'>{{user.email}}</span>
+                    <span class="user-info__row-title">
+                        Почта
+                    </span>
+                </div>
+                <div class="user-info__row">
+                    <span class='user-info__value user-info__bio'>{{user.profile.biography}}</span>
+                    <span class="user-info__row-title">
+                        О себе
+                    </span>
+                </div>
+        
+                <a href="">
+                    <button>
+                        Написать
+                    </button>
+                </a>
             </div>
         </div>
         

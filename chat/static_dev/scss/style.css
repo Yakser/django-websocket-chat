@@ -63,7 +63,9 @@ body {
   min-height: 100vh; }
 
 .title {
-  margin-block-end: 35px; }
+  margin-block-end: 35px;
+  margin-block-start: 35px;
+  text-align: center; }
 
 .menu-btn {
   display: flex;
@@ -590,8 +592,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 20px 0; }
+  align-items: center; }
 
 .clear-image-block label {
   font-size: 1rem;
@@ -619,6 +620,30 @@ main {
 .user-info {
   display: flex;
   flex-direction: column; }
+  .user-info .user-img {
+    width: 128px;
+    height: 128px; }
+
+.user-info__top {
+  display: flex;
+  align-items: center;
+  margin-block-end: 15px; }
+
+.user-info__row {
+  display: flex;
+  flex-direction: column; }
+  .user-info__row:not(:last-child) {
+    margin-block-end: 5px; }
+  .user-info__row .user-info__row-title {
+    color: #353f4f; }
+  .user-info__row .user-info__value {
+    font-weight: 500;
+    font-size: 1.2rem;
+    overflow-wrap: break-word; }
+
+.user-info__name {
+  font-size: 1.5rem;
+  font-weight: 500; }
 
 @media screen and (max-width: 1198px) {
   .sidebar {
@@ -631,6 +656,9 @@ main {
     padding-bottom: 20px; }
   .current-user-message {
     margin-left: auto;
-    margin-right: 0; } }
+    margin-right: 0; }
+  .title {
+    margin-block-end: 35px;
+    margin-block-start: 0; } }
 
 /*# sourceMappingURL=style.css.map */
