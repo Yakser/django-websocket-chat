@@ -40,6 +40,8 @@ body {
 }
 .title {
     margin-block-end: 35px;
+    margin-block-start: 35px;
+    text-align: center;
 }
 
 .menu-btn {
@@ -253,7 +255,6 @@ button {
         width: 20px;
         height: 20px;
         margin-inline-end: 5px;
-
     }
 }
 
@@ -272,6 +273,9 @@ button {
         svg {
             fill: rgba($red, 0.7);
         }
+    }
+    &.chat__clear-messages_in-chat {
+        margin-left: auto;
     }
 }
 .chat__edit {
@@ -358,14 +362,7 @@ button {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 
     &::-webkit-scrollbar {
-        // width: 14px;
         width: 0;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: $light-gray;
-        border-radius: 10000px;
-        border: 4px solid rgba(0, 0, 0, 0);
-        background-clip: padding-box;
     }
 }
 
@@ -375,6 +372,16 @@ a.chats-list-item {
     align-items: center;
     width: 100%;
     padding: 0 15px;
+    .chats-list-item__name {
+        display: flex;
+        align-items: baseline;
+        svg {
+            width: 15px;
+            height: 15px;
+            fill: $white;
+            margin-inline-end: 5px;
+        }
+    }
     &:first-child {
         padding-top: 15px;
         padding-bottom: 5px;
@@ -610,7 +617,12 @@ textarea#chat-message-input {
         user-select: none;
     }
 }
-
+.create-group-btn {
+    margin-block-end: 20px;
+}
+.find-friend-btn {
+    margin-block-end: 20px;
+}
 .logout-btn {
     font-weight: 300;
     font-size: 0.9rem;
@@ -664,7 +676,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    // padding: 20px 0;
 }
 
 .clear-image-block {
@@ -699,6 +711,34 @@ main {
 .user-info {
     display: flex;
     flex-direction: column;
+    .user-img {
+        width: 128px;
+        height: 128px;
+    }
+}
+.user-info__top {
+    display: flex;
+    align-items: center;
+    margin-block-end: 15px;
+}
+.user-info__row {
+    display: flex;
+    flex-direction: column;
+    &:not(:last-child) {
+        margin-block-end: 5px;
+    }
+    .user-info__row-title {
+        color: $light-gray;
+    }
+    .user-info__value {
+        font-weight: 500;
+        font-size: 1.2rem;
+        overflow-wrap: break-word;
+    }
+}
+.user-info__name {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 1198px) {
@@ -715,5 +755,9 @@ main {
     .current-user-message {
         margin-left: auto;
         margin-right: 0;
+    }
+    .title {
+        margin-block-end: 35px;
+        margin-block-start: 0;
     }
 }

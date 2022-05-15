@@ -1,7 +1,13 @@
 from django.contrib import admin
 
-from .models import (DailyChannelMessages, DailyGroupMessages,
-                     UserChannelMessage, UserGroupMessage)
+from users_messages.models import (DailyChannelMessages, DailyChatMessages,
+                                   DailyGroupMessages, UserChannelMessage,
+                                   UserChatMessage, UserGroupMessage)
+
+
+@admin.register(DailyChatMessages)
+class DailyChatMessagesAdmin(admin.ModelAdmin):
+    list_display = ('date',)
 
 
 @admin.register(DailyGroupMessages)
@@ -21,4 +27,9 @@ class UserGroupMessageAdmin(admin.ModelAdmin):
 
 @admin.register(UserChannelMessage)
 class UserChannelMessageAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'time')
+
+
+@admin.register(UserChatMessage)
+class UserChatMessageAdmin(admin.ModelAdmin):
     list_display = ('user_id', 'time')

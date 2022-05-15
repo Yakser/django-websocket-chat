@@ -1,0 +1,13 @@
+<div class='confirmation'>
+  <div class='confirmation__text-container content h-100'>
+    <h3 class='title'>Удалить историю сообщений чата?</h3>
+    <div class="clear_messages_confirm">
+      <a href="{% url 'chats:clear_messages' chat.id %}">
+        <button>Да</button>
+      </a>
+      <a class="close-btn">
+        <button>Нет</button>
+      </a>
+    </div>
+  </div>
+</div>

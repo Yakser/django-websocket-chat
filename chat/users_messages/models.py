@@ -1,3 +1,4 @@
+from chats.models import Chat
 from core.models import BaseDailyMessages, BaseUserMessage
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -5,6 +6,19 @@ from groups.models import Group
 from users_channels.models import UsersChannel
 
 User = get_user_model()
+
+
+class DailyChatMessages(BaseDailyMessages):
+    chat = models.ForeignKey(Chat,
+                             on_delete=models.SET_NULL,
+                             verbose_name='Чат',
+                             related_name='chat_containers',
+                             null=True
+                             )
+
+    class Meta:
+        verbose_name = 'Контейнер сообщений чата'
+        verbose_name_plural = 'Контейнеры сообщений чатов'
 
 
 class DailyGroupMessages(BaseDailyMessages):
@@ -31,6 +45,25 @@ class DailyChannelMessages(BaseDailyMessages):
     class Meta:
         verbose_name = 'Контейнер сообщений канала'
         verbose_name_plural = 'Контейнеры сообщений канала'
+
+
+class UserChatMessage(BaseUserMessage):
+    user = models.ForeignKey(User,
+                             on_delete=models.SET_NULL,
+                             verbose_name='Отправитель',
+                             related_name='chat_messages',
+                             null=True
+                             )
+    container = models.ForeignKey(DailyChatMessages,
+                                  on_delete=models.SET_NULL,
+                                  verbose_name='Контейнер',
+                                  related_name='chat_messages',
+                                  null=True
+                                  )
+
+    class Meta:
+        verbose_name = 'Сообщение чата'
+        verbose_name_plural = 'Сообщения чата'
 
 
 class UserGroupMessage(BaseUserMessage):
