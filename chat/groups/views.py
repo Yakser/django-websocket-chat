@@ -105,9 +105,9 @@ class GroupsListView(TemplateView):
 
     def get_context_data(self, user: User, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         groups = user.users_groups.all()
-        
+
         context['groups'] = groups
 
         return context
