@@ -16,18 +16,19 @@ User = get_user_model()
 class ChatView(TemplateView):
     template_name = 'chats/chat.html'
 
-    def get(self, request, chat_id, *args, **kwargs):
+    def get(self, request, chat_id: int, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request.user, chat_id))
 
-    def get_context_data(self, user: User, chat_id, **kwargs):
+    def get_context_data(self, user: User, chat_id: int, **kwargs):
         context = super().get_context_data(**kwargs)
 
         chat: Chat = get_object_or_404(Chat, pk=chat_id)
 
+        # если пользователь является участником чата
         if chat.first_user.id == user.id or chat.second_user.id == user.id:
-            container, created = DailyChatMessages.objects.get_or_create(chat=chat)
+            container, is_created = DailyChatMessages.objects.get_or_create(chat=chat)
 
             prefetch_users = Prefetch('user', queryset=User.objects.only('username'))
             messages = container.chat_messages.prefetch_related(prefetch_users)
@@ -55,11 +56,9 @@ class ChatsListView(TemplateView):
 
     def get_context_data(self, user: User, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        # получаем чаты пользователя
         chats = user.first_user_chats.all() | user.second_user_chats.all()
-
         context['chats'] = chats
-
         return context
 
 
@@ -75,6 +74,7 @@ class ChatRedirectOrCreateView(RedirectView):
         first_user = get_object_or_404(User, username=first_username)
         second_user = get_object_or_404(User, username=second_username)
 
+        # получаем или создаем чат с данными пользователями
         chats = Chat.objects.filter(Q(first_user=first_user) & Q(second_user=second_user) |
                                     Q(first_user=second_user) & Q(second_user=first_user))
         if chats:
@@ -90,18 +90,15 @@ class ChatRedirectOrCreateView(RedirectView):
 class ClearChatMessagesConfirmView(TemplateView):
     template_name = 'chats/clear_chat_messages_confirm.html'
 
-    def get(self, request, group_slug: str, *args, **kwargs):
+    def get(self, request, chat_id: int, *args, **kwargs):
         return render(request,
                       self.template_name,
-                      self.get_context_data(group_slug))
+                      self.get_context_data(chat_id))
 
-    def get_context_data(self, chat_id, **kwargs):
+    def get_context_data(self, chat_id: int, **kwargs):
         context = super().get_context_data(**kwargs)
-
         chat = get_object_or_404(Chat, pk=chat_id)
-
         context['chat'] = chat
-
         return context
 
 
@@ -109,7 +106,7 @@ class ClearChatMessagesConfirmView(TemplateView):
 class ClearChatMessagesView(TemplateView):
     template_name = 'chats/clear_chats_messages.html'
 
-    def get(self, request, chat_id, *args, **kwargs):
+    def get(self, request, chat_id: int, *args, **kwargs):
         chat = get_object_or_404(Chat, pk=chat_id)
 
         chat_container = DailyChatMessages.objects.get(chat=chat)
@@ -119,11 +116,8 @@ class ClearChatMessagesView(TemplateView):
                       self.template_name,
                       self.get_context_data(chat_id))
 
-    def get_context_data(self, chat_id, **kwargs):
+    def get_context_data(self, chat_id: int, **kwargs):
         context = super().get_context_data(**kwargs)
-
         chat = get_object_or_404(Chat, pk=chat_id)
-
         context['chat'] = chat
-
         return context

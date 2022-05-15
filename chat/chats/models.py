@@ -19,4 +19,4 @@ class Chat(models.Model):
         verbose_name_plural = 'Чаты'
 
     def __str__(self):
-        return f"Chat {self.first_user.username}-{self.second_user.username}"
+        return f"Chat<{self.id}>"
