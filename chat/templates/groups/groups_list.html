@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
-{% load static %}
-
 {% block title %} Группы {% endblock %}
 
 {% block content %}
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
-      <h1 class='title'>Все группы</h1>
-      
+      <h1 class='title'>Группы</h1>
+      <button>
+        <a href="{% url 'groups:create' %}">Создать группу</a>
+      </button>
       {% for group in groups %}
          <div>
-            <a href="{% url 'groups:group' group.slug %}">{{ group.name|truncatechars:10 }} - {{ group.slug|truncatechars:20 }}</a>
+            <a href="{% url 'groups:group' group.slug %}">{{ group.name|truncatechars:50 }} - {{ group.slug|truncatechars:50 }}</a>
          </div>
       {% endfor %}
-      
     </div>
 {% endblock %}

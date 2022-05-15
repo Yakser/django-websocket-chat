@@ -101,13 +101,13 @@ class GroupsListView(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request,
                       self.template_name,
-                      self.get_context_data())
+                      self.get_context_data(request.user))
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, user: User, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        groups = Group.objects.only('slug', 'name')
-
+        
+        groups = user.users_groups.all()
+        
         context['groups'] = groups
 
         return context

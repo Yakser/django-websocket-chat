@@ -30,12 +30,12 @@
                     <nav id="js-menu-nav">
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                Чаты
+                                <a href="{% url 'chats:chats_list' %}">Чаты</a>
                             </span>
                         </div>
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                Группы - <a href="{% url 'groups:create' %}">создать</a>
+                                <a href="{% url 'groups:groups_list' %}">Группы</a>
                             </span>
                         </div>
                         <div class="nav-block">
@@ -72,26 +72,66 @@
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
             <div class="chats-list">
-                {% for chat in request.user.users_groups.all %}
+                {% for chat in user.first_user_chats.all %}
                     <a class="chats-list-item
-                        {% if kwargs.group_slug == chat.slug or kwargs.channel_slug == chat.slug or kwargs.chat_slug == chat.slug %}
+                        {% if kwargs.chat_id == chat.id %}
                             chats-list-item_active 
                         {% endif %}"
-                        href="{% url 'groups:group' chat.slug %}">
-                        <div class="chats-list-item__img">
-                            {% if chat.image %}
-                                <img src="{{ chat.get_image_x256.url }}">
-                            {% else %}
-                                <span>{{ chat.name|make_list|first|capfirst  }}</span>
-                            {% endif %}
-                        </div>
-                        <span class="chats-list-item__name">{{ chat.name }}</span>
+                        href="{% url 'chats:chat' chat.id %}">
+                        {% if chat.first_user.id == request.user.id %}
+                            <div class="chats-list-item__img">
+                                <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
+                        {% else %}
+                            <div class="chats-list-item__img">
+                                <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
+                        {% endif %}
                     </a>
                 {% endfor %}
+
+                {% for chat in user.second_user_chats.all %}
+                    <a class="chats-list-item
+                        {% if kwargs.chat_id == chat.id %}
+                            chats-list-item_active 
+                        {% endif %}"
+                        href="{% url 'chats:chat' chat.id %}">
+                        {% if chat.first_user.id == request.user.id %}
+                            <div class="chats-list-item__img">
+                                <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
+                        {% else %}
+                            <div class="chats-list-item__img">
+                                <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+
+                {% for group in request.user.users_groups.all %}
+                    <a class="chats-list-item
+                        {% if kwargs.group_slug == group.slug %}
+                            chats-list-item_active 
+                        {% endif %}"
+                        href="{% url 'groups:group' group.slug %}">
+                        <div class="chats-list-item__img">
+                            {% if group.image %}
+                                <img src="{{ group.get_image_x256.url }}">
+                            {% else %}
+                                <span>{{ group.name|make_list|first|capfirst  }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="chats-list-item__name">{{ group.name }}</span>
+                    </a>
+                {% endfor %}
+                
             </div>
         {% endwith %}
 
-    
     {% else %}
         <div class="btns-container">
             <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>

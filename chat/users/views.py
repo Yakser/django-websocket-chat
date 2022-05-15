@@ -9,8 +9,8 @@ from users.forms import EditProfileForm, SignupForm
 User = get_user_model()
 
 
-class UserListView(TemplateView):
-    template_name = 'users/user_list.html'
+class UsersListView(TemplateView):
+    template_name = 'users/users_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,7 +22,15 @@ class UserListView(TemplateView):
 class UserDetailView(TemplateView):
     template_name = 'users/user_detail.html'
 
-    def get_context_data(self, id, **kwargs):
+    def get(self, request, id: int, *args, **kwargs):
+        if request.user.id == id:
+            return redirect('users:profile')
+        else:
+            return render(request,
+                          self.template_name,
+                          self.get_context_data(id))
+
+    def get_context_data(self, id: int, **kwargs):
         context = super().get_context_data(**kwargs)
 
         user = get_object_or_404(User.objects.only('email', 'username'), pk=id)
