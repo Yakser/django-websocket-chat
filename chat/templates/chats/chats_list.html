@@ -6,7 +6,7 @@
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
       <h1 class='title'>Чаты</h1>
-       <button>
+       <button class='find-friend-btn'>
         <a href="{% url 'users:users_list' %}">Найти друга</a>
       </button>
       {% for chat in chats %}

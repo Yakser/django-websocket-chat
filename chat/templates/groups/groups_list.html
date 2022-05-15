@@ -6,7 +6,7 @@
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
       <h1 class='title'>Группы</h1>
-      <button>
+      <button class='create-group-btn'>
         <a href="{% url 'groups:create' %}">Создать группу</a>
       </button>
       {% for group in groups %}

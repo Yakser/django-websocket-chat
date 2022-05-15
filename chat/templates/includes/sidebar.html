@@ -14,7 +14,7 @@
                 </div>
                 <div class="user ">
                     <a class="user__username" href="{% url 'users:profile' %}">
-                        {{ request.user.username|safe|truncatechars:10 }}
+                         {{ request.user.username|safe|truncatechars:10 }}
                     </a>
                     <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
                 </div>
@@ -58,12 +58,12 @@
                         {% endif %}
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                <a href={% url 'info:about' %} >О проекте</a>
+                                <a href="{% url 'info:about' %}">О проекте</a>
                             </span>
                         </div>
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                <a href={% url 'info:instruction' %} >Инструкция</a>
+                                <a href="{% url 'info:instruction' %}">Инструкция</a>
                             </span>
                         </div>
                     </nav>
@@ -125,7 +125,12 @@
                                 <span>{{ group.name|make_list|first|capfirst  }}</span>
                             {% endif %}
                         </div>
-                        <span class="chats-list-item__name">{{ group.name }}</span>
+                        <span class="chats-list-item__name">
+                            <svg viewBox="0 0 32 32"><path d="M11.33,14.44A6.22,6.22,0,1,0,5.11,8.22,6.22,6.22,0,0,0,11.33,14.44Z"/><path d="M23.78,17.56a4.67,4.67,0,1,0-4.67-4.67A4.66,4.66,0,0,0,23.78,17.56Z"/><path d="M30,28.44a1.55,1.55,0,0,0,1.56-1.55A7.79,7.79,0,0,0,19,20.74,10.9,10.9,0,0,0,.44,28.44,1.56,1.56,0,0,0,2,30H20.67a1.55,1.55,0,0,0,1.55-1.56"/></svg>
+                            <span>
+                                {{ group.name }}
+                            </span>
+                        </span>
                     </a>
                 {% endfor %}
                 
