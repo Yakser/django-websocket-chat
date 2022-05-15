@@ -2,7 +2,7 @@ import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-from websockets.queries import add_message_to_group
+from websockets.queries import add_message
 
 
 class BaseConsumer(AsyncWebsocketConsumer):
@@ -43,7 +43,7 @@ class BaseConsumer(AsyncWebsocketConsumer):
             }
         )
 
-        await add_message_to_group(user, message, self.connection_name)
+        await add_message(user, message, self.connection_name)
 
     # Receive message from room group
 
@@ -56,6 +56,10 @@ class BaseConsumer(AsyncWebsocketConsumer):
             'message': message,
             'username': username
         }))
+
+
+class ChatsConsumer(BaseConsumer):
+    pass
 
 
 class GroupsConsumer(BaseConsumer):

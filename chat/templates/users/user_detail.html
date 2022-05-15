@@ -32,8 +32,7 @@
                         О себе
                     </span>
                 </div>
-        
-                <a href="">
+                <a href="{% url 'chats:redirect_or_create'%}?username={{user.username}}">
                     <button>
                         Написать
                     </button>

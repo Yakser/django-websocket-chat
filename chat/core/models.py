@@ -10,7 +10,8 @@ class BaseUserMessage(models.Model):
     text = models.TextField(max_length=1024,
                             verbose_name='Текст')
     time = models.TimeField(verbose_name='Время отправки',
-                            auto_now_add=True)
+                            auto_now_add=True,
+                            null=True)
 
     class Meta:
         abstract = True
@@ -24,7 +25,7 @@ class BaseWebsocketGroup(models.Model):
     Абстрактная модель контейнера сообщений
     # TODO сделать task с созданием нового контейнера раз в сутки
     """
-    
+
     slug = models.SlugField(verbose_name='Идентификатор',
                             help_text='Используйте буквы, цифры или @/./+/-/_ ',
                             max_length=100,
@@ -65,7 +66,7 @@ class BaseWebsocketGroup(models.Model):
         return 'Нет изображения'
 
     image_tmb.short_description = 'Изображение'
-    image_tmb.allow_tags = True
+    image_tmb.allow_tags = True 
 
     class Meta:
         abstract = True

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Чаты {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      <h1 class='title'>Все чаты</h1>
+      {% for chat in chats %}
+         <div>
+            <a href="{% url 'chats:chat' chat.id %}">{{ chat.first_user.username|truncatechars:10 }} - {{ chat.second_user.username|truncatechars:10 }}</a>
+         </div>
+      {% endfor %}
+    </div>
+{% endblock %}

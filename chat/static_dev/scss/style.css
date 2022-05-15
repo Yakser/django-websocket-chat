@@ -258,6 +258,8 @@ button {
     transition: fill 0.15s ease-in; }
   .chat__clear-messages:hover svg {
     fill: rgba(190, 24, 93, 0.7); }
+  .chat__clear-messages.chat__clear-messages_in-chat {
+    margin-left: auto; }
 
 .chat__edit {
   display: block;

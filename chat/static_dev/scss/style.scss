@@ -274,6 +274,9 @@ button {
             fill: rgba($red, 0.7);
         }
     }
+    &.chat__clear-messages_in-chat {
+        margin-left: auto;
+    }
 }
 .chat__edit {
     display: block;

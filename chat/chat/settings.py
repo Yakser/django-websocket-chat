@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'users_channels.apps.UsersChannelsConfig',
     'users_messages.apps.UsersMessagesConfig',
+    'chats.apps.ChatsConfig',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
 ]
