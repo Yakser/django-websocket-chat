@@ -8,6 +8,7 @@ urlpatterns = [
     path('groups/', include('groups.urls', namespace="groups")),
     path('channels/', include('users_channels.urls', namespace="channels")),
     path('auth/', include('users.urls', namespace="users")),
+    path('info/', include('info.urls', namespace="info")),
     path('', include('homepage.urls', namespace="homepage")),
 ]
 
