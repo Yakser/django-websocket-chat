@@ -7,6 +7,10 @@ User = get_user_model()
 
 
 class BaseUserMessage(models.Model):
+    """
+    Абстрактная модель сообщения пользователя
+    """
+
     text = models.TextField(max_length=1024,
                             verbose_name='Текст')
     time = models.TimeField(verbose_name='Время отправки',
@@ -22,8 +26,15 @@ class BaseUserMessage(models.Model):
 
 class BaseWebsocketGroup(models.Model):
     """
-    Абстрактная модель контейнера сообщений
-    # TODO сделать task с созданием нового контейнера раз в сутки
+    Абстрактная модель websocket группы, которая создает свой channel layer
+
+    Attributes:
+        slug: уникальный идентификатор
+        name: имя
+        image: изображение
+        owner: владелец
+        group_members: участники группы
+
     """
 
     slug = models.SlugField(verbose_name='Идентификатор',
@@ -66,16 +77,21 @@ class BaseWebsocketGroup(models.Model):
         return 'Нет изображения'
 
     image_tmb.short_description = 'Изображение'
-    image_tmb.allow_tags = True 
+    image_tmb.allow_tags = True
 
     class Meta:
         abstract = True
 
     def __str__(self):
-        return self.name[:15]
+        return f"WebsocketGroup<{self.slug}>"
 
 
 class BaseDailyMessages(models.Model):
+    """
+    Абстрактная модель контейнера сообщений
+    """
+    # TODO task с созданием нового контейнера раз в сутки с помощью django-rq
+
     date = models.DateField(verbose_name='Дата создания',
                             auto_now_add=True,
                             null=True)
@@ -84,4 +100,4 @@ class BaseDailyMessages(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"Daily Messages - {self.date.strftime('%Y-%m-%d %H:%M')}"
+        return f"DailyMessages<{self.date.strftime('%Y-%m-%d %H:%M')}>"
