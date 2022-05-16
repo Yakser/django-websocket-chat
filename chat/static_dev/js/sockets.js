@@ -19,7 +19,7 @@ chatSocket.onmessage = function (event) {
     const { username, message } = JSON.parse(event.data);
     const cleanedMessage = cleanMessage(message);
 
-    // const currentUsername = document.querySelector('.user__username').textContent.trim();
+    const currentUsername = document.querySelector('.user__username').textContent.trim();
     console.log(currentUsername);
     if (validateMessage(message)) {
         const messageMarkup = `
