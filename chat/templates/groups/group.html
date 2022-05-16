@@ -63,7 +63,6 @@
                       placeholder='Введите сообщение...'
                       rows='1'
                       ></textarea>
-              {% comment %} <input id='chat-message-submit' type='button' value='Отправить'> {% endcomment %}
               <button id='chat-message-submit' title='Отправить сообщение'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><polygon class="cls-1" points="30.58 16 1.42 2 8.42 16 1.42 30 30.58 16"/></svg>
               </button>
@@ -71,7 +70,7 @@
         </div>
         <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
         <script type='text/javascript' src='{% static "js/clear_group_messages_confirm.js" %}'></script>
-        <script type='text/javascript' src='{% static "js/restore_messages_scroll_pos.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/page_reload_listener.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=group.slug %}
       {% else %}
         <h1 class='title'>Вы не состоите в этой группе 😔</h1>
