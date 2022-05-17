@@ -167,22 +167,29 @@ button {
   background-color: rgba(11, 17, 32, 0.6);
   backdrop-filter: blur(8px);
   display: none; }
+  .confirmation .confirmation__text-container, .confirmation .confirmation-top {
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%; }
   .confirmation .confirmation__text-container {
     align-items: center;
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 65%;
     background-color: rgba(53, 63, 79, 0.7);
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     max-height: 250px;
     border-radius: 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     padding: 5px 25px; }
     .confirmation .confirmation__text-container .title {
       text-align: center; }
       .confirmation .confirmation__text-container .title .group-name {
         font-weight: 600;
         color: #BE185D; }
+
+.close-confirm {
+  right: 15px;
+  position: absolute; }
 
 .chat {
   display: flex;
@@ -215,7 +222,7 @@ button {
       stroke-width: 2px;
       fill: transparent; }
 
-.chat__options {
+.chat__options, .confirmation-top {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border: 1px solid #1e293b;
@@ -226,7 +233,7 @@ button {
   height: 36px;
   display: flex;
   align-items: center; }
-  .chat__options .vl {
+  .chat__options .vl, .confirmation-top .vl {
     width: 1px;
     height: 100%;
     border-radius: 10000px;
@@ -247,18 +254,18 @@ button {
     height: 20px;
     margin-inline-end: 5px; }
 
-.chat__clear-messages {
+.chat__clear-messages, .close-confirm {
   display: block;
   width: 20px;
   height: 20px;
   cursor: pointer;
   margin-left: 20px; }
-  .chat__clear-messages svg {
+  .chat__clear-messages svg, .close-confirm svg {
     fill: #BE185D;
     transition: fill 0.15s ease-in; }
-  .chat__clear-messages:hover svg {
+  .chat__clear-messages:hover svg, .close-confirm:hover svg {
     fill: rgba(190, 24, 93, 0.7); }
-  .chat__clear-messages.chat__clear-messages_in-chat {
+  .chat__clear-messages.chat__clear-messages_in-chat, .close-confirm.chat__clear-messages_in-chat {
     margin-left: auto; }
 
 .chat__edit {
