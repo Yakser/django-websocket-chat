@@ -512,7 +512,9 @@ textarea#chat-message-input {
 .base-form__form-row {
     display: flex;
     flex-direction: column;
-    margin-block-end: 20px;
+    &:not(:last-child) {
+        margin-block-end: 20px;
+    }
     label {
         margin-inline-end: 5px;
         font-size: 1.1rem;
@@ -542,6 +544,10 @@ textarea#chat-message-input {
 
 .base-form__link {
     margin-block-start: 5px;
+    a {
+        text-decoration: underline;
+        color: $blue;
+    }
 }
 .base-form__star {
     color: rgba($blue, 0.5);
