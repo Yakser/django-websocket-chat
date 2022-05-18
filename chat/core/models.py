@@ -9,6 +9,11 @@ User = get_user_model()
 class BaseUserMessage(models.Model):
     """
     Абстрактная модель сообщения пользователя
+
+    Attributes:
+        text (TextField): текст сообщения
+        time (TimeField): время отправки сообщения
+
     """
 
     text = models.TextField(max_length=1024,
@@ -21,7 +26,7 @@ class BaseUserMessage(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"Message-{self.id}"
+        return f"Message<{self.id}>"
 
 
 class BaseWebsocketGroup(models.Model):
@@ -29,11 +34,11 @@ class BaseWebsocketGroup(models.Model):
     Абстрактная модель websocket группы, которая создает свой channel layer
 
     Attributes:
-        slug: уникальный идентификатор
-        name: имя
-        image: изображение
-        owner: владелец
-        group_members: участники группы
+        slug (SlugField): уникальный идентификатор
+        name (CharField): имя
+        image (ImageField): изображение
+        owner (User): владелец
+        group_members (User[]): участники
 
     """
 
@@ -52,8 +57,7 @@ class BaseWebsocketGroup(models.Model):
                               upload_to='uploads/groups_images',
                               null=True,
                               blank=True,
-                              help_text='Выберите изображение группы'
-                              )
+                              help_text='Выберите изображение группы')
 
     owner = models.ForeignKey(User,
                               verbose_name='Владелец',
@@ -63,8 +67,7 @@ class BaseWebsocketGroup(models.Model):
 
     group_members = models.ManyToManyField(User,
                                            verbose_name='Участники',
-                                           related_name='users_groups'
-                                           )
+                                           related_name='users_groups')
 
     def get_image_x256(self):
         return get_thumbnail(self.image,
@@ -89,6 +92,10 @@ class BaseWebsocketGroup(models.Model):
 class BaseDailyMessages(models.Model):
     """
     Абстрактная модель контейнера сообщений
+
+    Attributes:
+        date (DateField): дата создания контейнера
+        
     """
     # TODO task с созданием нового контейнера раз в сутки с помощью django-rq
 
