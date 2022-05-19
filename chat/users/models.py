@@ -9,6 +9,16 @@ User = get_user_model()
 
 
 class Profile(models.Model):
+    """
+    Модель профиля пользователя. Расширяет модель User.
+
+    Attributes:
+        user (User): пользователь
+        image (ImageField): изображение
+        biography (TextField): краткая информация о пользователе
+
+    """
+
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE)
 
@@ -17,8 +27,7 @@ class Profile(models.Model):
         max_length=500,
         unique=False,
         null=True,
-        help_text='Немного расскажите о себе'
-    )
+        help_text='Немного расскажите о себе')
 
     image = models.ImageField(verbose_name='Изображение пользователя',
                               upload_to='uploads/users_images',
@@ -37,8 +46,6 @@ class Profile(models.Model):
 
     image_tmb.short_description = 'Изображение'
     image_tmb.allow_tags = True
-
-    # TODO additional fields : chats, groups, public_channels, private_channels, . . .
 
     class Meta:
         verbose_name = 'Дополнительное поле'
