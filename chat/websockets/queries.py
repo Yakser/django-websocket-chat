@@ -10,7 +10,7 @@ from websockets.helpers import (get_chat_daily_messages, get_chat_id,
 User = get_user_model()
 
 
-async def add_message(user: User, message_text: str, connection_name: str) -> None:
+async def add_message_to_db(user: User, message_text: str, connection_name: str) -> None:
     """
     Добавляет сообщение в контейнер соответствующий типу подключения
 
@@ -18,6 +18,9 @@ async def add_message(user: User, message_text: str, connection_name: str) -> No
         user (User): отправитель
         message_text (str): текст сообщения
         connection_name (str): тип подключения
+
+    Raises:
+        ConnectionTypeDoesNotExist: несуществующий тип подключения
     """
     if connection_name.startswith(GROUPS_CONNECTION):
         await add_message_to_group(user, message_text, connection_name)

@@ -1,4 +1,4 @@
-from core.widgets import CustomClearableFileInput, CustomCheckboxSelectMultiple
+from core.widgets import CustomCheckboxSelectMultiple, CustomClearableFileInput
 from django import forms
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -7,6 +7,16 @@ User = get_user_model()
 
 
 class CreateGroupForm(forms.Form):
+    """
+    Форма создания группы
+
+    Fields:
+        slug (SlugField): идентификатор
+        name (CharField): имя
+        group_members(ModelMultipleChoiceField): участники
+
+    """
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super(CreateGroupForm, self).__init__(*args, **kwargs)
@@ -23,14 +33,23 @@ class CreateGroupForm(forms.Form):
                            help_text='Максимум 100 символов',
                            required=True)
 
-    group_members = forms.ModelMultipleChoiceField(
-        label='Участники',
-        queryset=User.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False)
+    group_members = forms.ModelMultipleChoiceField(label='Участники',
+                                                   queryset=User.objects.all(),
+                                                   widget=forms.CheckboxSelectMultiple,
+                                                   required=False)
 
 
 class EditGroupForm(forms.Form):
+    """
+    Форма редактирования группы
+
+    Fields:
+        name (CharField): имя
+        image (ImageField): изображение
+        group_members(ModelMultipleChoiceField): участники
+
+    """
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super(EditGroupForm, self).__init__(*args, **kwargs)
@@ -48,8 +67,7 @@ class EditGroupForm(forms.Form):
                              allow_empty_file=False,
                              widget=CustomClearableFileInput)
 
-    group_members = forms.ModelMultipleChoiceField(
-        label='Участники',
-        queryset=User.objects.all(),
-        widget=CustomCheckboxSelectMultiple(),
-        required=False)
+    group_members = forms.ModelMultipleChoiceField(label='Участники',
+                                                   queryset=User.objects.all(),
+                                                   widget=CustomCheckboxSelectMultiple(),
+                                                   required=False)

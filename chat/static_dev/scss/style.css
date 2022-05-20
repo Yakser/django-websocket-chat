@@ -16,6 +16,9 @@ a:visited, a:hover {
   color: #f5f5f5;
   text-decoration: none; }
 
+ul {
+  margin-bottom: 0; }
+
 fieldset {
   border: none; }
 
@@ -455,8 +458,9 @@ textarea#chat-message-input {
 
 .base-form__form-row {
   display: flex;
-  flex-direction: column;
-  margin-block-end: 20px; }
+  flex-direction: column; }
+  .base-form__form-row:not(:last-child) {
+    margin-block-end: 20px; }
   .base-form__form-row label {
     margin-inline-end: 5px;
     font-size: 1.1rem;
@@ -480,6 +484,9 @@ textarea#chat-message-input {
 
 .base-form__link {
   margin-block-start: 5px; }
+  .base-form__link a {
+    text-decoration: underline;
+    color: #0eaef6; }
 
 .base-form__star {
   color: rgba(14, 174, 246, 0.5);
@@ -522,7 +529,8 @@ textarea#chat-message-input {
   color: #f5f5f5;
   transition: 0.15s ease-in;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  width: 100%; }
 
 .user-img {
   flex-shrink: 0;
@@ -551,12 +559,17 @@ textarea#chat-message-input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  width: 100%; }
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden; }
   .user .user__username {
+    display: block;
+    max-width: 100%;
     font-weight: 500;
     font-size: 1.5rem;
-    user-select: none; }
+    user-select: none;
+    margin-inline-end: 3px;
+    overflow-wrap: break-word; }
 
 .create-group-btn {
   margin-block-end: 20px; }

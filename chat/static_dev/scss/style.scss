@@ -512,7 +512,9 @@ textarea#chat-message-input {
 .base-form__form-row {
     display: flex;
     flex-direction: column;
-    margin-block-end: 20px;
+    &:not(:last-child) {
+        margin-block-end: 20px;
+    }
     label {
         margin-inline-end: 5px;
         font-size: 1.1rem;
@@ -542,6 +544,10 @@ textarea#chat-message-input {
 
 .base-form__link {
     margin-block-start: 5px;
+    a {
+        text-decoration: underline;
+        color: $blue;
+    }
 }
 .base-form__star {
     color: rgba($blue, 0.5);
@@ -589,6 +595,17 @@ textarea#chat-message-input {
     transition: $transition;
     display: flex;
     align-items: center;
+    width: 100%;
+    // overflow: hidden;
+    // &::-webkit-scrollbar {
+    //     width: 5px;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: rgba($light-gray, .2);
+    //     border-radius: 10000px;
+    //     border: 5px solid rgba(0, 0, 0, 0);
+    //     background-clip: padding-box;
+    // }
 }
 
 .user-img {
@@ -620,12 +637,17 @@ textarea#chat-message-input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    flex-wrap: wrap;
     width: 100%;
+    overflow: hidden;
     .user__username {
+        display: block;
+        max-width: 100%;
         font-weight: 500;
         font-size: 1.5rem;
         user-select: none;
+        margin-inline-end: 3px;
+        overflow-wrap: break-word;
     }
 }
 .create-group-btn {
