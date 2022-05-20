@@ -9,4 +9,4 @@ class WebsocketEventType:
 
 
 class ChatMessageEventType(WebsocketEventType):
-    type: str = 'chat-message'
+    type: str = 'chat_message'

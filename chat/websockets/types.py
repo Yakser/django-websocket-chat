@@ -1,7 +1,5 @@
 from typing import TypedDict
 
-from websockets.events import ChatMessageEventType, WebsocketEventType
-
 
 class Message(TypedDict):
     message: str
@@ -13,8 +11,8 @@ class WebsocketData(TypedDict):
 
 
 class WebsocketEvent(WebsocketData):
-    type: WebsocketEventType
+    type: str
 
 
 class ChatMessageEvent(WebsocketEvent):
-    type: ChatMessageEventType
+    type: str

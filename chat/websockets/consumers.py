@@ -58,7 +58,7 @@ class BaseConsumer(AsyncWebsocketConsumer):
         username: str = user.username
 
         group_send_data: ChatMessageEvent = {
-            'type': ChatMessageEventType(),
+            'type': ChatMessageEventType.type,
             'message': message,
             'username': username
         }
