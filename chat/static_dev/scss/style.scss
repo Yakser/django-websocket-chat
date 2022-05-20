@@ -595,6 +595,17 @@ textarea#chat-message-input {
     transition: $transition;
     display: flex;
     align-items: center;
+    width: 100%;
+    // overflow: hidden;
+    // &::-webkit-scrollbar {
+    //     width: 5px;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: rgba($light-gray, .2);
+    //     border-radius: 10000px;
+    //     border: 5px solid rgba(0, 0, 0, 0);
+    //     background-clip: padding-box;
+    // }
 }
 
 .user-img {
@@ -627,14 +638,16 @@ textarea#chat-message-input {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    position: relative;
     width: 100%;
+    overflow: hidden;
     .user__username {
+        display: block;
+        max-width: 100%;
         font-weight: 500;
         font-size: 1.5rem;
         user-select: none;
         margin-inline-end: 3px;
-        margin-inline-end: auto;
+        overflow-wrap: break-word;
     }
 }
 .create-group-btn {

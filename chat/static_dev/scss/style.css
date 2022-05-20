@@ -529,7 +529,8 @@ textarea#chat-message-input {
   color: #f5f5f5;
   transition: 0.15s ease-in;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  width: 100%; }
 
 .user-img {
   flex-shrink: 0;
@@ -559,14 +560,16 @@ textarea#chat-message-input {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  position: relative;
-  width: 100%; }
+  width: 100%;
+  overflow: hidden; }
   .user .user__username {
+    display: block;
+    max-width: 100%;
     font-weight: 500;
     font-size: 1.5rem;
     user-select: none;
     margin-inline-end: 3px;
-    margin-inline-end: auto; }
+    overflow-wrap: break-word; }
 
 .create-group-btn {
   margin-block-end: 20px; }
