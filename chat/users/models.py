@@ -22,12 +22,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE)
 
-    biography = models.TextField(
-        verbose_name='О себе',
-        max_length=500,
-        unique=False,
-        null=True,
-        help_text='Немного расскажите о себе')
+    biography = models.TextField(verbose_name='О себе',
+                                 max_length=500,
+                                 unique=False,
+                                 null=True,
+                                 help_text='Немного расскажите о себе')
 
     image = models.ImageField(verbose_name='Изображение пользователя',
                               upload_to='uploads/users_images',
