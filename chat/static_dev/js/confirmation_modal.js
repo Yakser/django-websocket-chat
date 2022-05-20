@@ -8,6 +8,10 @@ const confirmationModal = () => {
     document.querySelector('.close-btn').addEventListener("click", function () {
         confirmation.style.display = 'none';
     });
+
+    document.querySelector('.close-confirm').addEventListener("click", function () {
+        confirmation.style.display = 'none';
+    });
 }
 
 confirmationModal();

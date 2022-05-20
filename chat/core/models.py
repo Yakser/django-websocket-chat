@@ -7,6 +7,15 @@ User = get_user_model()
 
 
 class BaseUserMessage(models.Model):
+    """
+    Абстрактная модель сообщения пользователя
+
+    Attributes:
+        text (TextField): текст сообщения
+        time (TimeField): время отправки сообщения
+
+    """
+
     text = models.TextField(max_length=1024,
                             verbose_name='Текст')
     time = models.TimeField(verbose_name='Время отправки',
@@ -17,13 +26,20 @@ class BaseUserMessage(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"Message-{self.id}"
+        return f"Message<{self.id}>"
 
 
 class BaseWebsocketGroup(models.Model):
     """
-    Абстрактная модель контейнера сообщений
-    # TODO сделать task с созданием нового контейнера раз в сутки
+    Абстрактная модель websocket группы, которая создает свой channel layer
+
+    Attributes:
+        slug (SlugField): уникальный идентификатор
+        name (CharField): имя
+        image (ImageField): изображение
+        owner (User): владелец
+        group_members (User[]): участники
+
     """
 
     slug = models.SlugField(verbose_name='Идентификатор',
@@ -41,8 +57,7 @@ class BaseWebsocketGroup(models.Model):
                               upload_to='uploads/groups_images',
                               null=True,
                               blank=True,
-                              help_text='Выберите изображение группы'
-                              )
+                              help_text='Выберите изображение группы')
 
     owner = models.ForeignKey(User,
                               verbose_name='Владелец',
@@ -52,8 +67,7 @@ class BaseWebsocketGroup(models.Model):
 
     group_members = models.ManyToManyField(User,
                                            verbose_name='Участники',
-                                           related_name='users_groups'
-                                           )
+                                           related_name='users_groups')
 
     def get_image_x256(self):
         return get_thumbnail(self.image,
@@ -66,16 +80,25 @@ class BaseWebsocketGroup(models.Model):
         return 'Нет изображения'
 
     image_tmb.short_description = 'Изображение'
-    image_tmb.allow_tags = True 
+    image_tmb.allow_tags = True
 
     class Meta:
         abstract = True
 
     def __str__(self):
-        return self.name[:15]
+        return f"WebsocketGroup<{self.slug}>"
 
 
 class BaseDailyMessages(models.Model):
+    """
+    Абстрактная модель контейнера сообщений
+
+    Attributes:
+        date (DateField): дата создания контейнера
+        
+    """
+    # TODO task с созданием нового контейнера раз в сутки с помощью django-rq
+
     date = models.DateField(verbose_name='Дата создания',
                             auto_now_add=True,
                             null=True)
@@ -84,4 +107,4 @@ class BaseDailyMessages(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"Daily Messages - {self.date.strftime('%Y-%m-%d %H:%M')}"
+        return f"DailyMessages<{self.date.strftime('%Y-%m-%d %H:%M')}>"

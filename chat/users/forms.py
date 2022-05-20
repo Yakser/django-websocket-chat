@@ -8,27 +8,34 @@ User = get_user_model()
 
 
 class EditProfileForm(forms.Form):
+    """
+    Форма редактирования профиля пользователя
+
+    Fields:
+        login (CharField): имя пользователя
+        email (EmailField): электронная почта
+        image (ImageField): изображение
+        biography (CharField): краткая информация о пользователе
+
+    """
+
     login = forms.CharField(max_length=150,
                             label='Имя пользователя',
                             help_text='Максимум 150 символов',
-                            required=True
-                            )
+                            required=True)
 
     email = forms.EmailField(label='Почта',
-                             required=False
-                             )
+                             required=False)
 
     image = forms.ImageField(label='Аватар',
                              required=False,
                              allow_empty_file=False,
-                             widget=CustomClearableFileInput
-                             )
+                             widget=CustomClearableFileInput)
 
     biography = forms.CharField(label='Расскажите немного о себе',
                                 widget=forms.Textarea(),
                                 max_length=500,
-                                required=False
-                                )
+                                required=False)
 
     def validate_edit_login(self, current_user):
         login = self.cleaned_data['login']
@@ -60,6 +67,16 @@ class EditProfileForm(forms.Form):
 
 
 class SignupForm(forms.Form):
+    """
+    Форма регистрации
+
+    Fields:
+        login (CharField): имя пользователя
+        email (EmailField): электронная почта
+        password (CharField): пароль
+        password_repeat (CharField): еще раз пароль
+
+    """
     email = forms.CharField(max_length=200,
                             label='Адрес электронной почты',
                             widget=forms.EmailInput,
