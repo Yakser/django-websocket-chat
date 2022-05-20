@@ -15,6 +15,7 @@ class UsersChannel(BaseWebsocketGroup):
                               upload_to='uploads/groups_images',
                               null=True,
                               help_text='Выберите изображение канала')
+    
     owner = models.ForeignKey(User,
                               verbose_name='Владелец',
                               related_name='owner_users_channels',
@@ -23,8 +24,7 @@ class UsersChannel(BaseWebsocketGroup):
 
     group_members = models.ManyToManyField(User,
                                            verbose_name='Участники',
-                                           related_name='users_channels'
-                                           )
+                                           related_name='users_channels')
 
     class Meta:
         verbose_name = 'Канал'

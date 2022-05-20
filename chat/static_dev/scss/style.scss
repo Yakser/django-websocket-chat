@@ -626,12 +626,15 @@ textarea#chat-message-input {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     position: relative;
     width: 100%;
     .user__username {
         font-weight: 500;
         font-size: 1.5rem;
         user-select: none;
+        margin-inline-end: 3px;
+        margin-inline-end: auto;
     }
 }
 .create-group-btn {
