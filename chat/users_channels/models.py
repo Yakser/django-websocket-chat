@@ -6,6 +6,11 @@ User = get_user_model()
 
 
 class UsersChannel(BaseWebsocketGroup):
+    """
+    Модель Канала. Наследуется от абстрактной модели BaseWebsocketGroup. 
+    
+    """
+    
     image = models.ImageField(verbose_name='Изображение канала',
                               upload_to='uploads/groups_images',
                               null=True,
