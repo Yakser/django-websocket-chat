@@ -22,7 +22,9 @@ body {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: -2;
     }
+
     .bg-grid {
         width: 100vw;
         height: 100%;
@@ -32,12 +34,16 @@ body {
         background-image: url("../img/grid.svg");
         mask-image: linear-gradient(to bottom, transparent, black);
         -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+        z-index: -1;
     }
+
     color: $white;
 }
+
 .wrapper {
     min-height: 100vh;
 }
+
 .title {
     margin-block-end: 35px;
     margin-block-start: 35px;
@@ -48,6 +54,7 @@ body {
     display: flex;
     justify-content: center;
     cursor: pointer;
+
     &.active {
         .menu-ico_arrow svg {
             transform: rotate(-90deg);
@@ -66,11 +73,13 @@ body {
         transition: 0.5s ease;
     }
 }
+
 .menu-ico_arrow {
     svg {
         transform: rotate(90deg);
         fill: $white;
     }
+
     &:hover {
         svg {
             fill: rgba($white, 0.2);
@@ -88,9 +97,11 @@ textarea {
     padding: 5px 15px;
     outline: 1px solid transparent;
     transition: $transition;
+
     &:hover {
         background-color: lighten($gray, 5%);
     }
+
     &:focus,
     &:focus-visible {
         outline: 1px solid $blue;
@@ -123,6 +134,7 @@ nav {
         font-size: 1.2rem;
         user-select: none;
         cursor: pointer;
+
         &:hover {
             background-color: transparent;
         }
@@ -138,6 +150,7 @@ nav {
     margin-top: 5px;
     position: relative;
     user-select: none;
+
     &:hover {
         color: $gray;
         transition: all 0.25s;
@@ -166,7 +179,8 @@ button {
     backdrop-filter: blur(8px);
     display: none;
 
-    .confirmation__text-container, .confirmation-top {
+    .confirmation__text-container,
+    .confirmation-top {
         margin-left: auto;
         margin-right: auto;
         width: 65%;
@@ -185,6 +199,7 @@ button {
 
         .title {
             text-align: center;
+
             .group-name {
                 font-weight: 600;
                 color: $red;
@@ -204,15 +219,18 @@ button {
     flex-direction: column;
     max-height: 85vh;
 }
+
 .chat__sendings {
     display: flex;
     flex-direction: row;
     margin: 0;
+
     #chat-message-input {
         box-shadow: none;
         border: 1px solid $gray;
         border-right-width: 0;
     }
+
     #chat-message-submit {
         box-shadow: none;
         border: 1px solid $gray;
@@ -223,6 +241,7 @@ button {
         display: flex;
         align-items: center;
         justify-content: center;
+
         svg {
             width: 20px;
             height: 20px;
@@ -233,7 +252,9 @@ button {
         }
     }
 }
-.chat__options, .confirmation-top {
+
+.chat__options,
+.confirmation-top {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border: 1px solid $gray;
@@ -244,6 +265,7 @@ button {
     height: 36px;
     display: flex;
     align-items: center;
+
     .vl {
         width: 1px;
         height: 100%;
@@ -252,15 +274,19 @@ button {
         margin: 0 15px;
     }
 }
+
 .chat__group-slug {
     color: $lighter-gray;
 }
+
 .chat__members-count {
     display: flex;
     align-items: center;
+
     span {
         color: $lighter-gray;
     }
+
     svg {
         fill: $lighter-gray;
         width: 20px;
@@ -269,7 +295,8 @@ button {
     }
 }
 
-.chat__clear-messages, .close-confirm {
+.chat__clear-messages,
+.close-confirm {
     display: block;
     width: 20px;
     height: 20px;
@@ -280,25 +307,30 @@ button {
         fill: $red;
         transition: fill $transition;
     }
+
     &:hover {
         svg {
             fill: rgba($red, 0.7);
         }
     }
+
     &.chat__clear-messages_in-chat {
         margin-left: auto;
     }
 }
+
 .chat__edit {
     display: block;
     margin-left: auto;
     width: 20px;
     height: 20px;
     cursor: pointer;
+
     svg {
         fill: $blue;
         transition: fill $transition;
     }
+
     &:hover {
         svg {
             fill: rgba($blue, 0.7);
@@ -309,9 +341,11 @@ button {
 #id_group_members {
     max-height: 350px;
     overflow-y: scroll;
+
     &::-webkit-scrollbar {
         width: 14px;
     }
+
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
@@ -333,9 +367,11 @@ button {
     border-radius: 0;
     backdrop-filter: blur(8px);
     background-color: rgba($sidebar, 0.7);
+
     &::-webkit-scrollbar {
         width: 14px;
     }
+
     &::-webkit-scrollbar-thumb {
         background-color: $light-gray;
         border-radius: 10000px;
@@ -343,10 +379,12 @@ button {
         background-clip: padding-box;
     }
 }
+
 .chat-log__title-message-container {
     display: flex;
     justify-content: center;
     margin: 20px 0;
+
     span {
         font-weight: 500;
         font-size: 1.2rem;
@@ -358,6 +396,7 @@ button {
         padding: 5px 15px;
         border: 1px solid $red;
     }
+
     a {
         font-weight: 600;
     }
@@ -383,9 +422,11 @@ a.chats-list-item {
     align-items: center;
     width: 100%;
     padding: 0 15px;
+
     .chats-list-item__name {
         display: flex;
         align-items: baseline;
+
         svg {
             width: 15px;
             height: 15px;
@@ -393,20 +434,25 @@ a.chats-list-item {
             margin-inline-end: 5px;
         }
     }
+
     &:first-child {
         padding-top: 15px;
         padding-bottom: 5px;
     }
+
     &:last-child {
         padding-bottom: 15px;
     }
+
     &:not(:first-child) {
         border-top: 1px solid $gray;
         padding: 5px 15px;
     }
+
     &:hover {
         background-color: rgba($light-gray, 0.7);
     }
+
     &.chats-list-item_active {
         background-color: rgba($blue, 0.2);
     }
@@ -425,12 +471,14 @@ a.chats-list-item {
     overflow: hidden;
     position: relative;
     user-select: none;
+
     img {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
     span {
         font-weight: 600;
         font-size: 2rem;
@@ -448,6 +496,7 @@ a.chats-list-item {
     width: fit-content;
     min-width: 125px;
     max-width: 75%;
+
     &.current-user-message {
         background-color: $light-gray;
     }
@@ -460,10 +509,12 @@ a.chats-list-item {
     align-self: flex-end;
     margin-left: 50px;
 }
+
 .message__text {
     overflow-wrap: break-word;
     margin: 0;
 }
+
 .message__author {
     color: $blue;
     font-size: 1.1rem;
@@ -478,6 +529,7 @@ textarea#chat-message-input {
     max-height: 25vh;
     resize: none;
     width: 100%;
+
     &::-webkit-scrollbar {
         width: 0;
     }
@@ -494,45 +546,55 @@ textarea#chat-message-input {
     border-radius: 15px;
     padding: 10px;
     margin: 0 auto;
+
     .base-form__errors {
         font-size: 1rem;
         margin-block-end: 5px;
         display: flex;
         flex-direction: column;
     }
+
     .base-form__form {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
+
     button {
         width: max-content;
     }
 }
+
 .base-form__form-row {
     display: flex;
     flex-direction: column;
+
     &:not(:last-child) {
         margin-block-end: 20px;
     }
+
     label {
         margin-inline-end: 5px;
         font-size: 1.1rem;
         font-weight: 500;
     }
+
     small {
         width: 100%;
         margin-block-start: 5px;
         opacity: 0.5;
     }
+
     input {
         width: 100%;
     }
+
     input[type="checkbox"] {
         display: inline-block;
         width: max-content;
         margin-inline-end: 5px;
     }
+
     .base-form__image-link {
         display: block;
         width: 100%;
@@ -544,11 +606,13 @@ textarea#chat-message-input {
 
 .base-form__link {
     margin-block-start: 5px;
+
     a {
         text-decoration: underline;
         color: $blue;
     }
 }
+
 .base-form__star {
     color: rgba($blue, 0.5);
     font-size: 1rem;
@@ -559,6 +623,7 @@ textarea#chat-message-input {
     display: flex;
     flex-direction: column;
     margin-block-end: 5px;
+
     span {
         color: $red;
         font-size: 1rem;
@@ -570,10 +635,12 @@ textarea#chat-message-input {
     padding: 20px;
     height: 100vh;
 }
+
 .sidebar__logo {
     width: 100%;
     margin-block-end: 20px;
 }
+
 .sidebar__container {
     backdrop-filter: blur(8px);
     background-color: rgba($light-gray, 0.2);
@@ -581,6 +648,7 @@ textarea#chat-message-input {
     border-radius: 15px;
     padding: 15px;
     margin-top: 5px;
+
     .hr {
         width: 100%;
         height: 1px;
@@ -621,18 +689,21 @@ textarea#chat-message-input {
     overflow: hidden;
     position: relative;
     user-select: none;
+
     img {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
     span {
         font-weight: 600;
         font-size: 2rem;
         user-select: none;
     }
 }
+
 .user {
     display: flex;
     align-items: center;
@@ -640,6 +711,7 @@ textarea#chat-message-input {
     flex-wrap: wrap;
     width: 100%;
     overflow: hidden;
+
     .user__username {
         display: block;
         max-width: 100%;
@@ -650,23 +722,28 @@ textarea#chat-message-input {
         overflow-wrap: break-word;
     }
 }
+
 .create-group-btn {
     margin-block-end: 20px;
 }
+
 .find-friend-btn {
     margin-block-end: 20px;
 }
+
 .logout-btn {
     font-weight: 300;
     font-size: 0.9rem;
     user-select: none;
     color: rgba($white, 0.5);
     transition: $transition;
+
     &:hover {
         text-decoration: underline;
         color: rgba($white, 0.8);
     }
 }
+
 .submit-btn {
     background-color: $blue;
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
@@ -676,14 +753,17 @@ textarea#chat-message-input {
     outline: 1px solid transparent;
     transition: $transition;
     font-weight: 500;
+
     &:hover {
         background-color: lighten($blue, 10%);
     }
+
     &:focus,
     &:focus-visible {
         outline: 1px solid $blue;
     }
 }
+
 .btns-container {
     display: flex;
     flex-direction: column;
@@ -691,10 +771,12 @@ textarea#chat-message-input {
     align-items: center;
     gap: 20px;
 }
+
 .login-btn {
     font-size: 1.5rem;
     font-weight: 600;
 }
+
 .signup-btn {
     font-size: 1.5rem;
     font-weight: 600;
@@ -723,13 +805,16 @@ main {
     display: flex;
     align-items: center;
     margin-block-start: 20px;
+
     a {
         font-size: 1.2rem;
+
         &:first-child {
             margin-inline-end: 10px;
         }
     }
 }
+
 .go-back-btn {
     font-size: 1.2rem;
 }
@@ -741,34 +826,42 @@ main {
     border-radius: 15px;
     padding: 15px;
 }
+
 .user-info {
     display: flex;
     flex-direction: column;
+
     .user-img {
         width: 128px;
         height: 128px;
     }
 }
+
 .user-info__top {
     display: flex;
     align-items: center;
     margin-block-end: 15px;
 }
+
 .user-info__row {
     display: flex;
     flex-direction: column;
+
     &:not(:last-child) {
         margin-block-end: 5px;
     }
+
     .user-info__row-title {
         color: $light-gray;
     }
+
     .user-info__value {
         font-weight: 500;
         font-size: 1.2rem;
         overflow-wrap: break-word;
     }
 }
+
 .user-info__name {
     font-size: 1.5rem;
     font-weight: 500;
@@ -780,15 +873,18 @@ main {
         height: 100%;
         width: 100%;
     }
+
     main {
         display: flex;
         flex-direction: column;
         padding-bottom: 20px;
     }
+
     .current-user-message {
         margin-left: auto;
         margin-right: 0;
     }
+
     .title {
         margin-block-end: 35px;
         margin-block-start: 0;

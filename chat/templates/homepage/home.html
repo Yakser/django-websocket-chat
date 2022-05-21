@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block title %} Главная {% endblock %}
 {% block content %}
-    {% include '../includes/sidebar.html' %}
-    <div class='content col-xl-9 h-100'>
-        <h1 class='title'>Добро пожаловать</h1>
+    <div class='content container-fluid h-100'>
+        <h1 class='title'>Добро пожаловать в <b>Soft</b>!</h1>
+        {% if request.user.is_authenticated %}
+            {% comment %} TODO {% endcomment %}
+        {% else %}
+            <div class="btns-container">
+                <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>
+                <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
