@@ -48,6 +48,11 @@ body {
     margin-block-end: 35px;
     margin-block-start: 35px;
     text-align: center;
+    .title__img {
+        width: 150px;
+        height: 150px;
+        // margin-inline-start: 10px;
+    }
 }
 
 .menu-btn {

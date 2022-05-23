@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,6 +10,7 @@ from users.forms import EditProfileForm, SignupForm
 User = get_user_model()
 
 
+@method_decorator(staff_member_required, name='dispatch')
 class UsersListView(TemplateView):
     """
     Отображает список пользователей
@@ -30,6 +32,7 @@ class UsersListView(TemplateView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class UserDetailView(TemplateView):
     """
     Отображает страницу пользователя (User)
