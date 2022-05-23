@@ -218,6 +218,28 @@ class ClearGroupMessagesView(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
+class DeleteGroupView(TemplateView):
+    template_name = 'groups/delete_group_messages.html'
+
+    def get(self, request, group_slug: str, *args, **kwargs):
+        group = get_object_or_404(Group, pk=group_slug)
+
+        group_container = DailyGroupMessages.objects.get(group=group)
+        group_container.group_messages.all().delete()
+
+        group.delete()
+
+        return render(request,
+                      self.template_name,
+                      self.get_context_data(group_slug))
+
+    def get_context_data(self, group_slug: str, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
 class EditGroupView(TemplateView):
     """
     Отображает страницу с сообщением об успешном удалении истории сообщений группы
@@ -245,6 +267,13 @@ class EditGroupView(TemplateView):
     def post(self, request, group_slug: str, *args, **kwargs):
         group: Group = get_object_or_404(Group.objects.all(),
                                          pk=group_slug)
+
+        if request.POST.get('delete') != None:
+            # group.delete()
+            # return redirect('/groups/edit/g1/')
+            # return render(request, 'groups/delete_group_messages.html')
+            pass
+    
         user: User = get_object_or_404(User.objects.only('id'),
                                        pk=request.user.id)
 
@@ -300,5 +329,6 @@ class EditGroupView(TemplateView):
 
         context['group'] = group
         context['form'] = form
+        context['edit'] = True
 
         return context
