@@ -1,4 +1,3 @@
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
@@ -89,7 +88,7 @@ class CreateGroupView(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request,
                       self.template_name,
-                      self.get_context_data(request.user.id))
+                      self.get_context_data(request))
 
     def post(self, request, *args, **kwargs):
         user: User = get_object_or_404(User.objects.all(),
@@ -112,12 +111,14 @@ class CreateGroupView(TemplateView):
 
         return self.get(request)
 
-    def get_context_data(self, id, **kwargs):
+    def get_context_data(self, request, **kwargs):
         context = super().get_context_data(**kwargs)
 
         user: User = get_object_or_404(User.objects.only('email', 'username'),
-                                       pk=id)
-        form = self.form_class(user=user)
+                                       pk=request.user.id)
+        form = self.form_class(request.POST or None, user=user)
+
+        form.is_valid()
 
         context['user'] = user
         context['form'] = form
@@ -268,12 +269,6 @@ class EditGroupView(TemplateView):
         group: Group = get_object_or_404(Group.objects.all(),
                                          pk=group_slug)
 
-        if request.POST.get('delete') != None:
-            # group.delete()
-            # return redirect('/groups/edit/g1/')
-            # return render(request, 'groups/delete_group_messages.html')
-            pass
-    
         user: User = get_object_or_404(User.objects.only('id'),
                                        pk=request.user.id)
 
@@ -290,7 +285,7 @@ class EditGroupView(TemplateView):
 
             group.save()
 
-            # if clear image checkbox is checked
+            # если нажата кнопка удаления изображения
             if form.cleaned_data['image'] is False:
                 group.image = None
             else:
