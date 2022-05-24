@@ -752,6 +752,10 @@ textarea#chat-message-input {
         color: rgba($white, 0.8);
     }
 }
+.form-buttons-container {
+    display: flex;
+    justify-content: space-around;
+}
 
 .submit-btn {
     background-color: $blue;
@@ -770,6 +774,14 @@ textarea#chat-message-input {
     &:focus,
     &:focus-visible {
         outline: 1px solid $blue;
+    }
+    min-width: 35%;
+}
+.delete-btn {
+    background-color: $red;
+    align-items: center;
+    &:hover {
+        background-color: lighten($red, 10%);
     }
 }
 

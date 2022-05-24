@@ -33,7 +33,12 @@
             </div>
         {% endfor %}
 
-        <button type='submit' class='submit-btn'>{{ submit_text }}</button>
+        <div class='form-buttons-container'>
+            <button name='edit' type='submit' class='submit-btn'>{{ submit_text }}</button>
+            {% if edit %}
+                <button type='button' class='submit-btn delete-btn'>Удалить</button>
+            {% endif %}
+        </div>
         {% if show_forgot_password %}
             <span class='base-form__link'>
                 <a href='{% url "users:password_reset" %}'>Забыли пароль?</a>
