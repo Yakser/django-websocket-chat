@@ -18,7 +18,9 @@ a:visited, a:hover {
     color: $white;
     text-decoration: none;
 }
-
+ul {
+    margin-bottom: 0;
+}
 fieldset {
     border: none;
 }

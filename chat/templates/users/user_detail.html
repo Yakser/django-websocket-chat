@@ -20,20 +20,23 @@
                     </div>
                     <span class='user-info__name'>{{user.username}}</span>
                 </div>
-                <div class="user-info__row">
-                    <span class='user-info__value user-info__email'>{{user.email}}</span>
-                    <span class="user-info__row-title">
-                        Почта
-                    </span>
-                </div>
-                <div class="user-info__row">
-                    <span class='user-info__value user-info__bio'>{{user.profile.biography}}</span>
-                    <span class="user-info__row-title">
-                        О себе
-                    </span>
-                </div>
-        
-                <a href="">
+                {% if user.email %}
+                    <div class="user-info__row">
+                        <span class='user-info__value user-info__email'>{{user.email}}</span>
+                        <span class="user-info__row-title">
+                            Почта
+                        </span>
+                    </div>
+                {% endif %}
+                {% if user.profile.biography %}
+                    <div class="user-info__row">
+                        <span class='user-info__value user-info__bio'>{{user.profile.biography}}</span>
+                        <span class="user-info__row-title">
+                            О себе
+                        </span>
+                    </div>
+                {% endif %}
+                <a href="{% url 'chats:redirect_or_create'%}?username={{user.username}}">
                     <button>
                         Написать
                     </button>

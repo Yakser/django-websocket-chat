@@ -12,9 +12,9 @@
                         <span>{{ request.user.username|make_list|first|capfirst  }}</span>
                     {% endif %}
                 </div>
-                <div class="user ">
+                <div class="user">
                     <a class="user__username" href="{% url 'users:profile' %}">
-                        {{ request.user.username|safe|truncatechars:10 }}
+                         {{ request.user.username|safe|truncatechars:50 }}
                     </a>
                     <a href="{% url 'users:logout' %}" class="logout-btn">Выйти</a>
                 </div>
@@ -30,12 +30,12 @@
                     <nav id="js-menu-nav">
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                Чаты
+                                <a href="{% url 'chats:chats_list' %}">Чаты</a>
                             </span>
                         </div>
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                Группы - <a href="{% url 'groups:create' %}">создать</a>
+                                <a href="{% url 'groups:groups_list' %}">Группы</a>
                             </span>
                         </div>
                         <div class="nav-block">
@@ -58,12 +58,12 @@
                         {% endif %}
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                <a href={% url 'info:about' %} >О проекте</a>
+                                <a href="{% url 'info:about' %}">О проекте</a>
                             </span>
                         </div>
                         <div class="nav-block">
                             <span class="nav-block__title">
-                                <a href={% url 'info:instruction' %} >Инструкция</a>
+                                <a href="{% url 'info:instruction' %}">Инструкция</a>
                             </span>
                         </div>
                     </nav>
@@ -72,26 +72,88 @@
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
             <div class="chats-list">
-                {% for chat in request.user.users_groups.all %}
+                {% for chat in request.user.first_user_chats.all %}
                     <a class="chats-list-item
-                        {% if kwargs.group_slug == chat.slug or kwargs.channel_slug == chat.slug or kwargs.chat_slug == chat.slug %}
+                        {% if kwargs.chat_id == chat.id %}
                             chats-list-item_active 
                         {% endif %}"
-                        href="{% url 'groups:group' chat.slug %}">
-                        <div class="chats-list-item__img">
-                            {% if chat.image %}
-                                <img src="{{ chat.get_image_x256.url }}">
-                            {% else %}
-                                <span>{{ chat.name|make_list|first|capfirst  }}</span>
-                            {% endif %}
-                        </div>
-                        <span class="chats-list-item__name">{{ chat.name }}</span>
+                        href="{% url 'chats:chat' chat.id %}">
+                        {% if chat.first_user.id == request.user.id %}   
+                            <div class="chats-list-item__img">
+                                {% if chat.second_user.profile.image %}
+                                    <img src="{{ chat.second_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
+                        {% else %}
+                            
+                            <div class="chats-list-item__img">
+                                {% if chat.first_user.profile.image %}
+                                    <img src="{{ chat.first_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
+                        {% endif %}
                     </a>
                 {% endfor %}
+
+                {% for chat in request.user.second_user_chats.all %}
+                    <a class="chats-list-item
+                        {% if kwargs.chat_id == chat.id %}
+                            chats-list-item_active 
+                        {% endif %}"
+                        href="{% url 'chats:chat' chat.id %}">
+                        {% if chat.first_user.id == request.user.id %}
+                            <div class="chats-list-item__img">
+                                {% if chat.second_user.profile.image %}
+                                    <img src="{{ chat.second_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
+                        {% else %}
+                            <div class="chats-list-item__img">
+                                {% if chat.first_user.profile.image %}
+                                    <img src="{{ chat.first_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
+                            </div>
+                            <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+
+                {% for group in request.user.users_groups.all %}
+                    <a class="chats-list-item
+                        {% if kwargs.group_slug == group.slug %}
+                            chats-list-item_active 
+                        {% endif %}"
+                        href="{% url 'groups:group' group.slug %}">
+                        <div class="chats-list-item__img">
+                            {% if group.image %}
+                                <img src="{{ group.get_image_x256.url }}">
+                            {% else %}
+                                <span>{{ group.name|make_list|first|capfirst  }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="chats-list-item__name">
+                            <svg viewBox="0 0 32 32"><path d="M11.33,14.44A6.22,6.22,0,1,0,5.11,8.22,6.22,6.22,0,0,0,11.33,14.44Z"/><path d="M23.78,17.56a4.67,4.67,0,1,0-4.67-4.67A4.66,4.66,0,0,0,23.78,17.56Z"/><path d="M30,28.44a1.55,1.55,0,0,0,1.56-1.55A7.79,7.79,0,0,0,19,20.74,10.9,10.9,0,0,0,.44,28.44,1.56,1.56,0,0,0,2,30H20.67a1.55,1.55,0,0,0,1.55-1.56"/></svg>
+                            <span>
+                                {{ group.name }}
+                            </span>
+                        </span>
+                    </a>
+                {% endfor %}
+                
             </div>
         {% endwith %}
 
-    
     {% else %}
         <div class="btns-container">
             <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>

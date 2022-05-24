@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Чат {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      {% if is_member %}
+        {% include '../includes/clear_chat_messages_confirm.html' with chat=chat %}
+        {% if request.user.id == chat.first_user.id %}
+            <h1 class='title'>Чат с {{ chat.second_user.username }}</h1>
+        {% else %}
+            <h1 class='title'>Чат с {{ chat.first_user.username }}</h1>
+        {% endif %}
+        <div class='chat col-12'>
+            <div class="chat__options">
+              {% if request.user.id == chat.first_user.id %}
+                  <a href='{% url "users:user_detail" chat.second_user.id %}' class='chat__user-link' title='{{ chat.second_user.username }}'>{{ chat.second_user.username|truncatechars:50 }}</a>
+              {% else %}
+                  <a href='{% url "users:user_detail" chat.first_user.id %}' class='chat__user-link' title='{{ chat.first_user.username }}'>{{ chat.first_user.username|truncatechars:50 }}</a>
+              {% endif %}
+                <a class='chat__clear-messages chat__clear-messages_in-chat'>
+                  <svg viewBox="0 0 32 32"><path class="cls-1" d="M17.39,16l7.32-7.32a1,1,0,1,0-1.39-1.39L16,14.61,8.68,7.29A1,1,0,1,0,7.29,8.68L14.61,16,7.29,23.32a1,1,0,1,0,1.39,1.39L16,17.39l7.32,7.32a1,1,0,0,0,1.39-1.39Z"/><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Z"/></svg>  
+                </a>
+            </div>
+           <div id='chat-log'>
+              <span class='chat-log__title-message-container'>
+                <span>
+                ✨ Напишите первое сообщение! ✨
+                </span>
+              </span>
+              {% for message in messages.all %}
+                {% if message.user == user %}
+                  <div class='message current-user-message'>
+                    <span class='message__author'>
+                      {{ message.user.username }} 
+                    </span>
+                    <p class='message__text'>{{ message.text|safe }}</p>
+                    <span class='message__time'>{{ message.time }} </span>
+                  </div>
+                {% else %}
+                  <div class='message'>
+                    <span class='message__author'>
+                      {{ message.user.username }} 
+                    </span>
+                    <p class='message__text'>{{message.text|safe}}</p>
+                    <span class='message__time'>{{ message.time }} </span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class='chat__sendings'>
+              <textarea 
+                      id='chat-message-input'
+                      maxlength='1024'
+                      placeholder='Введите сообщение...'
+                      rows='1'
+                      ></textarea>
+              <button id='chat-message-submit' title='Отправить сообщение'>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><polygon class="cls-1" points="30.58 16 1.42 2 8.42 16 1.42 30 30.58 16"/></svg>
+              </button>
+            </div>
+        </div>
+        <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/confirmation_modal.js" %}'></script>
+        {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=chat.id username=request.user.username %}
+      {% else %}
+        <h1 class='title'>Вы не состоите в этом чате 😔</h1>
+      {% endif %}
+    </div>
+{% endblock %}
