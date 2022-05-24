@@ -51,10 +51,14 @@ body {
     .title__img {
         width: 150px;
         height: 150px;
-        // margin-inline-start: 10px;
     }
 }
 
+.description {
+    margin-block-end: 50px;
+    font-size: 1.2rem;
+
+}
 .menu-btn {
     display: flex;
     justify-content: center;
@@ -280,7 +284,7 @@ button {
     }
 }
 
-.chat__group-slug {
+.chat__group-slug, a.chat__user-link {
     color: $lighter-gray;
 }
 
