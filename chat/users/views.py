@@ -30,6 +30,7 @@ class UsersListView(TemplateView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class UserDetailView(TemplateView):
     """
     Отображает страницу пользователя (User)

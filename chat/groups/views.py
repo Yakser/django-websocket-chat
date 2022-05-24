@@ -125,10 +125,10 @@ class CreateGroupView(TemplateView):
         return context
 
 
-@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class GroupsListView(TemplateView):
     """
-    Отображает список групп (Group)
+    Отображает список групп (Group) пользователя
 
     Context:
         groups (Group[]): QuerySet содержащий экземпляры класса Group
