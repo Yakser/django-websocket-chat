@@ -9,10 +9,21 @@
       <button class='create-group-btn'>
         <a href="{% url 'groups:create' %}">Создать группу</a>
       </button>
-      {% for group in groups %}
-         <div>
-            <a href="{% url 'groups:group' group.slug %}">{{ group.name|truncatechars:50 }} - {{ group.slug|truncatechars:50 }}</a>
-         </div>
-      {% endfor %}
+      <div class='groups-list'>
+        {% for group in groups %}
+           <a class='group' href="{% url 'groups:group' group.slug %}">
+              <div class="group__img">
+                  {% if group.image %}
+                      <img src="{{ group.get_image_x256.url }}">
+                  {% else %}
+                      <span>{{ group.name|make_list|first|capfirst  }}</span>
+                  {% endif %}
+              </div>
+              <span class="group__name">
+                {{ group.name }}
+              </span>
+            </a>
+        {% endfor %}
+      </div>
     </div>
 {% endblock %}

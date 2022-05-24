@@ -255,7 +255,8 @@ button {
     background-color: #1e293b;
     margin: 0 15px; }
 
-.chat__group-slug, a.chat__user-link {
+.chat__group-slug,
+a.chat__user-link {
   color: #475569; }
 
 .chat__members-count {
@@ -521,7 +522,10 @@ textarea#chat-message-input {
 
 .sidebar {
   padding: 20px;
-  height: 100vh; }
+  height: 100vh;
+  overflow-y: scroll; }
+  .sidebar::-webkit-scrollbar {
+    width: 0; }
 
 .sidebar__logo {
   width: 100%;
@@ -702,6 +706,63 @@ main {
 .user-info__name {
   font-size: 1.5rem;
   font-weight: 500; }
+
+.groups-list {
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px; }
+  .groups-list::-webkit-scrollbar {
+    width: 14px; }
+  .groups-list::-webkit-scrollbar-thumb {
+    background-color: #353f4f;
+    border-radius: 10000px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box; }
+
+.group {
+  transition: 0.15s ease-in;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px; }
+  .group .chats-list-item__name {
+    display: flex;
+    align-items: baseline; }
+    .group .chats-list-item__name svg {
+      width: 15px;
+      height: 15px;
+      fill: #f5f5f5;
+      margin-inline-end: 5px; }
+  .group:hover {
+    background-color: rgba(53, 63, 79, 0.2);
+    backdrop-filter: blur(8px); }
+
+.group__img {
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #475569;
+  margin-inline-end: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  user-select: none; }
+  .group__img img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .group__img span {
+    font-weight: 600;
+    font-size: 2rem;
+    user-select: none; }
 
 @media screen and (max-width: 1198px) {
   .sidebar {
