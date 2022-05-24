@@ -219,6 +219,17 @@ class ClearGroupMessagesView(TemplateView):
 
 @method_decorator(login_required, name='dispatch')
 class DeleteGroupView(TemplateView):
+    """
+    Отображает страницу с сообщением об успешном удалении группы
+
+    Context:
+        group (Group): экземпляр класса Group
+
+    Template:
+        template_name: 'groups/deleye_group_messages.html'
+
+    """
+
     template_name = 'groups/delete_group_messages.html'
 
     def get(self, request, group_slug: str, *args, **kwargs):
