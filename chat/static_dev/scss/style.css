@@ -51,7 +51,8 @@ body {
     background-size: 100%;
     position: absolute;
     top: 0;
-    left: 0; }
+    left: 0;
+    z-index: -2; }
   body .bg-grid {
     width: 100vw;
     height: 100%;
@@ -60,7 +61,8 @@ body {
     left: 0;
     background-image: url("../img/grid.svg");
     mask-image: linear-gradient(to bottom, transparent, black);
-    -webkit-mask-image: linear-gradient(to bottom, transparent, black); }
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    z-index: -1; }
 
 .wrapper {
   min-height: 100vh; }
@@ -69,6 +71,13 @@ body {
   margin-block-end: 35px;
   margin-block-start: 35px;
   text-align: center; }
+  .title .title__img {
+    width: 150px;
+    height: 150px; }
+
+.description {
+  margin-block-end: 50px;
+  font-size: 1.2rem; }
 
 .menu-btn {
   display: flex;
@@ -170,7 +179,8 @@ button {
   background-color: rgba(11, 17, 32, 0.6);
   backdrop-filter: blur(8px);
   display: none; }
-  .confirmation .confirmation__text-container, .confirmation .confirmation-top {
+  .confirmation .confirmation__text-container,
+  .confirmation .confirmation-top {
     margin-left: auto;
     margin-right: auto;
     width: 65%; }
@@ -225,7 +235,8 @@ button {
       stroke-width: 2px;
       fill: transparent; }
 
-.chat__options, .confirmation-top {
+.chat__options,
+.confirmation-top {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border: 1px solid #1e293b;
@@ -236,14 +247,15 @@ button {
   height: 36px;
   display: flex;
   align-items: center; }
-  .chat__options .vl, .confirmation-top .vl {
+  .chat__options .vl,
+  .confirmation-top .vl {
     width: 1px;
     height: 100%;
     border-radius: 10000px;
     background-color: #1e293b;
     margin: 0 15px; }
 
-.chat__group-slug {
+.chat__group-slug, a.chat__user-link {
   color: #475569; }
 
 .chat__members-count {
@@ -257,18 +269,22 @@ button {
     height: 20px;
     margin-inline-end: 5px; }
 
-.chat__clear-messages, .close-confirm {
+.chat__clear-messages,
+.close-confirm {
   display: block;
   width: 20px;
   height: 20px;
   cursor: pointer;
   margin-left: 20px; }
-  .chat__clear-messages svg, .close-confirm svg {
+  .chat__clear-messages svg,
+  .close-confirm svg {
     fill: #BE185D;
     transition: fill 0.15s ease-in; }
-  .chat__clear-messages:hover svg, .close-confirm:hover svg {
+  .chat__clear-messages:hover svg,
+  .close-confirm:hover svg {
     fill: rgba(190, 24, 93, 0.7); }
-  .chat__clear-messages.chat__clear-messages_in-chat, .close-confirm.chat__clear-messages_in-chat {
+  .chat__clear-messages.chat__clear-messages_in-chat,
+  .close-confirm.chat__clear-messages_in-chat {
     margin-left: auto; }
 
 .chat__edit {

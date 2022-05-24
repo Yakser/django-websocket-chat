@@ -10,12 +10,17 @@
       {% if is_member %}
         {% include '../includes/clear_chat_messages_confirm.html' with chat=chat %}
         {% if request.user.id == chat.first_user.id %}
-            <h1 class='title' title='{{ group.slug }}'>Чат с {{ chat.second_user.username }}</h1>
+            <h1 class='title'>Чат с {{ chat.second_user.username }}</h1>
         {% else %}
-            <h1 class='title' title='{{ group.slug }}'>Чат с {{ chat.first_user.username }}</h1>
+            <h1 class='title'>Чат с {{ chat.first_user.username }}</h1>
         {% endif %}
         <div class='chat col-12'>
             <div class="chat__options">
+              {% if request.user.id == chat.first_user.id %}
+                  <a href='{% url "users:user_detail" chat.second_user.id %}' class='chat__user-link' title='{{ chat.second_user.username }}'>{{ chat.second_user.username|truncatechars:50 }}</a>
+              {% else %}
+                  <a href='{% url "users:user_detail" chat.first_user.id %}' class='chat__user-link' title='{{ chat.first_user.username }}'>{{ chat.first_user.username|truncatechars:50 }}</a>
+              {% endif %}
                 <a class='chat__clear-messages chat__clear-messages_in-chat'>
                   <svg viewBox="0 0 32 32"><path class="cls-1" d="M17.39,16l7.32-7.32a1,1,0,1,0-1.39-1.39L16,14.61,8.68,7.29A1,1,0,1,0,7.29,8.68L14.61,16,7.29,23.32a1,1,0,1,0,1.39,1.39L16,17.39l7.32,7.32a1,1,0,0,0,1.39-1.39Z"/><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Z"/></svg>  
                 </a>

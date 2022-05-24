@@ -72,27 +72,36 @@
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
             <div class="chats-list">
-                {% for chat in user.first_user_chats.all %}
+                {% for chat in request.user.first_user_chats.all %}
                     <a class="chats-list-item
                         {% if kwargs.chat_id == chat.id %}
                             chats-list-item_active 
                         {% endif %}"
                         href="{% url 'chats:chat' chat.id %}">
-                        {% if chat.first_user.id == request.user.id %}
+                        {% if chat.first_user.id == request.user.id %}   
                             <div class="chats-list-item__img">
-                                <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% if chat.second_user.profile.image %}
+                                    <img src="{{ chat.second_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
                             </div>
                             <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
                         {% else %}
+                            
                             <div class="chats-list-item__img">
-                                <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% if chat.first_user.profile.image %}
+                                    <img src="{{ chat.first_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
                             </div>
                             <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
                         {% endif %}
                     </a>
                 {% endfor %}
 
-                {% for chat in user.second_user_chats.all %}
+                {% for chat in request.user.second_user_chats.all %}
                     <a class="chats-list-item
                         {% if kwargs.chat_id == chat.id %}
                             chats-list-item_active 
@@ -100,12 +109,20 @@
                         href="{% url 'chats:chat' chat.id %}">
                         {% if chat.first_user.id == request.user.id %}
                             <div class="chats-list-item__img">
-                                <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% if chat.second_user.profile.image %}
+                                    <img src="{{ chat.second_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
                             </div>
                             <span class="chats-list-item__name">{{ chat.second_user.username|truncatechars:20 }}</span>
                         {% else %}
                             <div class="chats-list-item__img">
-                                <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% if chat.first_user.profile.image %}
+                                    <img src="{{ chat.first_user.profile.image.url }}">
+                                {% else %}
+                                    <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                                {% endif %}
                             </div>
                             <span class="chats-list-item__name">{{ chat.first_user.username|truncatechars:20 }}</span>
                         {% endif %}

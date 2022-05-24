@@ -2,6 +2,8 @@ from chats.models import Chat
 from core.models import BaseDailyMessages, BaseUserMessage
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import Prefetch
+from django.db.models.query import QuerySet
 from groups.models import Group
 from users_channels.models import UsersChannel
 
@@ -15,6 +17,17 @@ class DailyChatMessages(BaseDailyMessages):
                              related_name='chat_containers',
                              null=True
                              )
+
+    def get_messages(self) -> QuerySet:
+        """
+        Возвращает сообщения контейнера
+        
+        Returns:
+            QuerySet: сообщения контейнера
+            
+        """
+        prefetch_users = Prefetch('user', queryset=User.objects.only('username'))
+        return self.chat_messages.prefetch_related(prefetch_users)
 
     class Meta:
         verbose_name = 'Контейнер сообщений чата'

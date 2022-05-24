@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import Prefetch, Q
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import RedirectView, TemplateView
@@ -47,30 +46,16 @@ class ChatView(TemplateView):
         context['user'] = user
         context['is_member'] = False
 
-        if self._check_if_user_is_member(chat, user):
+        if chat.check_if_user_is_member(user):
             container, is_created = DailyChatMessages.objects.get_or_create(chat=chat)
 
-            prefetch_users = Prefetch('user', queryset=User.objects.only('username'))
-            messages = container.chat_messages.prefetch_related(prefetch_users)
+            messages = container.get_messages()
 
             context['is_member'] = True
             context['chat'] = chat
             context['messages'] = messages
 
         return context
-
-    def _check_if_user_is_member(self, chat: Chat, user: User) -> bool:
-        """
-        Проверяет, является ли пользователь участником чата
-
-        Args:
-            chat (Chat): чат
-            user (User): пользователь
-
-        Returns:
-            bool
-        """
-        return chat.first_user.id == user.id or chat.second_user.id == user.id
 
 
 class ChatsListView(TemplateView):
@@ -93,8 +78,10 @@ class ChatsListView(TemplateView):
 
     def get_context_data(self, user: User, **kwargs):
         context = super().get_context_data(**kwargs)
+
         # получаем чаты пользователя
         chats = user.first_user_chats.all() | user.second_user_chats.all()
+
         context['chats'] = chats
         return context
 
@@ -119,9 +106,8 @@ class ChatRedirectOrCreateView(RedirectView):
         first_user = get_object_or_404(User, username=first_username)
         second_user = get_object_or_404(User, username=second_username)
 
-        # получаем или создаем чат с данными пользователями
-        chats = Chat.objects.filter(Q(first_user=first_user) & Q(second_user=second_user) |
-                                    Q(first_user=second_user) & Q(second_user=first_user))
+        chats = Chat.objects.get_chat_by_users(first_user, second_user)
+        
         if chats:
             chat = chats.first()
         else:
