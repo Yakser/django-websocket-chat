@@ -5,4 +5,4 @@ from groups.models import Group
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image_tmb')
+    list_display = ('name', 'image_tmb', )

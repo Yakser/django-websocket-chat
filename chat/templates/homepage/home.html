@@ -1,8 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %} Главная {% endblock %}
 {% block content %}
-    {% include '../includes/sidebar.html' %}
-    <div class='content col-xl-9 h-100'>
-        <h1 class='title'>Добро пожаловать</h1>
-    </div>
+        {% if request.user.is_authenticated %}
+            {% include '../includes/sidebar.html' %}
+             <div class='content col-xl-9 h-100'>
+                {% include '../includes/homepage_content.html' %}
+            </div>
+        {% else %}
+            <div class='content container-fluid h-100'>
+                {% include '../includes/homepage_content.html' %}
+                {% comment %} <h1 class='title'>
+                    Добро пожаловать в <img class="img img-responsive title__img" src="{% static './img/text_logo.svg' %}" alt="Soft Logo">
+                </h1>
+                <p class='description'>
+                    Это текстовый чат, основанный на веб-сокетах. Пользователи могут общаться друг с другом, а также создавать группы. 
+                </p> {% endcomment %}
+                <div class="btns-container">
+                    <a href="{% url 'users:signup' %}" class="signup-btn submit-btn">Зарегистрироваться</a>
+                    <a href="{% url 'users:login' %}" class="login-btn submit-btn">Войти</a>
+                </div>
+            </div>
+        {% endif %}
 {% endblock %}

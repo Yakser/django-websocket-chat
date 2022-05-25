@@ -21,15 +21,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
     'debug_toolbar',
     'sass_processor',
     'channels',
     'core.apps.CoreConfig',
     'groups.apps.GroupsConfig',
     'homepage.apps.HomepageConfig',
+    'info.apps.InfoConfig',
     'users.apps.UsersConfig',
     'users_channels.apps.UsersChannelsConfig',
     'users_messages.apps.UsersMessagesConfig',
+    'chats.apps.ChatsConfig',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -153,8 +156,10 @@ SHOW_TOOLBAR_CALLBACK = True
 mimetypes.add_type("application/javascript", ".js", True)
 
 LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/auth/profile/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

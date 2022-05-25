@@ -1,0 +1,2 @@
+class ConnectionTypeDoesNotExist(Exception):
+    pass

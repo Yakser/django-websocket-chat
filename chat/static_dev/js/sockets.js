@@ -2,6 +2,7 @@ moment.locale('ru');
 
 const connectionType= JSON.parse(document.getElementById('connection_type').textContent);
 const connectionName = JSON.parse(document.getElementById('connection_name').textContent);
+const currentUsername = JSON.parse(document.getElementById('username').textContent);
 
 const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${connectionType}_${connectionName}/`);
 
@@ -9,6 +10,8 @@ const chatLog = document.querySelector('#chat-log');
 chatLog.scrollTop = chatLog.scrollHeight;
 
 const chatInput = document.querySelector('#chat-message-input');
+chatInput.focus();
+
 const chatSubmit = document.querySelector('#chat-message-submit');
 
 
@@ -17,16 +20,10 @@ chatSocket.onmessage = function (event) {
     const cleanedMessage = cleanMessage(message);
 
     const currentUsername = document.querySelector('.user__username').textContent.trim();
-
+    console.log(currentUsername);
     if (validateMessage(message)) {
-        let messageClassRow = `<div class='message'>`
-
-        if (currentUsername === username) {
-            messageClassRow = `<div class='message current-user-message'>`
-        }
-        
         const messageMarkup = `
-        ${messageClassRow}
+        <div data-username=${username} class='message ${currentUsername === username && "current-user-message"}'>
             <span class='message__author'>${username || 'Анонимный пользователь'}</span>
             <p class='message__text'>${cleanedMessage}</p>
             <span class='message__time'>${moment().format('LT')}</span>
@@ -39,20 +36,21 @@ chatSocket.onmessage = function (event) {
 
 chatSocket.onclose = function (e) {
     console.error('Chat socket closed unexpectedly');
-    alert('Произошла ошибка! Сервер недоступен.')
+    // alert('Произошла ошибка! Сервер недоступен.')
 };
 
-chatInput.focus();
 
-chatInput.onkeyup = function (e) {
+chatInput.onkeydown = function (e) {
     if (e.keyCode === 13) { // enter, return
+        e.preventDefault();
+
+        chatInput.style.height = 'auto';
         chatSubmit.click();
     }
 };
 
-chatSubmit.onclick = function (e) {
+chatSubmit.onclick = function (event) {
     const message = cleanMessage(chatInput.value);
-
     if (validateMessage(message)) {
         try {
             chatSocket.send(JSON.stringify({

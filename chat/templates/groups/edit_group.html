@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Редактирование группы
+{% endblock %}
+
+{% block content %}
+    {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+        {% include '../includes/delete_group_confirm.html' with group=group %}
+        <h1 class='title'>Редактирование группы</h1>
+        {% include 'includes/form.html' with form=form submit_text="Изменить" %}
+        <script type='text/javascript' src='{% static "js/delete_group_confirmation_modal.js" %}'></script>
+    </div>
+{% endblock %}
+
+
+

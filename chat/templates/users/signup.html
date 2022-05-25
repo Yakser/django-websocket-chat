@@ -7,6 +7,6 @@
 {% block content %}
     <div class='content container-fluid h-100'>
         <h1 class='title'>Регистрация</h1>
-        {% include 'includes/form.html' with form=form submit_text="Зарегистрироваться" %}
+        {% include 'includes/form.html' with form=form submit_text="Зарегистрироваться" show_already_have_account=True %}
     </div>
 {% endblock %}

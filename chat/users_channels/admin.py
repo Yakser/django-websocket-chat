@@ -5,4 +5,4 @@ from users_channels.models import UsersChannel
 
 @admin.register(UsersChannel)
 class UsersChannelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image_tmb')
+    list_display = ('name', 'image_tmb', )

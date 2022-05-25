@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Чаты {% endblock %}
+
+{% block content %}
+  {% include '../includes/sidebar.html' %}
+    <div class='content col-xl-9 h-100'>
+      <h1 class='title'>Чаты</h1>
+       <button class='find-friend-btn'>
+        <a href='{% url "users:users_list" %}'>Найти друга</a>
+      </button>
+      <div class='all-chats-list list'>
+        {% for chat in chats %}
+           <a class='all-chats-list__item item' href='{% url "chats:chat" chat.id %}'>
+             {% if chat.first_user.id == request.user.id %}
+                <div class='chat__img item__img'>
+                  {% if chat.second_user.profile.image %}
+                      <img src='{{ chat.second_user.profile.get_image_x256.url }}'>
+                  {% else %}
+                      <span>{{ chat.second_user.username|make_list|first|capfirst }}</span>
+                  {% endif %}
+                </div>
+                <span class='chat__name item__name'>
+                  {{ chat.second_user.username|truncatechars:50 }}
+                </span>
+             {% else %}
+                <div class='chat__img item__img'>
+                  {% if chat.first_user.profile.image %}
+                      <img src='{{ chat.first_user.profile.get_image_x256.url }}'>
+                  {% else %}
+                      <span>{{ chat.first_user.username|make_list|first|capfirst }}</span>
+                  {% endif %}
+                </div>
+                <span class='chat__name item__name'>
+                  {{ chat.first_user.username|truncatechars:50 }}
+                </span>
+             {% endif %}
+            </a>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

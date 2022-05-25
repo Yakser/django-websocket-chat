@@ -1,2 +1,3 @@
 GROUPS_CONNECTION = 'groups'
 USERS_CHANNELS_CONNECTION = 'users_channels'
+CHATS_CONNECTION = 'chats'

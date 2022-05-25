@@ -1,0 +1,14 @@
+<div class='confirmation'>
+    {% include '../includes/confirmation_top.html'%}
+    <div class='confirmation__text-container content h-100'>
+      <h3 class='title'>Удалить группу?</h3>
+      <div class='clear_messages_confirm'>
+        <a href="{% url 'groups:delete_group' group.slug %}">
+          <button>Да</button>
+        </a>
+        <a class='close-btn'>
+          <button>Нет</button>
+        </a>
+      </div>
+    </div>
+  </div>
