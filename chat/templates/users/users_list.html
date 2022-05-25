@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Список пользователей
 {% endblock %}
@@ -9,14 +11,25 @@
     {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
         <h1 class='title'>Список пользователей</h1>
+        <input id="users_search" class="search-bar" type="text" placeholder="Поиск..">
         <div class='users-list'>
             {% for user in users %}
-                <div class='users-list__item'>
-                    <a href='{% url "users:user_detail" user.id %}'>{{user.username|truncatechars:50}}</span>
-                </div>
+                <a value="{{ user.username }}" class='all-chats-list__item item' href='{% url "users:user_detail" user.id %}'>
+                    <div class='chat__img item__img'>
+                        {% if user.profile.image %}
+                            <img src='{{ user.profile.get_image_x256.url }}'>
+                        {% else %}
+                            <span>{{ user.username|make_list|first|capfirst }}</span>
+                        {% endif %}
+                    </div>
+                    <span class='chat__name item__name'>
+                        {{ user.username|truncatechars:50 }}
+                    </span>
+                </a>
             {% endfor %}
         </div>
     </div>
+    <script src="{% static 'js/users_search_bar.js' %}"></script>
 
 {% endblock %}
 
