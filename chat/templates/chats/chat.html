@@ -64,7 +64,7 @@
             </div>
         </div>
         <script type='text/javascript' src='{% static "js/auto_textarea_resizing.js" %}'></script>
-        <script type='text/javascript' src='{% static "js/confirmation_modal.js" %}'></script>
+        <script type='text/javascript' src='{% static "js/messages_confirmation_modal.js" %}'></script>
         {% include '../includes/websocket_data.html' with connection_type=connection_type connection_name=chat.id username=request.user.username %}
       {% else %}
         <h1 class='title'>Вы не состоите в этом чате 😔</h1>

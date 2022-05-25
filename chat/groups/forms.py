@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
+from groups.validators import validate_slug
+
 User = get_user_model()
 
 
@@ -26,7 +28,8 @@ class CreateGroupForm(forms.Form):
 
     slug = forms.SlugField(label='Идентификатор',
                            help_text='Используйте буквы, цифры или @/./+/-/_ ',
-                           max_length=100)
+                           max_length=100,
+                           validators=[validate_slug])
 
     name = forms.CharField(max_length=100,
                            label='Имя группы',

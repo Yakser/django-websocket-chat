@@ -73,7 +73,7 @@
             </div>
         </div>
         {% with request.resolver_match.kwargs as kwargs %}
-            <div class="chats-list">
+            <div class="chats-list" id="js-chats-list">
                 {% for chat in request.user.first_user_chats.all %}
                     <a class="chats-list-item
                         {% if kwargs.chat_id == chat.id %}
