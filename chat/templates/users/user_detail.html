@@ -13,7 +13,7 @@
                 <div class='user-info__top'>
                     <div class='user-img user-info__img'>
                         {% if user.profile.image %}
-                            <img src='{{ user.profile.get_image_x256.url }}'' alt='user image' class='img img-responsive'>
+                            <img src='{{ user.profile.get_image_x256.url }}' alt='user image' class='img img-responsive'>
                         {% else %}
                             <span>{{ user.username|make_list|first|capfirst  }}</span>
                         {% endif %}
