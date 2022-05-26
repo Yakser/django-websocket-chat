@@ -14,7 +14,7 @@ class ProfileInlined(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (ProfileInlined, )
-    list_display = ('email', 'username', 'is_staff', )
+    list_display = ('username', 'email', 'is_staff', )
 
 
 admin.site.unregister(User)
