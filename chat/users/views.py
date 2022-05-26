@@ -180,4 +180,6 @@ class SignupView(TemplateView):
         context = super().get_context_data(**kwargs)
         form = self.form_class(request.POST or None)
         context['form'] = form
+        # небоходимо, чтобы показать ошибки валидации формы
+        form.is_valid() and form.check_passwords_match()
         return context

@@ -5,8 +5,8 @@ User = get_user_model()
 
 
 def validate_login(value):
-    if len(value.strip()) < 8:
-        raise ValidationError('Длина не менее 8 символов!')
+    if len(value.strip()) < 2:
+        raise ValidationError('Длина не менее 2 символов!')
     if User.objects.filter(username=value):
         raise ValidationError('Пользователь с таким именем уже существует!')
 

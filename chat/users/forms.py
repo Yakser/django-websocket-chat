@@ -1,7 +1,7 @@
 from core.widgets import CustomClearableFileInput
 from django import forms
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.password_validation import validate_password
 from users.validators import validate_email, validate_login
 
 User = get_user_model()
@@ -40,10 +40,9 @@ class EditProfileForm(forms.Form):
     def validate_edit_login(self, current_user):
         login = self.cleaned_data['login']
 
-        if not current_user.is_staff:
-            if len(login.strip()) < 8:
-                self.add_error('login', 'Длина имени не менее 8 символов!')
-                return
+        if len(login.strip()) < 2:
+            self.add_error('login', 'Длина имени не менее 2 символов!')
+            return
 
         if login != current_user.username and User.objects.filter(username=login):
             self.add_error('login',
@@ -91,7 +90,8 @@ class SignupForm(forms.Form):
                                help_text='Максимум 255 символов',
                                widget=forms.PasswordInput,
                                required=True,
-                               min_length=8)
+                               min_length=8,
+                               validators=[validate_password])
     password_repeat = forms.CharField(max_length=255,
                                       label='Повторите пароль',
                                       widget=forms.PasswordInput)
@@ -101,6 +101,6 @@ class SignupForm(forms.Form):
         password_repeat = self.cleaned_data['password_repeat']
 
         if password != password_repeat:
-            self.add_error('password_repeat', 'Пароли не совпадают!')
+            self.add_error('password', 'Пароли не совпадают!')
             return
         return password
