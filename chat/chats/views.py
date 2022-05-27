@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.core.handlers.asgi import ASGIRequest
+from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import RedirectView, TemplateView
@@ -31,7 +33,7 @@ class ChatView(TemplateView):
 
     template_name = 'chats/chat.html'
 
-    def get(self, request, chat_id: int, *args, **kwargs):
+    def get(self, request: ASGIRequest, chat_id: int, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request.user, chat_id))
@@ -71,7 +73,7 @@ class ChatsListView(TemplateView):
 
     template_name = 'chats/chats_list.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: ASGIRequest, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request.user))
@@ -80,7 +82,7 @@ class ChatsListView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         # получаем чаты пользователя
-        chats = user.first_user_chats.all() | user.second_user_chats.all()
+        chats: QuerySet = user.first_user_chats.all() | user.second_user_chats.all()
 
         context['chats'] = chats
         return context
@@ -106,8 +108,7 @@ class ChatRedirectOrCreateView(RedirectView):
         first_user = get_object_or_404(User, username=first_username)
         second_user = get_object_or_404(User, username=second_username)
 
-        chats = Chat.objects.get_chat_by_users(first_user, second_user)
-        
+        chats: QuerySet = Chat.objects.get_chat_by_users(first_user, second_user)
         if chats:
             chat = chats.first()
         else:
@@ -131,7 +132,7 @@ class ClearChatMessagesConfirmView(TemplateView):
 
     template_name = 'chats/clear_chat_messages_confirm.html'
 
-    def get(self, request, chat_id: int, *args, **kwargs):
+    def get(self, request: ASGIRequest, chat_id: int, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(chat_id))
@@ -157,10 +158,10 @@ class ClearChatMessagesView(TemplateView):
 
     template_name = 'chats/clear_chats_messages.html'
 
-    def get(self, request, chat_id: int, *args, **kwargs):
-        chat = get_object_or_404(Chat, pk=chat_id)
+    def get(self, request: ASGIRequest, chat_id: int, *args, **kwargs):
+        chat: Chat = get_object_or_404(Chat, pk=chat_id)
 
-        chat_container = DailyChatMessages.objects.get(chat=chat)
+        chat_container: DailyChatMessages = DailyChatMessages.objects.get(chat=chat)
         chat_container.chat_messages.all().delete()
 
         return render(request,

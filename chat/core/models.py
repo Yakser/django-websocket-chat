@@ -95,7 +95,7 @@ class BaseDailyMessages(models.Model):
 
     Attributes:
         date (DateField): дата создания контейнера
-        
+  
     """
     # TODO task с созданием нового контейнера раз в сутки с помощью django-rq
 

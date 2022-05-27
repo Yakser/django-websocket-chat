@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.core.handlers.asgi import ASGIRequest
 from django.db.models import Prefetch
 from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
@@ -35,7 +36,7 @@ class GroupView(TemplateView):
 
     template_name = 'groups/group.html'
 
-    def get(self, request, group_slug: str, *args, **kwargs):
+    def get(self, request: ASGIRequest, group_slug: str, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request.user, group_slug))
@@ -85,12 +86,12 @@ class CreateGroupView(TemplateView):
     template_name = 'groups/create_group.html'
     form_class = CreateGroupForm
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: ASGIRequest, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request))
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: ASGIRequest, *args, **kwargs):
         user: User = get_object_or_404(User.objects.all(),
                                        pk=request.user.id)
 
@@ -111,13 +112,13 @@ class CreateGroupView(TemplateView):
 
         return self.get(request)
 
-    def get_context_data(self, request, **kwargs):
+    def get_context_data(self, request: ASGIRequest, **kwargs):
         context = super().get_context_data(**kwargs)
 
         user: User = get_object_or_404(User.objects.only('email', 'username'),
                                        pk=request.user.id)
-        form = self.form_class(request.POST or None, user=user)
 
+        form = self.form_class(request.POST or None, user=user)
         form.is_valid()
 
         context['user'] = user
@@ -141,14 +142,14 @@ class GroupsListView(TemplateView):
 
     template_name = 'groups/groups_list.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: ASGIRequest, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request.user))
 
     def get_context_data(self, user: User, **kwargs):
         context = super().get_context_data(**kwargs)
-        groups = user.users_groups.all()
+        groups: QuerySet = user.users_groups.all()
         context['groups'] = groups
         return context
 
@@ -168,18 +169,15 @@ class ClearGroupMessagesConfirmView(TemplateView):
 
     template_name = 'groups/clear_group_messages_confirm.html'
 
-    def get(self, request, group_slug: str, *args, **kwargs):
+    def get(self, request: ASGIRequest, group_slug: str, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(group_slug))
 
     def get_context_data(self, group_slug: str, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        group = get_object_or_404(Group, pk=group_slug)
-
+        group: Group = get_object_or_404(Group, pk=group_slug)
         context['group'] = group
-
         return context
 
 
@@ -198,10 +196,9 @@ class ClearGroupMessagesView(TemplateView):
 
     template_name = 'groups/clear_group_messages.html'
 
-    def get(self, request, group_slug: str, *args, **kwargs):
-        group = get_object_or_404(Group, pk=group_slug)
-
-        group_container = DailyGroupMessages.objects.get(group=group)
+    def get(self, request: ASGIRequest, group_slug: str, *args, **kwargs):
+        group: Group = get_object_or_404(Group, pk=group_slug)
+        group_container: DailyGroupMessages = DailyGroupMessages.objects.get(group=group)
         group_container.group_messages.all().delete()
 
         return render(request,
@@ -210,11 +207,8 @@ class ClearGroupMessagesView(TemplateView):
 
     def get_context_data(self, group_slug: str, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        group = get_object_or_404(Group, pk=group_slug)
-
+        group: Group = get_object_or_404(Group, pk=group_slug)
         context['group'] = group
-
         return context
 
 
@@ -222,21 +216,18 @@ class ClearGroupMessagesView(TemplateView):
 class DeleteGroupView(TemplateView):
     template_name = 'groups/delete_group_messages.html'
 
-    def get(self, request, group_slug: str, *args, **kwargs):
-        group = get_object_or_404(Group, pk=group_slug)
-
-        group_container = DailyGroupMessages.objects.get(group=group)
+    def get(self, request: ASGIRequest, group_slug: str, *args, **kwargs):
+        group: Group = get_object_or_404(Group, pk=group_slug)
+        group_container: DailyGroupMessages = DailyGroupMessages.objects.get(group=group)
         group_container.group_messages.all().delete()
-
         group.delete()
 
         return render(request,
                       self.template_name,
-                      self.get_context_data(group_slug))
+                      self.get_context_data())
 
-    def get_context_data(self, group_slug: str, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         return context
 
 
@@ -260,7 +251,7 @@ class EditGroupView(TemplateView):
     template_name = 'groups/edit_group.html'
     form_class = EditGroupForm
 
-    def get(self, request, group_slug: str, *args, **kwargs):
+    def get(self, request: ASGIRequest, group_slug: str, *args, **kwargs):
         return render(request,
                       self.template_name,
                       self.get_context_data(request, group_slug))
@@ -272,7 +263,9 @@ class EditGroupView(TemplateView):
         user: User = get_object_or_404(User.objects.only('id'),
                                        pk=request.user.id)
 
-        form = self.form_class(request.POST, request.FILES, user=user)
+        form = self.form_class(request.POST,
+                               request.FILES,
+                               user=user)
 
         if form.is_valid() and group.owner == user:
             group.name = form.cleaned_data['name']
@@ -299,13 +292,13 @@ class EditGroupView(TemplateView):
                       self.template_name,
                       self.get_context_data(request, group_slug))
 
-    def get_context_data(self, request, group_slug: str, **kwargs):
+    def get_context_data(self, request: ASGIRequest, group_slug: str, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        group = get_object_or_404(Group.objects.all(),
-                                  pk=group_slug)
-        user = get_object_or_404(User.objects.only('id'),
-                                 pk=request.user.id)
+        group: Group = get_object_or_404(Group.objects.all(),
+                                         pk=group_slug)
+        user: User = get_object_or_404(User.objects.only('id'),
+                                       pk=request.user.id)
 
         initial_form_data = {
             'name': group.name,
