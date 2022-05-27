@@ -1,5 +1,5 @@
-# Django WebSocket Chat
-# Запуск
+# Soft - Django WebSocket Chat
+# Запуск на Windows
 ### Перед установкой зависимостей
 - [C++ Build Tools](https://stackoverflow.com/questions/40504552/how-to-install-visual-c-build-tools) (весом 6Гб)
 
