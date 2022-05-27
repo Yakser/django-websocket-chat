@@ -20,7 +20,7 @@ class BaseConsumer(AsyncWebsocketConsumer):
         Подключение к websocket группе
         """
         self.connection_name = self.scope['url_route']['kwargs']['group_name']
-        self.connection_group_name = f"websocket_group_{self.connection_name}"
+        self.connection_group_name = f'websocket_group_{self.connection_name}'
 
         # Вход в группу
         await self.channel_layer.group_add(
