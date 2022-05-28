@@ -37,7 +37,7 @@ class CreateGroupForm(forms.Form):
 
     group_members = forms.ModelMultipleChoiceField(label='Участники',
                                                    queryset=User.objects.all(),
-                                                   widget=forms.CheckboxSelectMultiple,
+                                                   widget=CustomCheckboxSelectMultiple(),
                                                    required=False)
 
 
