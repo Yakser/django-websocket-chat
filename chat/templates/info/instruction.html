@@ -8,6 +8,51 @@
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
       <h1 class='title'>Инструкция</h1>
-      
+      <div class="readme">
+        <p>
+          <mark><a target="_blank" href="https://github.com/Yakser/django-websocket-chat/blob/master/README.md">README</a></mark>
+          также можно почитать на нашем <a target="_blank" href="https://github.com/Yakser/django-websocket-chat/blob/master/README.md">GitHub</a> 😇
+        </з>
+        <p>
+          И не забудьте поставить звездочку 🌟
+        </p>
+        <h4>Инструкция по установке и запуску</h4>
+        <p>
+          Клонируйте репозиторий
+          <mark><code>git clone https://github.com/Yakser/django-websocket-chat</code></mark>
+        </p>
+        <p>
+          Перед установкой зависимостей проекта необходимо скачать
+          <mark>
+            <a target="_blank" href="https://stackoverflow.com/questions/40504552/how-to-install-visual-c-build-tools">C++ Build Tools</a>
+          </mark>
+        </p>
+        <p>
+          Установить зависимости можно командой <mark><code>pip install -r requirements.txt</code></mark>
+        </p>
+        <p>
+          Затем необходимо скачать и запустить
+          <mark>
+            <a href="https://redis.io/" target="_blank">Redis</a>
+          </mark>
+        </p>
+        <h5>Если у Вас Windows</h5>
+        <p>
+          Нужно установить 
+          <mark>
+            <a target="_blank" href="https://docs.microsoft.com/ru-ru/windows/wsl/install">WSL2</a>
+          </mark>
+          и в ней 
+          <mark>
+            <a target="_blank" href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">запустить redis-server</a>
+          </mark>
+        </p>
+        <h5>Запуск</h5>
+        <p>Сделайте и заполните файл <mark><code>.env</code></mark> в соответствии с <mark><code>.env.example</code></mark></p>
+        <p>Перейдите в директорию django-проекта <mark><code>cd chat</code></mark></p>
+        <p>
+          Запустите приложение командой <mark><code>python manage.py runserver</code></mark>
+        </p>
+      </div>
     </div>
 {% endblock %}
