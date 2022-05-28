@@ -1,17 +1,15 @@
 const searchBar = document.querySelector(".search-bar");
-const users = document.querySelectorAll(".item");
-
-console.log(searchBar)
+const items = document.querySelectorAll(".item");
 
 searchBar.addEventListener('input', (e) => {
     const barValue = searchBar.value;
-    for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        const name = user.getAttribute('value');
-        if (!name.includes(barValue) || barValue == NaN) {
-            user.style.display = 'none';
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const value = item.getAttribute('value');
+        if (!value.includes(barValue) || barValue == NaN) {
+            item.style.display = 'none';
         } else {
-            user.style.display = 'flex';
+            item.style.display = 'flex';
         }
     }
 });
