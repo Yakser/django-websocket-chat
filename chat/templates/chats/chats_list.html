@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Чаты {% endblock %}
 
 {% block content %}
@@ -9,9 +11,10 @@
        <button class='find-friend-btn'>
         <a href='{% url "users:users_list" %}'>Найти друга</a>
       </button>
+      <input class="search-bar" type="text" placeholder="Поиск..">
       <div class='all-chats-list list'>
         {% for chat in chats %}
-           <a class='all-chats-list__item item' href='{% url "chats:chat" chat.id %}'>
+           <a value="{{ chat.second_user.username }}" class='all-chats-list__item item' href='{% url "chats:chat" chat.id %}'>
              {% if chat.first_user.id == request.user.id %}
                 <div class='chat__img item__img'>
                   {% if chat.second_user.profile.image %}
@@ -39,4 +42,5 @@
         {% endfor %}
       </div>
     </div>
+    <script src="{% static 'js/users_search_bar.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Группы {% endblock %}
 
 {% block content %}
@@ -26,4 +28,5 @@
         {% endfor %}
       </div>
     </div>
+    <script src="{% static 'js/users_search_bar.js' %}"></script>
 {% endblock %}

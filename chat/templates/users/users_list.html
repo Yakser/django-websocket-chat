@@ -11,21 +11,24 @@
     {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
         <h1 class='title'>Список пользователей</h1>
-        <input id="users_search" class="search-bar" type="text" placeholder="Поиск..">
+        <input class="search-bar" type="text" placeholder="Поиск..">
         <div class='users-list'>
-            {% for user in users %}
-                <a value="{{ user.username }}" class='all-chats-list__item item' href='{% url "users:user_detail" user.id %}'>
-                    <div class='chat__img item__img'>
-                        {% if user.profile.image %}
-                            <img src='{{ user.profile.get_image_x256.url }}'>
-                        {% else %}
-                            <span>{{ user.username|make_list|first|capfirst }}</span>
-                        {% endif %}
-                    </div>
-                    <span class='chat__name item__name'>
-                        {{ user.username|truncatechars:50 }}
-                    </span>
-                </a>
+            {% for user_list in users %}
+                {% if user != user_list %}
+                    <a value="{{ user_list.username }}" style='display: none;' 
+                    class='all-chats-list__item item' href='{% url "users:user_detail" user_list.id %}'>
+                        <div class='chat__img item__img'>
+                            {% if user_list.profile.image %}
+                                <img src='{{ user_list.profile.get_image_x256.url }}'>
+                            {% else %}
+                                <span>{{ user_list.username|make_list|first|capfirst }}</span>
+                            {% endif %}
+                        </div>
+                        <span class='chat__name item__name'>
+                            {{ user_list.username|truncatechars:50 }}
+                        </span>
+                    </a>
+                {% endif%}
             {% endfor %}
         </div>
     </div>
