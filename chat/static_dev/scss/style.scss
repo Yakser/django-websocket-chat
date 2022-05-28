@@ -988,6 +988,7 @@ main {
 .about {
     p {
         margin-block-end: 20px;
+        line-height: 35px;
     }
 
     a {
@@ -1038,5 +1039,11 @@ main {
     .title {
         margin-block-end: 35px;
         margin-block-start: 0;
+    }
+    .readme, .about {
+        mark.code {
+            display: block;
+            margin: 0;
+        }
     }
 }

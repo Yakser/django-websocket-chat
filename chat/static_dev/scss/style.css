@@ -772,7 +772,8 @@ main {
 
 .readme p,
 .about p {
-  margin-block-end: 20px; }
+  margin-block-end: 20px;
+  line-height: 35px; }
 
 .readme a,
 .about a {
@@ -811,6 +812,9 @@ main {
     margin-right: 0; }
   .title {
     margin-block-end: 35px;
-    margin-block-start: 0; } }
+    margin-block-start: 0; }
+  .readme mark.code, .about mark.code {
+    display: block;
+    margin: 0; } }
 
 /*# sourceMappingURL=style.css.map */
