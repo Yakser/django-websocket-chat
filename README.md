@@ -27,7 +27,7 @@ sudo service redis-server start
 
 ## Windows
 - Установите [WSL2](https://docs.microsoft.com/ru-ru/windows/wsl/install)
-- Скачайте  `Redis:
+- В WSL установите  `redis-server`:
 
 ```bash
 sudo apt-add-repository ppa:redislabs/redis
