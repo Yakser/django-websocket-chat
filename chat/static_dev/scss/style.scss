@@ -984,23 +984,36 @@ main {
     }
 }
 
-.readme {
+.readme,
+.about {
     p {
         margin-block-end: 20px;
-        a {
-            text-decoration: underline;
-            color: $blue;
-        }
+    }
 
-        mark {
-            backdrop-filter: blur(8px);
-            background-color: rgba($sidebar, 0.7);
-            border: 1px solid $gray;
-            border-radius: 5px;
-            color: $white;
-            padding: 5px 10px;
-            margin: 0 5px;
-        }
+    a {
+        text-decoration: underline;
+        color: $blue;
+    }
+
+    mark {
+        backdrop-filter: blur(8px);
+        background-color: rgba($sidebar, 0.7);
+        border: 1px solid $gray;
+        border-radius: 5px;
+        color: $white;
+        padding: 5px 10px;
+        margin: 0 5px;
+    }
+}
+
+.links {
+    margin-block-start: 20px;
+
+    a {
+        font-weight: 500;
+        font-size: 1.2rem;
+        text-decoration: underline;
+        color: $blue;
     }
 }
 

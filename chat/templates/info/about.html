@@ -8,17 +8,23 @@
   {% include '../includes/sidebar.html' %}
     <div class='content col-xl-9 h-100'>
       <h1 class='title'>О проекте</h1>
-      <q> Текстовый чат, основанный на веб-сокетах. Пользователи могут общаться друг с другом, создавать группы и каналы </q>
-        <div class="row h-100">
-            <div class="content col-xl-3 h-100">
-              <h3><a href="https://github.com/Yakser/django-websocket-chat">Github</a></h3>
-            </div>
-            <div class="content col-xl-3 h-100">
-            </div>
-            <div class="content col-xl-3 h-100">
-            </div>
-            <div class="content col-xl-3 h-100">
-            </div>
+      <div class="about">
+        <p>Soft - текстовый чат, основанный на веб-сокетах, где пользователи могут общаться друг с другом и создавать группы</p>
+        <div class="links">
+          <a href="https://github.com/Yakser/django-websocket-chat">GitHub</a>
+          <a href="https://github.com/Yakser/django-websocket-chat/blob/master/README.md">README</a>
         </div>
+        <p>
+          Приложение написано на языке <mark>Python</mark> с использованием фреймворка <mark>Django</mark>
+        </p>
+        <h4>Технические детали:</h4>
+        <ul>
+          <li>Python 3.10.4</li>
+          <li>Django 3.2.13</li>
+          <li>БД: SQLite</li>
+          <li>Библиотека для работы с вебсокетами: channels 3.0.4</li>
+          <li>CSS препроцессор: SCSS</li>
+        </ul>
+      </div>
     </div>
 {% endblock %}
