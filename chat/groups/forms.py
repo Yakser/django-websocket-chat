@@ -20,9 +20,8 @@ class CreateGroupForm(forms.Form):
     """
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        self.user: User = kwargs.pop('user')
         super(CreateGroupForm, self).__init__(*args, **kwargs)
-
         self.fields['group_members'].queryset = \
             User.objects.filter(~Q(id=self.user.id)).only('id', 'username')
 
@@ -54,9 +53,8 @@ class EditGroupForm(forms.Form):
     """
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        self.user: User = kwargs.pop('user')
         super(EditGroupForm, self).__init__(*args, **kwargs)
-
         self.fields['group_members'].queryset = \
             User.objects.filter(~Q(id=self.user.id)).only('id', 'username')
 
