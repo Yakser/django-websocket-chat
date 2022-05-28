@@ -54,3 +54,10 @@ cd chat
 ```shell
 python manage.py runserver
 ```
+
+# Технические детали
+- Python 3.10.4 
+- Django 3.2.13
+- БД: SQLite
+- Библиотека для работы с вебсокетами: channels 3.0.4 
+- CSS препроцессор: SCSS
