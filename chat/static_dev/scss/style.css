@@ -102,6 +102,10 @@ body {
 .menu-ico_arrow:hover svg {
   fill: rgba(245, 245, 245, 0.2); }
 
+.search-bar {
+  width: 80%;
+  margin-bottom: 15px; }
+
 input:not([type="checkbox"]):not([type="radio"]),
 button,
 textarea {
@@ -626,6 +630,7 @@ textarea#chat-message-input {
   outline: 1px solid transparent;
   transition: 0.15s ease-in;
   font-weight: 500;
+  text-align: center;
   min-width: 35%; }
   .submit-btn:hover {
     background-color: #3fbff8; }
