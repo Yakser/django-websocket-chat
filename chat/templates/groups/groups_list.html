@@ -11,10 +11,10 @@
       <button class='create-group-btn'>
         <a href='{% url "groups:create" %}'>Создать группу</a>
       </button>
-      <input class="search-bar" type="text" placeholder="Поиск..">
-      <div class='groups-list list'>
+      <input class="search-bar" type="text" placeholder="Поиск.." id="js-search">
+      <div class='groups-list list' id="js-list-container">
         {% for group in groups %}
-           <a value="{{ group.name }}" class='group item' href='{% url "groups:group" group.slug %}'>
+           <a class='group item' href='{% url "groups:group" group.slug %}'>
               <div class='group__img item__img'>
                   {% if group.image %}
                       <img src='{{ group.get_image_x256.url }}'>
@@ -29,5 +29,5 @@
         {% endfor %}
       </div>
     </div>
-    <script src="{% static 'js/users_search_bar.js' %}"></script>
+    <script src="{% static 'js/search_bar.js' %}"></script>
 {% endblock %}
