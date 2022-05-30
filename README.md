@@ -19,11 +19,7 @@ pip install -r requirements.txt
 
 ## Linux/Mac OS
 
-Скачайте [Redis](https://redis.io)
-И запустите его:
-```bash
-sudo service redis-server start
-```
+Скачайте [Redis](https://redis.io) и запустите его
 
 ## Windows
 - Установите [WSL2](https://docs.microsoft.com/ru-ru/windows/wsl/install)
